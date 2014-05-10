@@ -7,19 +7,44 @@ class UsersController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function index()
-	{
-		//
+	public function index() {
+		$users = User::orderBy('username')
+			->paginate(self::$per_page);
+
+		return View::make('users.index', array('users' => $users));
 	}
 
+
+	public function login() {
+		$input = Input::only('username', 'password');
+		$remember = Input::get('remember') || false;
+
+		if(Request::instance()->isMethod('post')) {
+			if(Auth::attempt($input, $remember)) {
+				return Redirect::intended('/');
+			} else {
+				Session::flash('message', array(
+					'class' => 'error',
+					'content' => Lang::get('messages.login_incorrect')
+				));
+				return View::make('layouts.login');
+			}
+		} else {
+			return View::make('layouts.login');
+		}
+	}
+
+	public function logout() {
+		Auth::logout();
+		return Redirect::to('/login');
+	}
 
 	/**
 	 * Show the form for creating a new resource.
 	 *
 	 * @return Response
 	 */
-	public function create()
-	{
+	public function create() {
 		//
 	}
 
@@ -29,8 +54,7 @@ class UsersController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function store()
-	{
+	public function store() {
 		//
 	}
 
@@ -41,9 +65,10 @@ class UsersController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
-	{
-		//
+	public function show($id) {
+		$user = User::find($id);
+
+		return View::make('users.show', array('user' => $user));
 	}
 
 
@@ -53,8 +78,7 @@ class UsersController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
-	{
+	public function edit($id) {
 		//
 	}
 
@@ -65,8 +89,7 @@ class UsersController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
-	{
+	public function update($id) {
 		//
 	}
 
@@ -77,8 +100,7 @@ class UsersController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
-	{
+	public function destroy($id) {
 		//
 	}
 

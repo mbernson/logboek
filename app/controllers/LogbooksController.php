@@ -2,14 +2,17 @@
 
 class LogbooksController extends \BaseController {
 
+	public function dashboard() {
+		return View::make('home');
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 *
 	 * @return Response
 	 */
-	public function index()
-	{
-		//
+	public function index() {
+		return View::make('logbooks.index');
 	}
 
 
@@ -18,8 +21,7 @@ class LogbooksController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function create()
-	{
+	public function create() {
 		//
 	}
 
@@ -29,8 +31,7 @@ class LogbooksController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function store()
-	{
+	public function store() {
 		//
 	}
 
@@ -41,9 +42,12 @@ class LogbooksController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
-	{
-		//
+	public function show($id) {
+		$logbook = Logbook::findOrFail($id);
+		return View::make('entries.index', array(
+			'logbook' => $logbook,
+			'entries' => $logbook->entries
+		));
 	}
 
 
@@ -53,8 +57,7 @@ class LogbooksController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
-	{
+	public function edit($id) {
 		//
 	}
 
@@ -65,8 +68,7 @@ class LogbooksController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
-	{
+	public function update($id) {
 		//
 	}
 
@@ -77,8 +79,7 @@ class LogbooksController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
-	{
+	public function destroy($id) {
 		//
 	}
 

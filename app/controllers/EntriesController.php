@@ -7,8 +7,7 @@ class EntriesController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function index()
-	{
+	public function index($logbook_id) {
 		//
 	}
 
@@ -18,9 +17,13 @@ class EntriesController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function create()
-	{
-		//
+	public function create($logbook_id) {
+		$logbook = Logbook::findOrFail($logbook_id);
+		$entry = new Entry();
+		return View::make('entries.create', [
+			'logbook' => $logbook,
+			'entry' => $entry
+		]);
 	}
 
 
@@ -29,9 +32,14 @@ class EntriesController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function store()
-	{
-		//
+	public function store($logbook_id) {
+		$logbook = Logbook::findOrFail($logbook_id);
+
+		$entry = new Entry(Input::except('_token'));
+		$entry->logbook_id = $logbook->id;
+
+		$entry->save();
+		return Redirect::to(route('logbooks.show', [$logbook->id]));
 	}
 
 
@@ -41,8 +49,7 @@ class EntriesController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
-	{
+	public function show($logbook_id, $entry_id) {
 		//
 	}
 
@@ -53,9 +60,13 @@ class EntriesController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
-	{
-		//
+	public function edit($logbook_id, $entry_id) {
+		$logbook = Logbook::findOrFail($logbook_id);
+		$entry = Entry::findOrFail($entry_id);
+		return View::make('entries.edit', [
+			'logbook' => $logbook,
+			'entry' => $entry
+		]);
 	}
 
 
@@ -65,9 +76,14 @@ class EntriesController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
-	{
-		//
+	public function update($logbook_id, $entry_id) {
+		$logbook = Logbook::findOrFail($logbook_id);
+		$entry = Entry::findOrFail($entry_id);
+
+		$entry->fill(Input::except('_token'));
+
+		$entry->save();
+		return Redirect::to(route('logbooks.show', [$logbook->id]));
 	}
 
 
@@ -77,9 +93,11 @@ class EntriesController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
-	{
-		//
+	public function destroy($logbook_id, $entry_id) {
+		$entry = Entry::findOrFail($entry_id);
+
+		$entry->delete();
+		return Redirect::to(route('logbooks.show', [$logbook_id]));
 	}
 
 
