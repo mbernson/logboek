@@ -11,7 +11,20 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
+Route::any('/login', 'UsersController@login');
+
+Route::group(['before' => 'auth'], function() {
+    Route::get('/', 'LogbooksController@dashboard');
+
+    Route::resource('logbooks', 'LogbooksController');
+    Route::resource('logbooks.entries', 'EntriesController');
+    Route::resource('users', 'UsersController');
+
+    Route::any('/logout', 'UsersController@logout');
+
+    // Run the database migrations immediately
+    Route::get('/migrate/do/now', function() {
+	$status = Artisan::call('migrate');
+	return var_dump($status);
+    });
 });
