@@ -1,7 +1,7 @@
 {
-	"name": "laravel/laravel",
-	"description": "The Laravel Framework.",
-	"keywords": ["framework", "laravel"],
+	"name": "duckson/logboek",
+	"description": "A web-app for organizing IT-forensics logs",
+	"keywords": ["application", "forensics"],
 	"license": "MIT",
 	"require": {
             "laravel/framework": "4.1.*",
