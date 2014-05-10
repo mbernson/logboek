@@ -1,0 +1,3 @@
+textarea.markdown {
+	background: transparent url("/img/markdown-mark/66x40.png") no-repeat calc(100% - 16px) calc(100% - 16px);
+}
