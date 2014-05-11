@@ -11,7 +11,7 @@ class UsersController extends \BaseController {
 		$users = User::orderBy('username')
 			->paginate(self::$per_page);
 
-		return View::make('users.index', array('users' => $users));
+		return View::make('users.index', ['users' => $users]);
 	}
 
 
@@ -23,10 +23,10 @@ class UsersController extends \BaseController {
 			if(Auth::attempt($input, $remember)) {
 				return Redirect::intended('/');
 			} else {
-				Session::flash('message', array(
+				Session::flash('message', [
 					'class' => 'error',
 					'content' => Lang::get('messages.login_incorrect')
-				));
+				]);
 				return View::make('layouts.login');
 			}
 		} else {
@@ -45,7 +45,9 @@ class UsersController extends \BaseController {
 	 * @return Response
 	 */
 	public function create() {
-		//
+		return View::make('users.create', [
+			'user' => new User()
+		]);
 	}
 
 
@@ -55,7 +57,20 @@ class UsersController extends \BaseController {
 	 * @return Response
 	 */
 	public function store() {
-		//
+		$user = new User();
+
+		$user->username = Input::get('username');
+		$user->email = Input::get('email');
+
+		$password = Input::get('password');
+		if(empty($password))
+			throw new Exception('Password can not be empty.');
+
+		$user->password = Hash::make($password);
+
+		$user->save();
+
+		return Redirect::to(route('users.index'));
 	}
 
 
@@ -67,8 +82,7 @@ class UsersController extends \BaseController {
 	 */
 	public function show($id) {
 		$user = User::find($id);
-
-		return View::make('users.show', array('user' => $user));
+		return View::make('users.show', ['user' => $user]);
 	}
 
 
@@ -78,8 +92,9 @@ class UsersController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id) {
-		//
+	public function edit($user_id) {
+		$user = User::findOrFail($user_id);
+		return View::make('users.edit', ['user' => $user]);
 	}
 
 
@@ -89,8 +104,20 @@ class UsersController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id) {
-		//
+	public function update($user_id) {
+		$user = User::findOrFail($user_id);
+
+		$user->username = Input::get('username');
+		$user->email = Input::get('email');
+
+		$password = Input::get('password');
+		if(!empty($password)) {
+			$user->password = Hash::make($password);
+		}
+
+		$user->save();
+
+		return Redirect::to(route('users.index'));
 	}
 
 

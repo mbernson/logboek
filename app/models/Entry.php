@@ -1,6 +1,6 @@
 <?php
 
-class Entry extends Eloquent {
+class Entry extends Model {
     protected $table = 'entries';
 
     protected $fillable = ['title', 'body', 'started_at', 'finished_at'];
@@ -30,9 +30,5 @@ class Entry extends Eloquent {
 	    }
 
 	    return parent::save($options);
-    }
-
-    public function isNew() {
-	    return empty($this->id);
     }
 }

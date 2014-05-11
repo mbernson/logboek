@@ -19,10 +19,8 @@
 	    </div><!--/span-->
 	    <div class="col-6 col-sm-6 col-lg-4">
 	      <h2>Gebruikers</h2>
-	      <p>Gebruikersmanagement zal binnenkort worden toegevoegd.</p>
-	      <!--
+	      <p>De applicatie beschikt over eenvoudig gebruikersmanagement. Via de profiel-link rechtsboven kun je je wachtwoord veranderen, en er kunnen nieuwe gebruikers toegevoegd worden.</p>
 	      <p><a class="btn btn-default" href="{{ action('users.index') }}" role="button">Bekijken &raquo;</a></p>
-	      -->
 	    </div><!--/span-->
 
 	  </div><!--/row-->
