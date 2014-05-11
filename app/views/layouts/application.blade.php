@@ -77,7 +77,7 @@
           <div class="list-group">
 	  @foreach($logbooks as $logbook)
 	  {{ link_to_action('logbooks.show', $logbook->title, [$logbook->id], [
-		  'class' =>  'list-group-item'.(Request::has(URL::to($logbook)) ? ' active' : '')
+		  'class' =>  'list-group-item '.(Request::is('logbooks/'.$logbook->id.'*') ? 'active' : '')
 	  ]) }}
 	  @endforeach
           </div>
