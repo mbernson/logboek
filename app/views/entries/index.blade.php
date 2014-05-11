@@ -21,7 +21,7 @@
 
 	<tr>
 		<td>{{ $entry->id }}</td>
-		<td>{{ link_to_action('logbooks.entries.edit', $entry->title, [$logbook->id, $entry->id]) }}</td>
+		<td>{{ link_to_action('logbooks.entries.edit', empty($entry->title) ? 'Naamloos' : $entry->title, [$logbook->id, $entry->id]) }}</td>
 		<td>Ongeveer {{ str_word_count($entry->body) }} woorden</td>
 		<td>{{ $entry->started_at }}</td>
 		<td>{{ $entry->finished_at }}</td>
