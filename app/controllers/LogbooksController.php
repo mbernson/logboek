@@ -3,7 +3,11 @@
 class LogbooksController extends \BaseController {
 
 	public function dashboard() {
-		return View::make('home');
+		return View::make('dashboard', [
+			'entries' => Entry::with('logbook')
+				->orderBy('finished_at', 'desc')->orderBy('started_at', 'desc')
+				->take(10)->get()
+		]);
 	}
 
 	/**
