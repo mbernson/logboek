@@ -13,9 +13,9 @@ class CreateEntriesTable extends Migration {
 	public function up() {
 	    Schema::create('entries', function($table) {
 		$table->increments('id');
-		$table->string('title');
-		$table->longText('body');
-		$table->longText('html_body');
+		$table->string('title')->nullable();
+		$table->longText('body')->nullable();
+		$table->longText('html_body')->nullable();
 
 		$table->timestamp('started_at');
 		$table->timestamp('finished_at');
