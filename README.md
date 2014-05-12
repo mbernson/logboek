@@ -9,9 +9,11 @@ This is a web-application for organizing (logging) information for (ICT-)forensi
 
 ## Installation
 
-1. Clone the project into any place you like.
-2. Edit the database configuration in `app/config/database.php`.
-3. Run `artisan migrate` and `artisan db:seed`.
-4. Point a virtualhost towards `<logboek directory/public`.
-5. Visit the site. The default login is `owner` with password `changeme`. (You'll have to drop into the Laravel console to create more users, this functionality be added later on.)
-5. Celebrate!
+* Clone the project into any place you like.
+* Run `composer install`
+* Edit the database configuration in `app/config/database.php`.
+* `chmod -R 755 app/storage`
+* Run `artisan migrate` and `artisan db:seed`.
+* Point a virtualhost towards `<logboek_directory>/public`.
+* Visit the site. The default login is `owner` with password `changeme`. (You can change this and add more users after logging in)
+* Celebrate!
