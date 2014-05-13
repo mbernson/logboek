@@ -89,13 +89,12 @@
 
       <hr>
 
-      <footer>
-	<p>&copy; Hogeschool Leiden 2014</p>
+      <footer class="muted">
+	<p class="pull-left">&copy; <a href="http://duckson.nl">Mathijs Bernson</a>, 2014</p>
+	<p class="pull-right"><a href="https://git.duckson.nl/hsleiden/logboek">Source</a> | <a href="https://git.duckson.nl/hsleiden/logboek/blob/master/LICENSE.md">MIT License</a></p>
       </footer>
 
     </div><!--/.container-->
-
-
 
     <!-- Bootstrap core JavaScript -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
