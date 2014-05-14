@@ -47,7 +47,7 @@ class TasksController extends \BaseController {
 	public function store() {
 		$task = new Task();
 
-		$task->fill(Input::only(['name', 'user_id', 'desc']));
+		$task->fill(Input::only(['name', 'user_id', 'description']));
 		$task->deadline = new DateTime(Input::get('deadline'));
                 $task->save();
 
@@ -92,7 +92,7 @@ class TasksController extends \BaseController {
 	public function update($task_id) {
 		$task = Task::findOrFail($task_id);
 
-		$task->fill(Input::only(['name', 'user_id']));
+		$task->fill(Input::only(['name', 'user_id', 'description']));
                 $task->save();
 
                 return Redirect::to(route('tasks.index'));
