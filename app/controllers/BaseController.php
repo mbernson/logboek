@@ -19,5 +19,6 @@ class BaseController extends Controller {
 
 	public function __construct() {
 		View::share('logbooks', Logbook::all());
+		View::share('tasks',Task::all()); 
 	}
 }

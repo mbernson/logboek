@@ -40,7 +40,7 @@
 	  <ul class="nav navbar-nav">
 	    <li {{ Request::is('logbooks') ? 'class="active"' : '' }}>{{ link_to_route('logbooks.index', 'Logboeken') }}</li>
 	    <li {{ Request::is('users') ? 'class="active"' : '' }}>{{ link_to_route('users.index', 'Gebruikers') }}</li>
-            <li {{ Request::is('tasks') ? 'class="active"' : '' }}>{{ link_to_route('tasks.index', 'Taken') }}</li>
+            <li {{ Request::is('tasks') ? 'class="active"' : '' }}>{{ link_to_route('.index', 'Gebruikers') }}</li>
 	  </ul>
 
 	@if(Auth::check())
@@ -68,8 +68,6 @@
           <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
         </p>
 
-	@include('partials.alert')
-
 	@yield('content')
         </div><!--/span-->
 
@@ -92,12 +90,13 @@
 
       <hr>
 
-      <footer class="muted">
-	<p class="pull-left">&copy; <a href="http://duckson.nl">Mathijs Bernson</a>, 2014</p>
-	<p class="pull-right"><a href="https://git.duckson.nl/hsleiden/logboek">Source</a> | <a href="https://git.duckson.nl/hsleiden/logboek/blob/master/LICENSE.md">MIT License</a></p>
+      <footer>
+	<p>&copy; Hogeschool Leiden 2014</p>
       </footer>
 
     </div><!--/.container-->
+
+
 
     <!-- Bootstrap core JavaScript -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
