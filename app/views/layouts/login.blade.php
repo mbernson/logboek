@@ -28,6 +28,9 @@
 
       <form class="form-signin" role="form" action="/login" method="post">
         <h2 class="form-signin-heading">Please sign in</h2>
+
+	@include('partials.alert')
+
         <input type="text" name="username" class="form-control" placeholder="Username" required autofocus>
         <input type="password" name="password" class="form-control" placeholder="Password" required>
         <label class="checkbox">
@@ -37,5 +40,8 @@
       </form>
 
     </div> <!-- /container -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
   </body>
 </html>

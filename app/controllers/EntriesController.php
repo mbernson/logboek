@@ -48,7 +48,11 @@ class EntriesController extends \BaseController {
 		$entry->logbook_id = $logbook->id;
 
 		$entry->save();
-		return Redirect::to(route('logbooks.show', [$logbook->id]));
+		return Redirect::to(route('logbooks.show', [$logbook->id]))
+			->with('message', [
+				'content' => 'Entry toegevoegd',
+				'class' => 'success'
+			]);
 	}
 
 
@@ -97,7 +101,11 @@ class EntriesController extends \BaseController {
 		$entry->fill(Input::except('_token'));
 
 		$entry->save();
-		return Redirect::to(route('logbooks.show', [$logbook->id]));
+		return Redirect::to(route('logbooks.show', [$logbook->id]))
+			->with('message', [
+				'content' => 'Entry bijgewerkt',
+				'class' => 'success'
+			]);
 	}
 
 
@@ -111,7 +119,11 @@ class EntriesController extends \BaseController {
 		$entry = Entry::findOrFail($entry_id);
 
 		$entry->delete();
-		return Redirect::to(route('logbooks.show', [$logbook_id]));
+		return Redirect::to(route('logbooks.show', [$logbook_id]))
+			->with('message', [
+				'content' => 'Entry verwijderd',
+				'class' => 'danger'
+			]);
 	}
 
 

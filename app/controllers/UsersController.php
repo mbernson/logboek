@@ -14,19 +14,26 @@ class UsersController extends \BaseController {
 		return View::make('users.index', ['users' => $users]);
 	}
 
-
 	public function login() {
+		$login_success_message = [
+			'class' => 'success'
+		];
+		$login_error_message = [
+			'class' => 'error',
+			'content' => Lang::get('messages.login_incorrect')
+		];
+
 		$input = Input::only('username', 'password');
 		$remember = Input::get('remember') || false;
+		$username = Input::get('username');
 
 		if(Request::instance()->isMethod('post')) {
 			if(Auth::attempt($input, $remember)) {
-				return Redirect::intended('/');
+				$login_success_message['content'] = "Welkom bij het IPFIT-logboek, $username!";
+				return Redirect::intended('/')
+					->with('message', $login_success_message);
 			} else {
-				Session::flash('message', [
-					'class' => 'error',
-					'content' => Lang::get('messages.login_incorrect')
-				]);
+				Session::flash('message', $login_error_message);
 				return View::make('layouts.login');
 			}
 		} else {
@@ -36,7 +43,10 @@ class UsersController extends \BaseController {
 
 	public function logout() {
 		Auth::logout();
-		return Redirect::to('/login');
+		return Redirect::to('/login')->with('message', [
+			'content' => 'Je bent uitgelogd.',
+			'class' => 'success'
+		]);
 	}
 
 	/**
