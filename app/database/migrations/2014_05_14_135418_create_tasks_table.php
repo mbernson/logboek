@@ -13,7 +13,7 @@ class CreateTasksTable extends Migration {
 	public function up() {
 		Schema::create('tasks', function($table) {
 			$table->increments('id');
-			$table->string('title');
+			$table->string('name');
 			$table->integer('user_id');
 			$table->text('description');
 			$table->timestamp('deadline');
