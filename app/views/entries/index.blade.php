@@ -14,7 +14,7 @@
 		<th>Titel</th>
 		<th>Aantal woorden</th>
 		<th>Begonnen op</th>
-		<th>Opgeslagen op</th>
+		<th>Afgemaakt op</th>
 	</tr>
 
 	@foreach($entries as $entry)

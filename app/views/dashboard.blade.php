@@ -33,8 +33,9 @@
 		<tr>
 			<th>Titel</th>
 			<th>Aantal woorden</th>
+			<th>Gebruiker</th>
 			<th>Begonnen op</th>
-			<th>Opgeslagen op</th>
+			<th>Afgemaakt op</th>
 		</tr>
 
 		@foreach($entries as $entry)
@@ -42,6 +43,7 @@
 		<tr>
 			<td>{{ link_to_action('logbooks.entries.edit', empty($entry->title) ? 'Naamloos' : $entry->title, [$entry->logbook->id, $entry->id]) }}</td>
 			<td>Ongeveer {{ str_word_count($entry->body) }} woorden</td>
+			<td>{{ $entry->logbook->user->username }}</td>
 			<td>{{ $entry->started_at }}</td>
 			<td>{{ $entry->finished_at }}</td>
 		</tr>
