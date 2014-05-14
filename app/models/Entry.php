@@ -12,7 +12,7 @@ class Entry extends Model {
 
     public $timestamps = false;
     public function getDates() {
-	    return array('started_at', 'finished_at');
+	    return ['started_at', 'finished_at'];
     }
 
     public function logbook() {

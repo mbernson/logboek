@@ -35,7 +35,16 @@ class EntriesController extends \BaseController {
 	public function store($logbook_id) {
 		$logbook = Logbook::findOrFail($logbook_id);
 
-		$entry = new Entry(Input::except('_token'));
+		$entry = new Entry(Input::only('title', 'body'));
+
+		// Run all date attributes through strtotime
+		foreach($entry->getDates() as $date_attr) {
+			if(Input::has($date_attr))
+				$entry->$date_attr = new DateTime(
+					Input::get($date_attr)
+				);
+		}
+
 		$entry->logbook_id = $logbook->id;
 
 		$entry->save();
