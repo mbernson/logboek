@@ -35,19 +35,16 @@ class EntriesController extends \BaseController {
 	public function store($logbook_id) {
 		$logbook = Logbook::findOrFail($logbook_id);
 
-		$entry = new Entry(Input::only('title', 'body'));
-
-		// Run all date attributes through strtotime
-		foreach($entry->getDates() as $date_attr) {
-			if(Input::has($date_attr))
-				$entry->$date_attr = new DateTime(
-					Input::get($date_attr)
-				);
-		}
+		$entry = new Entry(Input::only('title', 'body', 'started_at', 'finished_at'));
 
 		$entry->logbook_id = $logbook->id;
 
-		$entry->save();
+		if($entry->validate())
+			$entry->save();
+		else
+			return View::make('entries.create', ['entry' => $entry, 'logbook' => $logbook])
+				->withErrors($entry->validator());
+
 		return Redirect::to(route('logbooks.show', [$logbook->id]))
 			->with('message', [
 				'content' => 'Entry toegevoegd',
@@ -98,9 +95,14 @@ class EntriesController extends \BaseController {
 		$logbook = Logbook::findOrFail($logbook_id);
 		$entry = Entry::findOrFail($entry_id);
 
-		$entry->fill(Input::except('_token'));
+		$entry->fill(Input::only('title', 'body', 'started_at', 'finished_at'));
 
-		$entry->save();
+		if($entry->validate())
+			$entry->save();
+		else
+			return View::make('entries.edit', ['entry' => $entry, 'logbook' => $logbook])
+				->withErrors($entry->validator());
+
 		return Redirect::to(route('logbooks.show', [$logbook->id]))
 			->with('message', [
 				'content' => 'Entry bijgewerkt',
