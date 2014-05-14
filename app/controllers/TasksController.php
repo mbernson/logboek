@@ -93,6 +93,9 @@ class TasksController extends \BaseController {
 		$task = Task::findOrFail($task_id);
 
 		$task->fill(Input::only(['name', 'user_id', 'description']));
+		if(Input::has('deadline'))
+			$task->deadline = new DateTime(Input::get('deadline'));
+
                 $task->save();
 
                 return Redirect::to(route('tasks.index'));
