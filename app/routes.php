@@ -19,6 +19,7 @@ Route::group(['before' => 'auth'], function() {
     Route::resource('logbooks', 'LogbooksController');
     Route::resource('logbooks.entries', 'EntriesController');
     Route::resource('users', 'UsersController');
+    Route::resource('tasks', 'TasksController');
 
     Route::any('/logout', 'UsersController@logout');
 });
