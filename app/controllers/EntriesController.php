@@ -59,7 +59,12 @@ class EntriesController extends \BaseController {
 	 * @return Response
 	 */
 	public function show($logbook_id, $entry_id) {
-		//
+		$logbook = Logbook::findOrFail($logbook_id);
+		$entry = Entry::findOrFail($entry_id);
+		return View::make('entries.show', [
+			'logbook' => $logbook,
+			'entry' => $entry
+		]);
 	}
 
 
