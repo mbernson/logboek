@@ -23,6 +23,17 @@ class User extends Model implements UserInterface, RemindableInterface {
 		return $this->hasMany('LogBook', 'user_id');
 	}
 
+	protected $rules = [
+		'email' => 'required|email|unique:users',
+		'username' => 'required|alpha_num|unique:users',
+		'password' => 'required|min:8',
+	];
+	protected $edit_rules = [
+		'email' => 'required|email',
+		'username' => 'required|alpha_num',
+		'password' => 'required|min:8',
+	];
+
 	/**
 	 * Get the unique identifier for the user.
 	 *

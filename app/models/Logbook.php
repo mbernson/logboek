@@ -3,6 +3,10 @@
 class Logbook extends Eloquent {
     protected $table = 'logbooks';
 
+    protected $rules = [
+	    'title' => 'required',
+    ];
+
     public function entries() {
 	    return $this->hasMany('Entry', 'logbook_id');
     }

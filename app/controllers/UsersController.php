@@ -69,16 +69,17 @@ class UsersController extends \BaseController {
 	public function store() {
 		$user = new User();
 
-		$user->username = Input::get('username');
-		$user->email = Input::get('email');
+		$user->unguard();
+		$user->fill(Input::only('username', 'email', 'password'));
 
-		$password = Input::get('password');
-		if(empty($password))
-			throw new Exception('Password can not be empty.');
-
-		$user->password = Hash::make($password);
-
-		$user->save();
+		if($user->validate()) {
+			$user->password = Hash::make(Input::get('password'));
+			$user->save();
+		} else {
+			$user->password = null; // Don't send the password back over the wire
+			return View::make('users.create', ['user' => $user])
+				->withErrors($user->validator());
+		}
 
 		return Redirect::to(route('users.index'));
 	}
@@ -117,15 +118,20 @@ class UsersController extends \BaseController {
 	public function update($user_id) {
 		$user = User::findOrFail($user_id);
 
-		$user->username = Input::get('username');
-		$user->email = Input::get('email');
+		$user->unguard();
+		$user->fill(Input::only('username', 'email'));
+		if(Input::has('password'))
+			$user->password = Input::get('password');
 
-		$password = Input::get('password');
-		if(!empty($password)) {
-			$user->password = Hash::make($password);
+		if($user->validate()) {
+			if(Input::has('password'))
+				$user->password = Hash::make(Input::get('password'));
+			$user->save();
+		} else {
+			$user->password = null; // Don't send the password back over the wire
+			return View::make('users.edit', ['user' => $user])
+				->withErrors($user->validator());
 		}
-
-		$user->save();
 
 		return Redirect::to(route('users.index'));
 	}
