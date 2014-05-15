@@ -49,6 +49,13 @@ Log::useFiles(storage_path().'/logs/laravel.log');
 App::error(function(Exception $exception, $code)
 {
 	Log::error($exception);
+
+	if(!App::environment('local')) {
+		return Response::view('layouts.error', [
+			'title' => 'Sorry, er is iets mis gegaan',
+			'message' => 'Er is een interne applicatiefout opgetreden. Details over de fout zijn opgeslagen. Meld de fout bij de webmaster als je hier vaker tegenaan loopt.'
+		], 500);
+	}
 });
 
 /*
@@ -64,7 +71,10 @@ App::error(function(Exception $exception, $code)
 
 App::down(function()
 {
-	return Response::make("Be right back!", 503);
+	return Response::view('layouts.error', [
+		'title' => 'Ben zo terug!',
+		'message' => 'Deze website is tijdelijk uit de lucht wegens onderhoud.'
+	], 503);
 });
 
 /*
@@ -74,7 +84,10 @@ App::down(function()
 */
 App::missing(function($exception)
 {
-    return Response::view('errors.missing', array(), 404);
+	return Response::view('layouts.error', [
+		'title' => 'Pagina niet gevonden',
+		'message' => 'De opgevraagde pagina bestaat niet. Klopt de URL? Stuur anders een bugreport in.'
+	], 404);
 });
 
 /*
