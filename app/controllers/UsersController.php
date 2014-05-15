@@ -19,7 +19,7 @@ class UsersController extends \BaseController {
 			'class' => 'success'
 		];
 		$login_error_message = [
-			'class' => 'error',
+			'class' => 'danger',
 			'content' => Lang::get('messages.login_incorrect')
 		];
 
