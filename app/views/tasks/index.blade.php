@@ -14,7 +14,8 @@
                 <th>ID</th>
                 <th>Naam</th>
                 <th>Eigenaar</th>
-                <th>Start</th>
+                <th>Deadline</th>
+		<th>Status</th>
         </tr>
 
         @foreach($tasks as $task)
@@ -22,7 +23,12 @@
                 <td>{{ $task->id }}</td>
 		<td>{{ link_to_action('tasks.show', $task->name, [$task->id]) }}</td>
 		<td>{{ link_to_action('users.show', $task->user->username, [$task->user->id]) }}</td>
-		<td>{{ $task->created_at }}</td>
+		<td>{{ $task->deadline }}</td>
+		@if($task->status == 0)
+                        <td>Openstaand</td>
+                @else
+                        <td>Afgesloten</td>
+                @endif
         </tr>
         @endforeach
 

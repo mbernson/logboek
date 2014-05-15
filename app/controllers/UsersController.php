@@ -19,7 +19,7 @@ class UsersController extends \BaseController {
 			'class' => 'success'
 		];
 		$login_error_message = [
-			'class' => 'error',
+			'class' => 'danger',
 			'content' => Lang::get('messages.login_incorrect')
 		];
 
@@ -81,7 +81,12 @@ class UsersController extends \BaseController {
 				->withErrors($user->validator());
 		}
 
-		return Redirect::to(route('users.index'));
+		return Redirect::to(route('users.index'))
+                        ->with('message', [
+                                'content' => 'Gebruiker met succes aangemaakt!',
+                                'class' => 'success'
+                        ]);
+
 	}
 
 
@@ -133,7 +138,11 @@ class UsersController extends \BaseController {
 				->withErrors($user->validator());
 		}
 
-		return Redirect::to(route('users.index'));
+			return Redirect::to(route('users.index'))
+                        ->with('message', [
+                                'content' => 'Gebruiker met succes geupdated!',
+                                'class' => 'success'
+                        ]);
 	}
 
 

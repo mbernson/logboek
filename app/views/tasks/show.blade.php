@@ -17,10 +17,33 @@
                 <td>Eigenaar</td>
                 <td>{{ $task->user->username }}</td>
         </tr>
+	<tr>
+		<td>Beschrijving</td>
+		<td>{{ $task->description }}</td>
+	</tr>
+	<tr>
+		<td>Status</td>
+
+		@if($task->status == 0)
+			<td>Openstaand</td>
+		@else
+			<td>Afgesloten</td>
+		@endif
+
+	</tr>
+	<tr>
+		<td>Deadline</td>
+		<td>{{ $task->deadline }}</td>
+	</tr>
         <tr>
-                <td>Start</td>
+                <td>Aanmaakdatum taak</td>
                 <td>{{ $task->created_at }}</td>
         </tr>
+        <tr>
+                <td>Updatedatum taak</td>
+                <td>{{ $task->updated_at }}</td>
+        </tr>
+
 </table>
 
 {{ link_to_action('tasks.edit', 'Bewerken', [$task->id], ['class' => 'btn btn-success']) }}
