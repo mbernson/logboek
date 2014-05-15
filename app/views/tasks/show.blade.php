@@ -35,15 +35,6 @@
 		<td>Deadline</td>
 		<td>{{ $task->deadline }}</td>
 	</tr>
-        <tr>
-                <td>Aanmaakdatum taak</td>
-                <td>{{ $task->created_at }}</td>
-        </tr>
-        <tr>
-                <td>Updatedatum taak</td>
-                <td>{{ $task->updated_at }}</td>
-        </tr>
-
 </table>
 
 {{ link_to_action('tasks.edit', 'Bewerken', [$task->id], ['class' => 'btn btn-success']) }}
