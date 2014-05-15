@@ -156,5 +156,10 @@ class EntriesController extends \BaseController {
 			]);
 	}
 
+	public function import() {
+	}
+
+	public function export() {
+	}
 
 }
