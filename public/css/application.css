@@ -16,6 +16,10 @@ textarea.markdown {
 	float: right;
 }
 
+.entry-panel .panel-body {
+	overflow-x: scroll;
+}
+
 .entry-panel .panel-footer .table {
 	margin-bottom: 0;
 }
