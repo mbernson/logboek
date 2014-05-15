@@ -4,6 +4,6 @@ return array(
 
     'debug' => false,
 
-    'url' => 'https://logboek.theinternets.nl',
+    'url' => 'https://example.com',
 
 );
