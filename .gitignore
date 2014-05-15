@@ -6,5 +6,6 @@ composer.phar
 .DS_Store
 Thumbs.db
 
-# Ignore any production configuration
+# Ignore any production/local configuration
 app/config/production
+app/config/local
