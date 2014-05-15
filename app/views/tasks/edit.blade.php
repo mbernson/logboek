@@ -24,9 +24,16 @@
 </div>
 
 <div class="form-group">
-        {{ Form::label('desc', 'Beschrijving') }}
-        {{ Form::textarea('desc', $task->desc, ['class' => 'form-control markdown', 'rows' => 10]) }}
+        {{ Form::label('description', 'Beschrijving') }}
+        {{ Form::textarea('description', $task->description, ['class' => 'form-control markdown', 'rows' => 10]) }}
         <p><em>Je kunt bij het schrijven gebruik maken van <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet">Markdown</a>.</em></p>
+</div>
+
+<div class="form-group">
+	<?php $status = ["0" => "openstaand", "1" => "afgesloten"]; ?>
+
+        {{ Form::label('status', 'Taak status') }}
+        {{ Form::select('status', $status, null, ['class' => 'form-control']) }}
 </div>
 
 <button type="submit" class="btn btn-primary btn-lg">Opslaan</button>

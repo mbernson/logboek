@@ -47,15 +47,21 @@ class TasksController extends \BaseController {
 	public function store() {
 		$task = new Task();
 
-		$task->fill(Input::only(['name', 'user_id', 'description']));
+		$task->fill(Input::only(['name', 'user_id', 'description', 'status']));
 		$task->deadline = new DateTime(Input::get('deadline'));
-                $task->save();
+
+		if($task->validate()) {
+                        $task->save();
+                } else {
+                        return View::make('tasks.edit', ['task' => $task])
+                                ->withErrors($task->validator());
+                }
 
                 return Redirect::to(route('tasks.index'))
-			->with('message', [
-				'content' => 'Taak toegevoegd',
-				'class' => 'success'
-			]);
+                        ->with('message', [
+                                'content' => 'Taak met succes aangemaakt!',
+                                'class' => 'success'
+                        ]);
         }
 
 
@@ -92,13 +98,22 @@ class TasksController extends \BaseController {
 	public function update($task_id) {
 		$task = Task::findOrFail($task_id);
 
-		$task->fill(Input::only(['name', 'user_id', 'description']));
+		$task->fill(Input::only(['name', 'user_id', 'description', 'status']));
 		if(Input::has('deadline'))
 			$task->deadline = new DateTime(Input::get('deadline'));
 
-                $task->save();
+		if($task->validate()) {
+			$task->save();
+		} else {
+			return View::make('tasks.edit', ['task' => $task])
+                                ->withErrors($task->validator());
+		}
 
-                return Redirect::to(route('tasks.index'));
+		return Redirect::to(route('tasks.index'))
+                        ->with('message', [
+                                'content' => 'Taak met succes geupdated!',
+                                'class' => 'success'
+                        ]);
 	}
 
 
@@ -112,7 +127,11 @@ class TasksController extends \BaseController {
 		$entry = Task::findOrFail($task_id);
                 $entry->delete();
 
-		return Redirect::to(route('tasks.index'));
+		return Redirect::to(route('tasks.index'))
+                        ->with('message', [
+                                'content' => 'Taak met succes verwijderd!',
+                                'class' => 'success'
+			]);
 	}
 
 

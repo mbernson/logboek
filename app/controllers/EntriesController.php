@@ -39,15 +39,15 @@ class EntriesController extends \BaseController {
 
 		$entry->logbook_id = $logbook->id;
 
-		if($entry->validate())
+		if($entry->validate()){
 			$entry->save();
-		else
+		} else {
 			return View::make('entries.create', ['entry' => $entry, 'logbook' => $logbook])
 				->withErrors($entry->validator());
-
+		}
 		return Redirect::to(route('logbooks.show', [$logbook->id]))
 			->with('message', [
-				'content' => 'Entry toegevoegd',
+				'content' => 'Entry met succes aangemaakt!',
 				'class' => 'success'
 			]);
 	}
@@ -105,7 +105,7 @@ class EntriesController extends \BaseController {
 
 		return Redirect::to(route('logbooks.show', [$logbook->id]))
 			->with('message', [
-				'content' => 'Entry bijgewerkt',
+				'content' => 'Entry met succes geupdated!',
 				'class' => 'success'
 			]);
 	}
@@ -123,7 +123,7 @@ class EntriesController extends \BaseController {
 		$entry->delete();
 		return Redirect::to(route('logbooks.show', [$logbook_id]))
 			->with('message', [
-				'content' => 'Entry verwijderd',
+				'content' => 'Entry met succes verwijderd!',
 				'class' => 'danger'
 			]);
 	}
