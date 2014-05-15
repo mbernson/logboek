@@ -29,18 +29,12 @@
 	{{ Form::text('finished_at', $entry->finished_at, ['class' => 'form-control', 'placeholder' => 'Als je dit leeg laat wordt het de datum dat je op "Opslaan" drukt']) }}
 </div>
 
-<button type="submit" class="btn btn-primary btn-lg">Opslaan</button>
+<button type="submit" class="btn btn-primary pull-left">Opslaan</button>
 
 {{ Form::close() }}
 
-@if(!$entry->isNew())
-
-{{ Form::open(['route' => ['logbooks.entries.destroy', $logbook->id, $entry->id], 'method' => 'delete']) }}
-
-<button type="submit" class="btn btn-danger pull-right">Verwijderen</button>
-
-{{ Form::close() }}
-
-@endif
+<div class="pull-right">
+	@include('entries.delete_form', ['entry' => $entry])
+</div>
 
 @stop

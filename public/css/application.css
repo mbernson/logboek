@@ -6,3 +6,20 @@ textarea.markdown {
   padding: 40px 15px;
   text-align: center;
 }
+
+.entry-panel .panel-title {
+	width: 50%;
+	display: inline-block;
+}
+
+.entry-panel .btn {
+	float: right;
+}
+
+.entry-panel .panel-footer .table {
+	margin-bottom: 0;
+}
+
+.entry-panel .panel-footer .table tr:first-child * {
+	border: none;
+}
