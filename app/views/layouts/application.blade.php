@@ -38,7 +38,7 @@
 	<div class="collapse navbar-collapse">
 
 	  <ul class="nav navbar-nav">
-	    <li {{ Request::is('entries') || Request::is('/') ? 'class="active"' : '' }}>{{ link_to_action('EntriesController@index', 'Entries') }}</li>
+	    <li {{ Request::is('entries') || Request::is('/') ? 'class="active"' : '' }}>{{ link_to('/entries', 'Entries') }}</li>
 	    <li {{ Request::is('logbooks') ? 'class="active"' : '' }}>{{ link_to_route('logbooks.index', 'Logboeken') }}</li>
 	    <li {{ Request::is('users') ? 'class="active"' : '' }}>{{ link_to_route('users.index', 'Gebruikers') }}</li>
             <li {{ Request::is('tasks') ? 'class="active"' : '' }}>{{ link_to_route('tasks.index', 'Taken') }}</li>

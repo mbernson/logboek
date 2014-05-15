@@ -15,7 +15,7 @@
 	    <div class="col-6 col-sm-6 col-lg-4">
 	      <h2>Entries</h2>
 	      <p>Ieder log boek kan een onbeperkt aantal <em>entries</em> bevatten. <em>Entries</em> zijn de daadwerkelijke informatie in je logboek. Ze bestaan uit een titel, tekstuele inhoud (geschreven met Markdown), en start/eind-data.</p>
-	      <p><a class="btn btn-default" href="/logbooks/1/entries" role="button">Bekijken &raquo;</a></p>
+	      <p><a class="btn btn-default" href="/entries" role="button">Bekijken &raquo;</a></p>
 	    </div><!--/span-->
 	    <div class="col-6 col-sm-6 col-lg-4">
 	      <h2>Gebruikers</h2>

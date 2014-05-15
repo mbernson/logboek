@@ -14,6 +14,7 @@ class EntriesController extends \BaseController {
 			->paginate(10);
 
 		return View::make('entries.index', [
+			'title' => 'Recente entries',
 			'entries' => $entries,
 		]);
 	}
