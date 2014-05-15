@@ -77,6 +77,7 @@
 
 	@section('sidebar')
 
+	  <h3>Logboeken</h3>
           <div class="list-group">
 	  @foreach($logbooks as $logbook)
 	  {{ link_to_action('logbooks.show', $logbook->title, [$logbook->id], [
@@ -84,6 +85,15 @@
 	  ]) }}
 	  @endforeach
           </div>
+
+	  <h3>Recente taken</h3>
+	  <div class="list-group">
+		@foreach($tasks as $task)
+          	{{ link_to_action('tasks.show', $task->name, [$task->id], [
+                  	'class' =>  'list-group-item '.(Request::is('tasks/'.$task->id.'*') ? 'active' : '')
+          	]) }}
+          	@endforeach
+	  </div>
 
 	@show
 

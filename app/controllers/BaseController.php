@@ -19,6 +19,8 @@ class BaseController extends Controller {
 
 	public function __construct() {
 		View::share('logbooks', Logbook::all());
-		View::share('tasks',Task::all()); 
+		View::share('tasks', Task::where('status', false)
+			->orderBy('deadline', 'asc')
+			->take(7)->get()); // Oudste deadlines bovenaan
 	}
 }
