@@ -22,5 +22,7 @@ Route::group(['before' => 'auth'], function() {
     Route::resource('tasks', 'TasksController');
     Route::resource('evidences', 'EvidenceController');
 
+    Route::post('/tasks/{id}/toggle', 'TasksController@toggle');
+
     Route::any('/logout', 'UsersController@logout');
 });
