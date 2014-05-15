@@ -15,7 +15,7 @@
 
 <div class="form-group">
         {{ Form::label('user_id', 'Toegewezen aan') }}
-	{{ Form::select('user_id', $users_options, null, ['class' => 'form-control']) }}
+	{{ Form::select('user_id', $users_options, $task->user_id, ['class' => 'form-control']) }}
 </div>
 
 <div class="form-group">
