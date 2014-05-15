@@ -41,6 +41,7 @@
 	    <li {{ Request::is('logbooks') ? 'class="active"' : '' }}>{{ link_to_route('logbooks.index', 'Logboeken') }}</li>
 	    <li {{ Request::is('users') ? 'class="active"' : '' }}>{{ link_to_route('users.index', 'Gebruikers') }}</li>
             <li {{ Request::is('tasks') ? 'class="active"' : '' }}>{{ link_to_route('tasks.index', 'Taken') }}</li>
+	    <li {{ Request::is('evidences') ? 'class="active"' : '' }}>{{ link_to_route('evidences.index', 'Bewijzen') }}</li>
 	  </ul>
 
 	@if(Auth::check())
@@ -88,7 +89,7 @@
 
 	  <h3>Recente taken</h3>
 	  <div class="list-group">
-		@foreach($tasks as $task)
+		@foreach($tasks_recent as $task)
           	{{ link_to_action('tasks.show', $task->name, [$task->id], [
                   	'class' =>  'list-group-item '.(Request::is('tasks/'.$task->id.'*') ? 'active' : '')
           	]) }}
