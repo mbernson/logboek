@@ -88,8 +88,6 @@
 
 	  <h3>Recente taken</h3>
 	  <div class="list-group">
-		<?php $tasks = DB::table('tasks')->where('status', '0')->groupBy('deadline')->take(7)->get(); ?>
-
 		@foreach($tasks as $task)
           	{{ link_to_action('tasks.show', $task->name, [$task->id], [
                   	'class' =>  'list-group-item '.(Request::is('tasks/'.$task->id.'*') ? 'active' : '')
