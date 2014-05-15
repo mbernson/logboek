@@ -12,10 +12,6 @@ class TasksController extends \BaseController {
 		View::share(['users_options' => $users_options]);
 	}
 
-	public function dashboard() {
-
-	}
-
 	/**
 	 * Display a listing of the resource.
 	 *
