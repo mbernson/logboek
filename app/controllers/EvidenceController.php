@@ -98,23 +98,23 @@ class EvidenceController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($task_id) {
-		$task = Task::findOrFail($task_id);
+	public function update($id) {
+		$evidence = Evidence::findOrFail($id);
 
-		$task->fill(Input::only(['name', 'user_id', 'description', 'status']));
-		if(Input::has('deadline'))
-			$task->deadline = new DateTime(Input::get('deadline'));
+		$evidence->fill(Input::only(['title', 'hash', 'sender', 'original_message', 'encrypted_message', 'software']));
+		if(Input::has('date_received'))
+			$evidence->date_received = new DateTime(Input::get('date_received'));
 
-		if($task->validate()) {
-			$task->save();
+		if($evidence->validate()) {
+			$evidence->save();
 		} else {
-			return View::make('tasks.edit', ['task' => $task])
-                                ->withErrors($task->validator());
+			return View::make('evidences.edit', ['evidence' => $evidence])
+                                ->withErrors($evidence->validator());
 		}
 
-		return Redirect::to(route('tasks.index'))
+		return Redirect::to(route('evidences.index'))
                         ->with('message', [
-                                'content' => 'Taak met succes geupdated!',
+                                'content' => 'Bewijs met succes geupdated!',
                                 'class' => 'success'
                         ]);
 	}
