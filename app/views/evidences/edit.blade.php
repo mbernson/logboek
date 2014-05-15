@@ -27,7 +27,7 @@
 	<?php $sender_name = ["JuffrouwJannie" => "JuffrouwJannie", "Demesmaeker" => "Demesmaeker", "Vondelaar" => "Vondelaar",	"Krasser" => "Krasser"]; ?>
 
         {{ Form::label('sender', 'Verzender') }}
-	{{ Form::select('sender', $sender_name, null, ['class' => 'form-control']) }}
+	{{ Form::select('sender', $sender_name, $evidence->sender, ['class' => 'form-control']) }}
 </div>
 
 <div class="form-group">
