@@ -1,14 +1,5 @@
 # Logboek changelog
 
-## v0.1
-
-* Initial release
-
-## v0.2
-
-* Adds basic user management
-* Adds a useful dashboard
-
 ## v0.3
 
 Major features
@@ -24,3 +15,12 @@ Minor features
 * Validations and (error) notifications added
 * Configuration support for Piwik tracking added
 * Prettier error pages
+
+## v0.2
+
+* Adds basic user management
+* Adds a useful dashboard
+
+## v0.1
+
+* Initial release
