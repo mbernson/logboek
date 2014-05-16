@@ -20,7 +20,7 @@
         </tr>
 
         @foreach($tasks as $task)
-        <tr data-id="{{ $task->id }}">
+        <tr data-id="{{ $task->id }}" data-status="{{ $task->status ? 'completed' : 'pending' }}" class="{{ $task->status ? 'success' : 'danger' }}">
                 <td>{{ $task->id }}</td>
 		<td>{{ link_to_action('tasks.show', $task->name, [$task->id]) }}</td>
 		<td>{{ link_to_action('users.show', $task->user->username, [$task->user->id]) }}</td>
@@ -32,8 +32,8 @@
 		@endif
 
 		<td><div class="btn-group btn-group-xs">
-		<button type="button" class="btn btn-default {{ $task->status ? 'btn-success' : '' }}">Ja</button>
-		<button type="button" class="btn btn-default {{ $task->status ? '' : 'btn-danger' }}">Nee</button>
+		<button type="button" data-default-class="btn-success" class="btn btn-default {{ $task->status ? 'btn-success' : '' }}">Ja</button>
+		<button type="button" data-default-class="btn-danger" class="btn btn-default {{ $task->status ? '' : 'btn-danger' }}">Nee</button>
 		</div></td>
 	</tr>
 	@endforeach
