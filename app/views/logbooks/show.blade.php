@@ -2,9 +2,11 @@
 
 @section('content')
 
-@if(isset($title))
-	<h1>{{{ $title }}}</h1>
-@endif
+<h1>{{{ $logbook->title }}}</h1>
+
+<p>
+	<a class="btn btn-primary btn-lg" href="{{ action('logbooks.entries.create', [$logbook->id]) }}">Nieuwe entry</a>
+</p>
 
 @foreach($entries as $entry)
 

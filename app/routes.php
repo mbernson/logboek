@@ -14,10 +14,12 @@
 Route::any('/login', 'UsersController@login');
 
 Route::group(['before' => 'auth'], function() {
-    Route::get('/', 'LogbooksController@dashboard');
+    Route::get('/', 'EntriesController@index');
+    Route::get('/intro', 'DashboardController@intro');
 
     Route::resource('logbooks', 'LogbooksController');
     Route::resource('logbooks.entries', 'EntriesController');
+    Route::get('/entries', 'EntriesController@index');
     Route::resource('users', 'UsersController');
     Route::resource('tasks', 'TasksController');
     Route::resource('evidences', 'EvidenceController');

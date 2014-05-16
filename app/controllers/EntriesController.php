@@ -7,8 +7,16 @@ class EntriesController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function index($logbook_id) {
-		//
+	public function index() {
+		$entries = Entry::with('logbook')
+			->orderBy('finished_at', 'desc')
+			->orderBy('started_at', 'desc')
+			->paginate(10);
+
+		return View::make('entries.index', [
+			'title' => 'Recente entries',
+			'entries' => $entries,
+		]);
 	}
 
 
