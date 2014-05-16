@@ -116,6 +116,7 @@
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/offcanvas.js"></script>
     <script src="/js/entry.js"></script>
+    <script src="/js/tasks.js"></script>
 
     @if(App::environment('production') && Config::get('app.piwik_enabled') == true)
 

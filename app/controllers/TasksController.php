@@ -21,6 +21,14 @@ class TasksController extends \BaseController {
 		return View::make('tasks.index');
 	}
 
+	public function toggle($id) {
+		$task = Task::findOrFail($id);
+		$task->status = ! $task->status;
+		$task->save();
+
+		return View::make('tasks.index');
+	}
+
 
 	/**
 	 * Show the form for creating a new resource.
