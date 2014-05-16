@@ -117,10 +117,10 @@
     <script src="/js/entry.js"></script>
 
     @if(App::environment('production') && Config::get('app.piwik_enabled') == true)
-	@include('partials.piwik_tag', [
-		'tracker_url' => Config::get('app.piwik_tracker_url'),
-		'site_id' => Config::get('app.piwik_site_id')
-	])
+
+        {{-- This must be on one line, otherwise blade will not parse it --}}
+	@include('partials.piwik_tag', ['tracker_url' => Config::get('app.piwik_tracker_url'), 'site_id' => Config::get('app.piwik_site_id')])
+
     @endif
 
   </body>
