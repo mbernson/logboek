@@ -38,6 +38,7 @@
 	<div class="collapse navbar-collapse">
 
 	  <ul class="nav navbar-nav">
+	    <li {{ Request::is('entries') || Request::is('/') ? 'class="active"' : '' }}>{{ link_to('/entries', 'Entries') }}</li>
 	    <li {{ Request::is('logbooks') ? 'class="active"' : '' }}>{{ link_to_route('logbooks.index', 'Logboeken') }}</li>
 	    <li {{ Request::is('users') ? 'class="active"' : '' }}>{{ link_to_route('users.index', 'Gebruikers') }}</li>
             <li {{ Request::is('tasks') ? 'class="active"' : '' }}>{{ link_to_route('tasks.index', 'Taken') }}</li>
@@ -82,7 +83,7 @@
           <div class="list-group">
 	  @foreach($logbooks as $logbook)
 	  {{ link_to_action('logbooks.show', $logbook->title, [$logbook->id], [
-		  'class' =>  'list-group-item '.(Request::is('logbooks/'.$logbook->id.'*') ? 'active' : '')
+		  'class' => 'list-group-item '.(Request::is('logbooks/'.$logbook->id.'*') ? 'active' : '')
 	  ]) }}
 	  @endforeach
           </div>
@@ -118,10 +119,10 @@
     <script src="/js/tasks.js"></script>
 
     @if(App::environment('production') && Config::get('app.piwik_enabled') == true)
-	@include('partials.piwik_tag', [
-		'tracker_url' => Config::get('app.piwik_tracker_url'),
-		'site_id' => Config::get('app.piwik_site_id')
-	])
+
+        {{-- This must be on one line, otherwise blade will not parse it --}}
+	@include('partials.piwik_tag', ['tracker_url' => Config::get('app.piwik_tracker_url'), 'site_id' => Config::get('app.piwik_site_id')])
+
     @endif
 
   </body>

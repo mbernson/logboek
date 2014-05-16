@@ -2,14 +2,6 @@
 
 class LogbooksController extends \BaseController {
 
-	public function dashboard() {
-		return View::make('dashboard', [
-			'entries' => Entry::with('logbook')
-				->orderBy('finished_at', 'desc')->orderBy('started_at', 'desc')
-				->take(10)->get()
-		]);
-	}
-
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -48,9 +40,14 @@ class LogbooksController extends \BaseController {
 	 */
 	public function show($id) {
 		$logbook = Logbook::findOrFail($id);
-		return View::make('entries.index', array(
+		$entries = Entry::where('logbook_id', $id)
+			->orderBy('finished_at', 'desc')
+			->orderBy('started_at', 'desc')
+			->paginate(10);
+
+		return View::make('logbooks.show', array(
 			'logbook' => $logbook,
-			'entries' => $logbook->entries
+			'entries' => $entries
 		));
 	}
 

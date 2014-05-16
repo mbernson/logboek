@@ -16,7 +16,7 @@ class CreateEvidencesTable extends Migration {
 		$table->string('title');
 		$table->string('hash');
 
-		$table->timetamp('date_received');
+		$table->timestamp('date_received');
 		$table->string('sender');
 
 		$table->text('original_message');

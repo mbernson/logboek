@@ -30,7 +30,7 @@ class UsersController extends \BaseController {
 		if(Request::instance()->isMethod('post')) {
 			if(Auth::attempt($input, $remember)) {
 				$login_success_message['content'] = "Welkom bij het IPFIT-logboek, $username!";
-				return Redirect::intended('/')
+				return Redirect::intended('/intro')
 					->with('message', $login_success_message);
 			} else {
 				Session::flash('message', $login_error_message);
