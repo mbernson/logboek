@@ -58,7 +58,7 @@ class UsersController extends \BaseController {
 	}
 
 	/**
-	 * Clear the user's session 
+	 * Clear the user's session
 	 *
 	 * @return Response
 	 */
@@ -103,10 +103,10 @@ class UsersController extends \BaseController {
 		}
 
 		return Redirect::to(route('users.index'))
-                        ->with('message', [
-                                'content' => 'Gebruiker met succes aangemaakt!',
-                                'class' => 'success'
-                        ]);
+			->with('message', [
+				'content' => 'Gebruiker met succes aangemaakt!',
+				'class' => 'success'
+			]);
 	}
 
 
@@ -158,11 +158,11 @@ class UsersController extends \BaseController {
 				->withErrors($user->validator());
 		}
 
-                return Redirect::to(route('users.index'))
-                        ->with('message', [
-                                'content' => 'Gebruiker met succes geupdated!',
-                                'class' => 'success'
-                        ]);
+		return Redirect::to(route('users.index'))
+			->with('message', [
+				'content' => 'Gebruiker met succes geupdated!',
+				'class' => 'success'
+			]);
 	}
 
 

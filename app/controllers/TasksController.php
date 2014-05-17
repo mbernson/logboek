@@ -37,9 +37,8 @@ class TasksController extends \BaseController {
 	 */
 	public function create() {
 		return View::make('tasks.create', [
-                        'task' => new Task(),
+			'task' => new Task(),
 		]);
-
 	}
 
 
@@ -55,18 +54,18 @@ class TasksController extends \BaseController {
 		$task->deadline = new DateTime(Input::get('deadline'));
 
 		if($task->validate()) {
-                        $task->save();
-                } else {
-                        return View::make('tasks.edit', ['task' => $task])
-                                ->withErrors($task->validator());
-                }
+			$task->save();
+		} else {
+			return View::make('tasks.edit', ['task' => $task])
+				->withErrors($task->validator());
+		}
 
-                return Redirect::to(route('tasks.index'))
-                        ->with('message', [
-                                'content' => 'Taak met succes aangemaakt!',
-                                'class' => 'success'
-                        ]);
-        }
+		return Redirect::to(route('tasks.index'))
+			->with('message', [
+				'content' => 'Taak met succes aangemaakt!',
+				'class' => 'success'
+			]);
+	}
 
 
 	/**
@@ -110,14 +109,14 @@ class TasksController extends \BaseController {
 			$task->save();
 		} else {
 			return View::make('tasks.edit', ['task' => $task])
-                                ->withErrors($task->validator());
+				->withErrors($task->validator());
 		}
 
 		return Redirect::to(route('tasks.index'))
-                        ->with('message', [
-                                'content' => 'Taak met succes geupdated!',
-                                'class' => 'success'
-                        ]);
+			->with('message', [
+				'content' => 'Taak met succes geupdated!',
+				'class' => 'success'
+			]);
 	}
 
 
@@ -129,12 +128,12 @@ class TasksController extends \BaseController {
 	 */
 	public function destroy($task_id) {
 		$entry = Task::findOrFail($task_id);
-                $entry->delete();
+		$entry->delete();
 
 		return Redirect::to(route('tasks.index'))
-                        ->with('message', [
-                                'content' => 'Taak met succes verwijderd!',
-                                'class' => 'success'
+			->with('message', [
+				'content' => 'Taak met succes verwijderd!',
+				'class' => 'success'
 			]);
 	}
 

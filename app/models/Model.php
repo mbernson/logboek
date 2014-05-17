@@ -1,33 +1,33 @@
-<?php 
+<?php
 
 abstract class Model extends Eloquent {
 
-    public function isNew() {
-	    return empty($this->id);
-    }
+	public function isNew() {
+		return empty($this->id);
+	}
 
-    // Validation rules
-    protected $rules = [];
-    protected $edit_rules = [];
+	// Validation rules
+	protected $rules = [];
+	protected $edit_rules = [];
 
-    protected function rules() {
-	    if(!$this->isNew() && !empty($this->edit_rules))
-		    return $this->edit_rules;
-	    return $this->rules;
-    }
+	protected function rules() {
+		if(!$this->isNew() && !empty($this->edit_rules))
+			return $this->edit_rules;
+		return $this->rules;
+	}
 
-    public function validate() {
-	    $this->validator = Validator::make($this->attributes, $this->rules());
+	public function validate() {
+		$this->validator = Validator::make($this->attributes, $this->rules());
 
-	    if($this->validator->fails()) {
-		    return false;
-	    }
+		if($this->validator->fails()) {
+			return false;
+		}
 
-	    return true;
-    }
+		return true;
+	}
 
-    protected $validator;
-    public function validator() {
-	    return $this->validator;
-    }
+	protected $validator;
+	public function validator() {
+		return $this->validator;
+	}
 }
