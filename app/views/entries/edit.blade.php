@@ -33,8 +33,12 @@
 
 {{ Form::close() }}
 
+@if(!$entry->isNew())
+
 <div class="pull-right">
 	@include('entries.delete_form', ['entry' => $entry])
 </div>
+
+@endif
 
 @stop

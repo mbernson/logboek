@@ -5,8 +5,9 @@ class TasksController extends \BaseController {
 	public function __construct() {
 		parent::__construct();
 
+		$users = User::all();
 		$users_options = [];
-		foreach(User::all() as $user)
+		foreach($users as $user)
 			$users_options[$user->id] = $user->username;
 
 		View::share(['users_options' => $users_options]);
