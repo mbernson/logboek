@@ -4,6 +4,8 @@
 
 <h1>Logboeken</h1>
 
+<p><a class="btn btn-primary btn-lg" href="{{ action('logbooks.create') }}">Nieuw logboek</a></p>
+
 <table class="table table-hover">
 	<tr>
 		<th>ID</th>
@@ -11,6 +13,7 @@
 		<th>Eigenaar</th>
 		<th>Aantal entries</th>
 		<th>Laatst bijgewerkt</th>
+		<th>Bewerken</th>
 	</tr>
 
 	@foreach($logbooks as $logbook)
@@ -20,6 +23,7 @@
 		<td>{{ link_to_action('users.show', $logbook->user->username, [$logbook->user->id]) }}</td>
 		<td>{{ $logbook->entries->count() }}</td>
 		<td>{{ ($entry = $logbook->entries->last()) ? $entry->started_at : 'Nog nooit' }}</td>
+		<td>{{ link_to_action('logbooks.edit', 'Bewerken', [$logbook->id], ['class' => 'btn btn-sm btn-success']) }}</td>
 	</tr>
 	@endforeach
 
