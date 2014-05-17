@@ -27,3 +27,7 @@ textarea.markdown {
 .entry-panel .panel-footer .table tr:first-child * {
 	border: none;
 }
+
+#sidebar > p {
+	text-align: center;
+}
