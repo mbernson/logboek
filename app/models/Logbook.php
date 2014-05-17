@@ -1,6 +1,6 @@
 <?php
 
-class Logbook extends Eloquent {
+class Logbook extends Model {
 	protected $table = 'logbooks';
 
 	protected $rules = [
