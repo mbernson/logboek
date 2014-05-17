@@ -2,6 +2,14 @@
 
 This is a web-application for organizing (logging) information for (ICT-)forensic investigations. It lets different users maintain any number of logbooks and store text-entries within them.
 
+## Features
+
+Logboek's primary features are:
+
+* Maintaining forensic journals (logbooks) during your investigation.
+* Assigning tasks to people in your team.
+* Securely storing evidence files.
+
 ## Requirements
 
 * PHP > 5.4
@@ -11,9 +19,10 @@ This is a web-application for organizing (logging) information for (ICT-)forensi
 
 * Clone the project into any place you like.
 * Run `composer install`
-* Edit the database configuration in `app/config/database.php`.
-* `chmod -R 755 app/storage`
-* Run `artisan migrate` and `artisan db:seed`.
-* Point a virtualhost towards `<logboek_directory>/public`.
+* Copy the configuration folder `app/config/production.example` to `app/config/production`
+* Edit your production configuration
+* Run `chmod -R 755 app/storage`
+* Run `php artisan migrate` and `php artisan db:seed`
+* Point a virtualhost to `<logboek_directory>/public`
 * Visit the site. The default login is `owner` with password `changeme`. (You can change this and add more users after logging in)
 * Celebrate!
