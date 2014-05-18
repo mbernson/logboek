@@ -88,6 +88,12 @@
 				@endforeach
 			</div>
 
+			@if(isset($user_logbook))
+			<p>
+			<a class="btn btn-primary btn-lg" href="{{ action('logbooks.entries.create', [$user_logbook->id]) }}">Schrijf in je logboek</a>
+			</p>
+			@endif
+
 			<h3>Recente taken</h3>
 			<div class="list-group">
 			@foreach($tasks_recent as $task)
