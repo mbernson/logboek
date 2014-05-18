@@ -5,6 +5,8 @@ use Carbon\Carbon;
 class Entry extends Model {
 	protected $table = 'entries';
 
+	protected $softDelete = true;
+
 	protected $fillable = ['title', 'body', 'started_at', 'finished_at'];
 
 	protected $rules = [
