@@ -12,22 +12,22 @@
 
 	<div class="panel-footer collapse" id="metadata-{{ $entry->id }}">
 		<table class="table">
-		<tr>	
+		<tr>
 			<th>Eigenaar</th>
 			<td>{{ link_to_action('users.show', $entry->logbook->user->username, [$entry->logbook->user->id]) }}</td>
-		</tr>	
-		<tr>	
+		</tr>
+		<tr>
 			<th>Logboek</th>
 			<td>{{ link_to_action('logbooks.edit', $entry->logbook->title, [$entry->logbook->id]) }}</td>
-		</tr>	
-		<tr>	
+		</tr>
+		<tr>
 			<th>Begonnen om</th>
 			<td>{{ $entry->started_at }}</td>
-		</tr>	
-		<tr>	
+		</tr>
+		<tr>
 			<th>Afgemaakt om</th>
 			<td>{{ $entry->finished_at }}</td>
-		</tr>	
+		</tr>
 		</table>
 	</div>
 </div>

@@ -95,15 +95,19 @@
 			</p>
 			@endif
 
-			<h3>Recente taken</h3>
-			<div class="list-group">
-			@foreach($tasks_recent as $task)
-			{{ link_to_action('tasks.show', $task->name, [$task->id], [
-			'class' =>	'list-group-item '.(Request::is('tasks/'.$task->id.'*') ? 'active' : '')
-			]) }}
-			@endforeach
-		</div>
+	  <h3>Recente taken</h3>
 
+	  @if($tasks_count == 0)
+		  <p>Geen openstaande taken gevonden.</p>
+	  @else
+		  <div class="list-group">
+			@foreach($tasks_recent as $task)
+	          	{{ link_to_action('tasks.show', $task->name, [$task->id], [
+        	          	'class' =>  'list-group-item '.(Request::is('tasks/'.$task->id.'*') ? 'active' : '')
+          		]) }}
+	          	@endforeach
+		  </div>
+	  @endif
 		@show
 
 	</div><!--/span-->

@@ -27,6 +27,7 @@ class EntriesController extends \BaseController {
 	 */
 	public function create($logbook_id) {
 		$logbook = Logbook::findOrFail($logbook_id);
+
 		$entry = new Entry();
 		return View::make('entries.create', [
 			'logbook' => $logbook,
@@ -43,24 +44,32 @@ class EntriesController extends \BaseController {
 	public function store($logbook_id) {
 		$logbook = Logbook::findOrFail($logbook_id);
 
-		$entry = new Entry(Input::only('title', 'body', 'started_at', 'finished_at'));
+		if($logbook->user_id == (Auth::user()->id) OR $logbook->user_id == 0) {
+			$entry = new Entry(Input::only('title', 'body', 'started_at', 'finished_at'));
 
-		$entry->logbook_id = $logbook->id;
+			$entry->logbook_id = $logbook->id;
 
-		if($entry->validate()){
-			$entry->save();
-			$title = $entry->title;
-			$author = Auth::user()->username;
-			Prowl::send("Entry", "\"$title\" was added by $author", "IPFIT1 Logboek");
+			if($entry->validate()){
+				$entry->save();
+				$title = $entry->title;
+				$author = Auth::user()->username;
+				Prowl::send("Entry", "\"$title\" was added by $author", "IPFIT1 Logboek");
+			} else {
+				return View::make('entries.create', ['entry' => $entry, 'logbook' => $logbook])
+					->withErrors($entry->validator());
+			}
+			return Redirect::to(route('logbooks.show', [$logbook->id]))
+				->with('message', [
+					'content' => 'Entry met succes aangemaakt!',
+					'class' => 'success'
+				]);
 		} else {
-			return View::make('entries.create', ['entry' => $entry, 'logbook' => $logbook])
-				->withErrors($entry->validator());
+			return Redirect::to(route('logbooks.show', [$logbook->id]))
+                                ->with('message', [
+                                        'content' => 'Geen rechten om entry weg te schrijven!',
+                                        'class' => 'danger'
+                                ]);
 		}
-		return Redirect::to(route('logbooks.show', [$logbook->id]))
-			->with('message', [
-				'content' => 'Entry met succes aangemaakt!',
-				'class' => 'success'
-			]);
 	}
 
 
@@ -104,21 +113,33 @@ class EntriesController extends \BaseController {
 	 */
 	public function update($logbook_id, $entry_id) {
 		$logbook = Logbook::findOrFail($logbook_id);
-		$entry = Entry::findOrFail($entry_id);
 
-		$entry->fill(Input::only('title', 'body', 'started_at', 'finished_at'));
+                if($logbook->user_id == (Auth::user()->id) || $user_id == 0)
+                {
 
-		if($entry->validate())
-			$entry->save();
-		else
-			return View::make('entries.edit', ['entry' => $entry, 'logbook' => $logbook])
-				->withErrors($entry->validator());
+			$entry = Entry::findOrFail($entry_id);
 
-		return Redirect::to(route('logbooks.show', [$logbook->id]))
-			->with('message', [
-				'content' => 'Entry met succes geupdated!',
+			$entry->fill(Input::only('title', 'body', 'started_at', 'finished_at'));
+
+			if($entry->validate())
+				$entry->save();
+			else
+				return View::make('entries.edit', ['entry' => $entry, 'logbook' => $logbook])
+					->withErrors($entry->validator());
+
+			return Redirect::to(route('logbooks.show', [$logbook->id]))
+				->with('message', [
+					'content' => 'Entry met succes geupdated!',
 				'class' => 'success'
-			]);
+				]);
+		} else {
+			return Redirect::to(route('logbooks.show', [$logbook->id]))
+                                ->with('message', [
+                                        'content' => 'Geen rechten om entry te updaten!',
+                                        'class' => 'danger'
+                                ]);
+
+		}
 	}
 
 
