@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddSoftDeletionToTasksAndEntries extends Migration {
+class AddSoftDeletionToEntriesAndTasks extends Migration {
 
 	/**
 	 * Run the migrations.
