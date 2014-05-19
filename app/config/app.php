@@ -39,6 +39,13 @@ return array(
 
 	/*
 	|--------------------------------------------------------------------------
+	| Prowl settings
+	|--------------------------------------------------------------------------
+	*/
+	'prowl_api_key' => null,
+
+	/*
+	|--------------------------------------------------------------------------
 	| Application Timezone
 	|--------------------------------------------------------------------------
 	|
@@ -131,6 +138,8 @@ return array(
 
 		'VTalbot\Markdown\MarkdownServiceProvider',
 
+		'Duckson\Prowl\ProwlServiceProvider',
+
 	),
 
 	/*
@@ -198,6 +207,8 @@ return array(
 		'View'            => 'Illuminate\Support\Facades\View',
 
 		'Markdown' => 'VTalbot\Markdown\Facades\Markdown',
+
+		'Prowl' => 'Duckson\Prowl\Facades\Prowl',
 
 	),
 
