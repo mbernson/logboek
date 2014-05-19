@@ -44,7 +44,7 @@ class EntriesController extends \BaseController {
 	public function store($logbook_id) {
 		$logbook = Logbook::findOrFail($logbook_id);
 
-		if($logbook_id == (Auth::user()->id) OR $logbook->user_id == 0)
+		if($logbook->user_id == (Auth::user()->id) OR $logbook->user_id == 0)
                 {
 			$entry = new Entry(Input::only('title', 'body', 'started_at', 'finished_at'));
 
@@ -112,7 +112,7 @@ class EntriesController extends \BaseController {
 	public function update($logbook_id, $entry_id) {
 		$logbook = Logbook::findOrFail($logbook_id);
 
-                if($logbook_id == (Auth::user()->id) || $user_id == 0)
+                if($logbook->user_id == (Auth::user()->id) || $user_id == 0)
                 {
 
 			$entry = Entry::findOrFail($entry_id);
