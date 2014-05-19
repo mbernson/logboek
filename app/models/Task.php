@@ -3,6 +3,8 @@
 class Task extends Model {
 	protected $fillable = ['name', 'user_id', 'description', 'status', 'deadline'];
 
+	protected $softDelete = true;
+
 	protected $rules = [
 		'name' => 'required',
 		'user_id' => 'required',
