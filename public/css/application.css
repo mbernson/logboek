@@ -3,8 +3,8 @@ textarea.markdown {
 }
 
 .page-not-found {
-  padding: 40px 15px;
-  text-align: center;
+	padding: 40px 15px;
+	text-align: center;
 }
 
 .entry-panel .panel-title {
@@ -26,4 +26,8 @@ textarea.markdown {
 
 .entry-panel .panel-footer .table tr:first-child * {
 	border: none;
+}
+
+#sidebar > p {
+	text-align: center;
 }

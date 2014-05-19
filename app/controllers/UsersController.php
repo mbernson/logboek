@@ -14,33 +14,54 @@ class UsersController extends \BaseController {
 		return View::make('users.index', ['users' => $users]);
 	}
 
+	/**
+	 * Attempt to log the user in, or display the login view
+	 *
+	 * @return Response
+	 */
 	public function login() {
-		$login_success_message = [
-			'class' => 'success'
-		];
-		$login_error_message = [
-			'class' => 'danger',
-			'content' => Lang::get('messages.login_incorrect')
-		];
-
 		$input = Input::only('username', 'password');
 		$remember = Input::get('remember') || false;
-		$username = Input::get('username');
 
-		if(Request::instance()->isMethod('post')) {
-			if(Auth::attempt($input, $remember)) {
-				$login_success_message['content'] = "Welkom bij het IPFIT-logboek, $username!";
-				return Redirect::intended('/intro')
-					->with('message', $login_success_message);
-			} else {
-				Session::flash('message', $login_error_message);
-				return View::make('layouts.login');
-			}
+		if(Request::instance()->isMethod('post'))
+			return $this->attempt_auth($input, $remember);
+		else
+			return View::make('layouts.login');
+	}
+
+	private function attempt_auth($input, $remember = false) {
+		if(Auth::attempt($input, $remember)) {
+			return Redirect::intended('/intro')
+				->with('message', self::login_success_message());
 		} else {
+			Session::flash('message', self::login_error_message());
+
 			return View::make('layouts.login');
 		}
 	}
 
+	private static function login_success_message() {
+		if(!Auth::check())
+			return false;
+
+		$username = Auth::user()->username;
+		return [
+			'content' => "Welkom bij het IPFIT-logboek, $username!",
+			'class' => 'success'
+		];
+	}
+	private static function login_error_message() {
+		return [
+			'class' => 'danger',
+			'content' => Lang::get('messages.login_incorrect')
+		];
+	}
+
+	/**
+	 * Clear the user's session
+	 *
+	 * @return Response
+	 */
 	public function logout() {
 		Auth::logout();
 		return Redirect::to('/login')->with('message', [
@@ -82,11 +103,10 @@ class UsersController extends \BaseController {
 		}
 
 		return Redirect::to(route('users.index'))
-                        ->with('message', [
-                                'content' => 'Gebruiker met succes aangemaakt!',
-                                'class' => 'success'
-                        ]);
-
+			->with('message', [
+				'content' => 'Gebruiker met succes aangemaakt!',
+				'class' => 'success'
+			]);
 	}
 
 
@@ -138,11 +158,11 @@ class UsersController extends \BaseController {
 				->withErrors($user->validator());
 		}
 
-			return Redirect::to(route('users.index'))
-                        ->with('message', [
-                                'content' => 'Gebruiker met succes geupdated!',
-                                'class' => 'success'
-                        ]);
+		return Redirect::to(route('users.index'))
+			->with('message', [
+				'content' => 'Gebruiker met succes geupdated!',
+				'class' => 'success'
+			]);
 	}
 
 

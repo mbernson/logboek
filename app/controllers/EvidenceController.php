@@ -12,21 +12,17 @@ class EvidenceController extends \BaseController {
 		View::share(['users_options' => $users_options]);
 	}
 
-	public function dashboard() {
-
-	}
-
 	/**
 	 * Display a listing of the resource.
 	 *
 	 * @return Response
 	 */
 	public function index() {
-                $evidences = Evidence::orderBy('date_received')
-                        ->paginate(self::$per_page);
+		$evidences = Evidence::orderBy('date_received')
+			->paginate(self::$per_page);
 
-                return View::make('evidences.index', ['evidences' => $evidences]);
-        }
+		return View::make('evidences.index', ['evidences' => $evidences]);
+	}
 
 
 	/**
@@ -36,9 +32,8 @@ class EvidenceController extends \BaseController {
 	 */
 	public function create() {
 		return View::make('evidences.create', [
-                        'evidence' => new Evidence(),
+			'evidence' => new Evidence(),
 		]);
-
 	}
 
 
@@ -54,18 +49,18 @@ class EvidenceController extends \BaseController {
 		$evidence->date_received = new DateTime(Input::get('date_received'));
 
 		if($evidence->validate()) {
-                        $evidence->save();
-                } else {
-                        return View::make('evidences.edit', ['evidence' => $evidence])
-                                ->withErrors($evidence->validator());
-                }
+			$evidence->save();
+		} else {
+			return View::make('evidences.edit', ['evidence' => $evidence])
+				->withErrors($evidence->validator());
+		}
 
-                return Redirect::to(route('evidences.index'))
-                        ->with('message', [
-                                'content' => 'Bewijs met succes aangemaakt!',
-                                'class' => 'success'
-                        ]);
-        }
+		return Redirect::to(route('evidences.index'))
+			->with('message', [
+				'content' => 'Bewijs met succes aangemaakt!',
+				'class' => 'success'
+			]);
+	}
 
 
 	/**
@@ -76,7 +71,7 @@ class EvidenceController extends \BaseController {
 	 */
 	public function show($id) {
 		$evidence = Evidence::find($id);
-                return View::make('evidences.show', ['evidence' => $evidence]);
+		return View::make('evidences.show', ['evidence' => $evidence]);
 	}
 
 
@@ -109,14 +104,14 @@ class EvidenceController extends \BaseController {
 			$evidence->save();
 		} else {
 			return View::make('evidences.edit', ['evidence' => $evidence])
-                                ->withErrors($evidence->validator());
+				->withErrors($evidence->validator());
 		}
 
 		return Redirect::to(route('evidences.index'))
-                        ->with('message', [
-                                'content' => 'Bewijs met succes geupdated!',
-                                'class' => 'success'
-                        ]);
+			->with('message', [
+				'content' => 'Bewijs met succes geupdated!',
+				'class' => 'success'
+			]);
 	}
 
 
@@ -128,12 +123,12 @@ class EvidenceController extends \BaseController {
 	 */
 	public function destroy($id) {
 		$evidence = Evidence::findOrFail($id);
-                $evidence->delete();
+		$evidence->delete();
 
 		return Redirect::to(route('evidences.index'))
-                        ->with('message', [
-                                'content' => 'Bewijs met succes verwijderd!',
-                                'class' => 'success'
+			->with('message', [
+				'content' => 'Bewijs met succes verwijderd!',
+				'class' => 'success'
 			]);
 	}
 

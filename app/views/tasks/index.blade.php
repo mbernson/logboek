@@ -4,9 +4,7 @@
 
 <h1>Taken</h1>
 
-<p>
-<a class="btn btn-primary btn-lg" href="{{ action('tasks.create') }}">Nieuwe taak</a>
-</p>
+<p><a class="btn btn-primary btn-lg" href="{{ action('tasks.create') }}">Nieuwe taak</a></p>
 
 	<table class="table table-hover">
         	<tr>

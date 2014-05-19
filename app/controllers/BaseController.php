@@ -22,6 +22,12 @@ class BaseController extends Controller {
 
 		View::share('tasks', Task::all());
 
+		if(Auth::check()) {
+			View::share('user_logbook', Logbook::where('user_id', Auth::user()->id)->take(1)->first());
+		}
+
+		$tasks_count = DB::table('tasks')->where('status', 0)->count();
+		View::share('tasks_count', $tasks_count);
 		View::share('tasks_recent', Task::where('status', false)
 			->orderBy('deadline', 'asc')
 			->take(7)->get()); // Oudste deadlines bovenaan
