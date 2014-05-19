@@ -116,7 +116,7 @@
 <hr>
 
 <footer class="muted">
-	<p class="pull-left">&copy; <a href="http://duckson.nl">Mathijs Bernson</a>, 2014</p>
+	<p class="pull-left">&copy; <a href="http://duckson.nl">Mathijs Bernson</a>, <a href="http://bartmauritz.nl">Bart Mauritz</a>, 2014</p>
 	<p class="pull-right"><a href="https://git.duckson.nl/hsleiden/logboek">Source</a> | <a href="https://git.duckson.nl/hsleiden/logboek/blob/master/LICENSE.md">MIT License</a></p>
 </footer>
 
