@@ -11,18 +11,33 @@ class Evidence extends Model {
 		'original_message' => 'required',
 	];
 
+	// Relations
+
 	public function user() {
 		return $this->belongsTo('User', 'user_id');
 	}
+
+	// Dates
 
 	public function getDates() {
 		return array_merge(parent::getDates(), ['date_received']);
 	}
 
-	public function setBodyAttribute($value) {
+	// Mutators
+
+	public function setOriginalMessageAttribute($value) {
 		$this->attributes['original_message'] = $value;
 		$this->attributes['html_original_message'] = Markdown::string($value);
+	}
+
+	public function setEncryptedMessageAttribute($value) {
 		$this->attributes['encrypted_message'] = $value;
 		$this->attributes['html_encrypted_message'] = Markdown::string($value);
+	}
+
+	// Scopes
+	
+	public function scopeNewest($query) {
+		return $query->orderBy('date_received');
 	}
 }

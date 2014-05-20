@@ -10,24 +10,25 @@
 
 
 <table class="table table-hover">
-        <tr>
-                <th>ID</th>
+	<tr>
+		<th>ID</th>
 		<th>Titel</th>
-                <th>Hash</th>
-                <th>Datum verzending</th>
-                <th>Verzender</th>
-        </tr>
+		<th>Hash</th>
+		<th>Datum verzending</th>
+		<th>Verzender</th>
+	</tr>
 
 	 @foreach($evidences as $evidence)
-        <tr>
-                <td>{{ $evidence->id }}</td>
-                <td>{{ link_to_action('evidences.show', $evidence->title, [$evidence->id]) }}</td>
-                <td>{{ $evidence->hash }}</td>
-                <td>{{ $evidence->date_received }}</td>
-                <td>{{ $evidence->sender }}</td>
-        </tr>
-        @endforeach
+	<tr>
+		<td>{{ $evidence->id }}</td>
+		<td>{{ link_to_action('evidences.show', $evidence->title, [$evidence->id]) }}</td>
+		<td>{{ $evidence->hash }}</td>
+		<td>{{ $evidence->date_received }}</td>
+		<td>{{ $evidence->sender }}</td>
+	</tr>
+	@endforeach
 </table>
 
+{{ $evidences->links() }}
 
 @stop
