@@ -13,7 +13,7 @@ class AddColumnsToTasks extends Migration {
 	public function up() {
 		Schema::table('tasks', function($table) {
 			$table->boolean('status')->default(false);
-			$table->text('html_description');
+			$table->text('html_description')->nullable();
 		});
 	}
 
