@@ -97,11 +97,11 @@
 
 	  <h3>Recente taken</h3>
 
-	  @if($tasks_count == 0)
+	  @if(count($recent_tasks) === 0)
 		  <p>Geen openstaande taken gevonden.</p>
 	  @else
 		  <div class="list-group">
-			@foreach($tasks_recent as $task)
+			@foreach($recent_tasks as $task)
 	          	{{ link_to_action('tasks.show', $task->name, [$task->id], [
         	          	'class' =>  'list-group-item '.(Request::is('tasks/'.$task->id.'*') ? 'active' : '')
           		]) }}
