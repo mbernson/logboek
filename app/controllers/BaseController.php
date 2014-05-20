@@ -18,18 +18,17 @@ class BaseController extends Controller {
 	}
 
 	public function __construct() {
-		View::share('logbooks', Logbook::all());
-
-		View::share('tasks', Task::all());
+		View::share('logbooks', Logbook::all()
+			->take(10));
 
 		if(Auth::check()) {
-			View::share('user_logbook', Logbook::where('user_id', Auth::user()->id)->take(1)->first());
+			View::share('user_logbook', Logbook::where('user_id', Auth::user()->id)
+				->first());
 		}
 
-		$tasks_count = DB::table('tasks')->where('status', 0)->count();
-		View::share('tasks_count', $tasks_count);
-		View::share('tasks_recent', Task::where('status', false)
-			->orderBy('deadline', 'asc')
-			->take(7)->get()); // Oudste deadlines bovenaan
+		View::share('recent_tasks', Task::open()->newest()
+			// https://www.youtube.com/watch?v=o2In5a9LDNg
+			->take(5)
+			->get());
 	}
 }

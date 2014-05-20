@@ -10,7 +10,7 @@ class TasksController extends \BaseController {
 		foreach($users as $user)
 			$users_options[$user->id] = $user->username;
 
-		View::share(['users_options' => $users_options]);
+		View::share('users_options', $users_options);
 	}
 
 	/**
@@ -19,15 +19,21 @@ class TasksController extends \BaseController {
 	 * @return Response
 	 */
 	public function index() {
-		return View::make('tasks.index');
+		$tasks = Task::newest()->paginate(static::$per_page);
+		return View::make('tasks.index', ['tasks' => $tasks]);
 	}
 
 	public function toggle($id) {
-		$task = Task::findOrFail($id);
-		$task->status = ! $task->status;
-		$task->save();
-
-		return View::make('tasks.index');
+		if(Request::ajax()) {
+			$task = Task::findOrFail($id);
+			$task->status = ! $task->status;
+			if($task->save())
+				return Response::json([
+					'status' => $task->status
+				]);
+		} else {
+			App::abort(404);
+		}
 	}
 
 
@@ -51,6 +57,7 @@ class TasksController extends \BaseController {
 	public function store() {
 		$task = new Task();
 
+		$task->unguard();
 		$task->fill(Input::only(['name', 'user_id', 'description', 'status']));
 		$task->deadline = new DateTime(Input::get('deadline'));
 
@@ -76,8 +83,8 @@ class TasksController extends \BaseController {
 	 * @return Response
 	 */
 	public function show($id) {
-		$task = Task::find($id);
-		return View::make('tasks.show', array( 'task' => $task));
+		$task = Task::findOrFail($id);
+		return View::make('tasks.show', ['task' => $task]);
 	}
 
 
@@ -89,7 +96,7 @@ class TasksController extends \BaseController {
 	 */
 	public function edit($task_id) {
 		$task = Task::findOrFail($task_id);
-		return View::make('tasks.edit', [ 'task' => $task ]);
+		return View::make('tasks.edit', ['task' => $task]);
 	}
 
 
