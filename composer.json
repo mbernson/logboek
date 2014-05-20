@@ -4,9 +4,9 @@
 	"keywords": ["application", "forensics"],
 	"license": "MIT",
 	"require": {
-            "laravel/framework": "4.1.*",
-            "vtalbot/markdown": "1.5",
-            "imagine/imagine": "0.5.*"
+		"laravel/framework": "4.1.*",
+		"vtalbot/markdown": "1.5",
+		"imagine/imagine": "0.5.*"
 	},
 	"autoload": {
 		"classmap": [

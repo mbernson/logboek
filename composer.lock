@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "b5282f668c4eb23695cf6db0bd94f05a",
+    "hash": "d83de795177eea75c303e11e52c8a6e9",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -834,16 +834,16 @@
         },
         {
             "name": "stack/builder",
-            "version": "v1.0.1",
+            "version": "v1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stackphp/builder.git",
-                "reference": "49ab90450d7f959943f3659a4bcb5965530117c2"
+                "reference": "b4af43e7b7f3f7fac919ff475b29f7c5dc7b23b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stackphp/builder/zipball/49ab90450d7f959943f3659a4bcb5965530117c2",
-                "reference": "49ab90450d7f959943f3659a4bcb5965530117c2",
+                "url": "https://api.github.com/repos/stackphp/builder/zipball/b4af43e7b7f3f7fac919ff475b29f7c5dc7b23b7",
+                "reference": "b4af43e7b7f3f7fac919ff475b29f7c5dc7b23b7",
                 "shasum": ""
             },
             "require": {
@@ -880,7 +880,7 @@
             "keywords": [
                 "stack"
             ],
-            "time": "2013-10-25 14:04:45"
+            "time": "2014-01-28 19:42:24"
         },
         {
             "name": "swiftmailer/swiftmailer",

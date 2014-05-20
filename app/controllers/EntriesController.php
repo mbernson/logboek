@@ -44,14 +44,16 @@ class EntriesController extends \BaseController {
 	public function store($logbook_id) {
 		$logbook = Logbook::findOrFail($logbook_id);
 
-		if($logbook->user_id == (Auth::user()->id) OR $logbook->user_id == 0)
-                {
+		if($logbook->user_id == (Auth::user()->id) OR $logbook->user_id == 0) {
 			$entry = new Entry(Input::only('title', 'body', 'started_at', 'finished_at'));
 
 			$entry->logbook_id = $logbook->id;
 
 			if($entry->validate()){
 				$entry->save();
+				$title = $entry->title;
+				$author = Auth::user()->username;
+				Prowl::send("Entry", "\"$title\" was added by $author", "IPFIT1 Logboek");
 			} else {
 				return View::make('entries.create', ['entry' => $entry, 'logbook' => $logbook])
 					->withErrors($entry->validator());
