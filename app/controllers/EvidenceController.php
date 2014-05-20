@@ -18,7 +18,8 @@ class EvidenceController extends \BaseController {
 	 * @return Response
 	 */
 	public function index() {
-		$evidences = Evidence::orderBy('date_received')
+		$evidences = Evidence::newest()
+			->orderBy('title')
 			->paginate(self::$per_page);
 
 		return View::make('evidences.index', ['evidences' => $evidences]);
@@ -31,9 +32,7 @@ class EvidenceController extends \BaseController {
 	 * @return Response
 	 */
 	public function create() {
-		return View::make('evidences.create', [
-			'evidence' => new Evidence(),
-		]);
+		return View::make('evidences.create', ['evidence' => new Evidence()]);
 	}
 
 
@@ -45,6 +44,7 @@ class EvidenceController extends \BaseController {
 	public function store() {
 		$evidence = new Evidence();
 
+		$evidence->unguard();
 		$evidence->fill(Input::only(['title', 'hash', 'sender', 'original_message', 'encrypted_message', 'software']));
 		$evidence->date_received = new DateTime(Input::get('date_received'));
 
@@ -70,7 +70,7 @@ class EvidenceController extends \BaseController {
 	 * @return Response
 	 */
 	public function show($id) {
-		$evidence = Evidence::find($id);
+		$evidence = Evidence::findOrFail($id);
 		return View::make('evidences.show', ['evidence' => $evidence]);
 	}
 
@@ -83,7 +83,7 @@ class EvidenceController extends \BaseController {
 	 */
 	public function edit($id) {
 		$evidence = Evidence::findOrFail($id);
-		return View::make('evidences.edit', [ 'evidence' => $evidence ]);
+		return View::make('evidences.edit', ['evidence' => $evidence]);
 	}
 
 
