@@ -29,6 +29,41 @@
 	{{ Form::text('finished_at', $entry->finished_at, ['class' => 'form-control', 'placeholder' => 'Als je dit leeg laat wordt het de datum dat je op "Opslaan" drukt']) }}
 </div>
 
+<div class="form-group">
+        {{ Form::label('who', 'Wie') }}
+        {{ Form::text('who', $entry->who, ['class' => 'form-control']) }}
+</div>
+
+<div class="form-group">
+        {{ Form::label('what', 'Wat') }}
+        {{ Form::text('what', $entry->what, ['class' => 'form-control']) }}
+</div>
+
+<div class="form-group">
+        {{ Form::label('where', 'Waar') }}
+        {{ Form::text('where', $entry->where, ['class' => 'form-control']) }}
+</div>
+
+<div class="form-group">
+        {{ Form::label('which', 'Welk') }}
+        {{ Form::text('which', $entry->which, ['class' => 'form-control']) }}
+</div>
+
+<div class="form-group">
+        {{ Form::label('way', 'Welke wijze') }}
+        {{ Form::text('way', $entry->way, ['class' => 'form-control']) }}
+</div>
+
+<div class="form-group">
+        {{ Form::label('when', 'Wanneer') }}
+        {{ Form::text('when', $entry->when, ['class' => 'form-control']) }}
+</div>
+
+<div class="form-group">
+        {{ Form::label('why', 'Waarom') }}
+        {{ Form::text('why', $entry->why, ['class' => 'form-control']) }}
+</div>
+
 <button type="submit" class="btn btn-primary pull-left">Opslaan</button>
 
 {{ Form::close() }}
