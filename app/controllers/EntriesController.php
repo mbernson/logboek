@@ -27,13 +27,11 @@ class EntriesController extends \BaseController {
 	 */
 	public function create($logbook_id) {
 		$logbook = Logbook::findOrFail($logbook_id);
-		$evidence = DB::table('evidences')->get();
-
 		$entry = new Entry();
+
 		return View::make('entries.create', [
 			'logbook' => $logbook,
 			'entry' => $entry,
-			'evidence' => $evidence
 		]);
 	}
 
@@ -97,12 +95,10 @@ class EntriesController extends \BaseController {
 	public function edit($logbook_id, $entry_id) {
 		$logbook = Logbook::findOrFail($logbook_id);
 		$entry = Entry::findOrFail($entry_id);
-		$evidence = Evidence::all();
 
 		return View::make('entries.edit', [
 			'logbook' => $logbook,
 			'entry' => $entry,
-			'evidence' => $evidence
 		]);
 	}
 
