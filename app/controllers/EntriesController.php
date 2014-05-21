@@ -62,10 +62,10 @@ class EntriesController extends \BaseController {
 				]);
 		} else {
 			return Redirect::to(route('logbooks.show', [$logbook->id]))
-                                ->with('message', [
-                                        'content' => 'Geen rechten om entry weg te schrijven!',
-                                        'class' => 'danger'
-                                ]);
+				->with('message', [
+					'content' => 'Geen rechten om entry weg te schrijven!',
+					'class' => 'danger'
+				]);
 		}
 	}
 
@@ -112,7 +112,7 @@ class EntriesController extends \BaseController {
 	public function update($logbook_id, $entry_id) {
 		$logbook = Logbook::findOrFail($logbook_id);
 
-                if($logbook->user_id == (Auth::user()->id) || $logbook->user_id == 0) {
+		if($logbook->user_id == (Auth::user()->id) || $logbook->user_id == 0) {
 
 			$entry = Entry::findOrFail($entry_id);
 
@@ -122,19 +122,19 @@ class EntriesController extends \BaseController {
 				$entry->save();
 			else
 				return View::make('entries.edit', ['entry' => $entry, 'logbook' => $logbook])
-					->withErrors($entry->validator());
+				->withErrors($entry->validator());
 
 			return Redirect::to(route('logbooks.show', [$logbook->id]))
 				->with('message', [
 					'content' => 'Entry met succes geupdated!',
-				'class' => 'success'
+					'class' => 'success'
 				]);
 		} else {
 			return Redirect::to(route('logbooks.show', [$logbook->id]))
-                                ->with('message', [
-                                        'content' => 'Geen rechten om entry te updaten!',
-                                        'class' => 'danger'
-                                ]);
+				->with('message', [
+					'content' => 'Geen rechten om entry te updaten!',
+					'class' => 'danger'
+				]);
 
 		}
 	}
