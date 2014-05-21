@@ -7,7 +7,7 @@ class Entry extends Model {
 
 	protected $softDelete = true;
 
-	protected $fillable = ['title', 'body', 'started_at', 'finished_at'];
+	protected $fillable = ['title', 'body', 'started_at', 'finished_at', 'who', 'what', 'where', 'which', 'way', 'when', 'why'];
 
 	protected $rules = [
 		'title' => 'required',

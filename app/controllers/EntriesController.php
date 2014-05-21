@@ -27,11 +27,13 @@ class EntriesController extends \BaseController {
 	 */
 	public function create($logbook_id) {
 		$logbook = Logbook::findOrFail($logbook_id);
+		$evidence = DB::table('evidences')->get();
 
 		$entry = new Entry();
 		return View::make('entries.create', [
 			'logbook' => $logbook,
-			'entry' => $entry
+			'entry' => $entry,
+			'evidence' => $evidence
 		]);
 	}
 
@@ -45,15 +47,12 @@ class EntriesController extends \BaseController {
 		$logbook = Logbook::findOrFail($logbook_id);
 
 		if($logbook->user_id == (Auth::user()->id) OR $logbook->user_id == 0) {
-			$entry = new Entry(Input::only('title', 'body', 'started_at', 'finished_at'));
+			$entry = new Entry(Input::only('title', 'body', 'started_at', 'finished_at', 'who', 'what', 'where', 'which', 'way', 'when', 'why'));
 
 			$entry->logbook_id = $logbook->id;
 
 			if($entry->validate()){
 				$entry->save();
-				$title = $entry->title;
-				$author = Auth::user()->username;
-				Prowl::send("Entry", "\"$title\" was added by $author", "IPFIT1 Logboek");
 			} else {
 				return View::make('entries.create', ['entry' => $entry, 'logbook' => $logbook])
 					->withErrors($entry->validator());
@@ -98,9 +97,12 @@ class EntriesController extends \BaseController {
 	public function edit($logbook_id, $entry_id) {
 		$logbook = Logbook::findOrFail($logbook_id);
 		$entry = Entry::findOrFail($entry_id);
+		$evidence = Evidence::all();
+
 		return View::make('entries.edit', [
 			'logbook' => $logbook,
-			'entry' => $entry
+			'entry' => $entry,
+			'evidence' => $evidence
 		]);
 	}
 
@@ -119,7 +121,7 @@ class EntriesController extends \BaseController {
 
 			$entry = Entry::findOrFail($entry_id);
 
-			$entry->fill(Input::only('title', 'body', 'started_at', 'finished_at'));
+			$entry->fill(Input::only('title', 'body', 'started_at', 'finished_at', 'who', 'what', 'where', 'which', 'way', 'when', 'why'));
 
 			if($entry->validate())
 				$entry->save();
