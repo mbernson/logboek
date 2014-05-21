@@ -51,9 +51,6 @@ class EntriesController extends \BaseController {
 
 			if($entry->validate()){
 				$entry->save();
-				$title = $entry->title;
-				$author = Auth::user()->username;
-				Prowl::send("Entry", "\"$title\" was added by $author", "IPFIT1 Logboek");
 			} else {
 				return View::make('entries.create', ['entry' => $entry, 'logbook' => $logbook])
 					->withErrors($entry->validator());

@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'url' => 'http://logboek',
+	'url' => 'https://logboek.duckson.nl',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -131,8 +131,6 @@ return array(
 
 		'VTalbot\Markdown\MarkdownServiceProvider',
 
-		'Duckson\Prowl\ProwlServiceProvider',
-
 	),
 
 	/*
@@ -200,8 +198,6 @@ return array(
 		'View'            => 'Illuminate\Support\Facades\View',
 
 		'Markdown' => 'VTalbot\Markdown\Facades\Markdown',
-
-		'Prowl' => 'Duckson\Prowl\Facades\Prowl',
 
 	),
 
