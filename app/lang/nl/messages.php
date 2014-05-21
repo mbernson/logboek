@@ -5,4 +5,12 @@ return [
 	'log_out' => 'Log uit',
 	'remember_me' => 'Onthoud mij',
 	'login_incorrect' =>  'Ongeldige gebruikersnaam of wachtwoord.',
+
+	'who'   => 'wie',
+	'what'  => 'wat',
+	'where' => 'waar',
+	'which' => 'welk',
+	'way'   => 'welke wijze',
+	'when'  => 'wanneer',
+	'why'   => 'waarom',
 ];

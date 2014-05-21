@@ -27,11 +27,11 @@
         </tr>
         <tr>
                 <td>Origineel bericht</td>
-                <td>{{ $evidence->original_message }}</td>
+                <td>{{ $evidence->html_original_message }}</td>
         </tr>
         <tr>
                 <td>Encrypted bericht</td>
-                <td>{{ $evidence->encrypted_message }}</td>
+                <td>{{ $evidence->html_encrypted_message }}</td>
         </tr>
         <tr>
                 <td>Gebruikte software / attributen</td>

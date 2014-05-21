@@ -7,7 +7,7 @@ class Entry extends Model {
 
 	protected $softDelete = true;
 
-	protected $fillable = ['title', 'body', 'started_at', 'finished_at'];
+	protected $fillable = ['title', 'body', 'started_at', 'finished_at', 'who', 'what', 'where', 'which', 'way', 'when', 'why'];
 
 	protected $rules = [
 		'title' => 'required',
@@ -83,4 +83,13 @@ class Entry extends Model {
 
 		return parent::save($options);
 	}
+
+	public function get7Ws() {
+		$results = [];
+		foreach($this->attributes as $key => $value) {
+			if(substr($key, 0, 1) == 'w')
+				$results[$key] = $value;
+		}
+		return $results;
+	}	
 }

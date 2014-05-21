@@ -29,5 +29,17 @@
 			<td>{{ $entry->finished_at }}</td>
 		</tr>
 		</table>
+
+		<h3>7 W's</h3>
+		<table class="table">
+		@foreach($entry->get7Ws() as $title => $value)
+			@if(!empty($value))
+			<tr>
+				<th>{{ ucfirst(Lang::get("messages.$title")) }}</th>
+				<td>{{{ $value }}}</td>
+			</tr>
+			@endif
+		@endforeach
+		</table>
 	</div>
 </div>
