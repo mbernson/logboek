@@ -19,14 +19,20 @@ class Entry extends Model {
 		parent::__construct($attributes);
 	}
 
+	// Dates
+
 	public $timestamps = false;
 	public function getDates() {
 		return ['started_at', 'finished_at'];
 	}
 
+	// Relations
+
 	public function logbook() {
 		return $this->belongsTo('Logbook', 'logbook_id');
 	}
+
+	// Mutators
 
 	public function setBodyAttribute($value) {
 		$this->attributes['body'] = $value;
@@ -56,6 +62,20 @@ class Entry extends Model {
 	public function setFinishedAtAttribute($value) {
 		$this->setDateTimeAttribute('finished_at', $value);
 	}
+
+	// Scopes
+
+	/**
+	 * Join with logbooks to select only
+	 * the entries that should be shown in overviews.
+	 */
+	public function scopeInOverview($query) {
+		return $query->join('logbooks', 'entries.logbook_id', '=', 'logbooks.id')
+			->select(['entries.*', 'logbooks.in_overview'])
+			->where('logbooks.in_overview', '=', '1');
+	}
+
+	// Overrides
 
 	public function save(array $options = []) {
 		if(empty($this->finished_at))

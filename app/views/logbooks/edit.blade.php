@@ -14,8 +14,13 @@
 </div>
 
 <div class="form-group">
-        {{ Form::label('user_id', 'Eigenaar') }}
+	{{ Form::label('user_id', 'Eigenaar') }}
 	{{ Form::select('user_id', $users_options, $logbook->user_id, ['class' => 'form-control']) }}
+</div>
+
+<div class="form-group">
+	{{ Form::label('in_overview', 'Toon in overzicht') }}
+	{{ Form::select('in_overview', ['1' => 'Ja', '0' => 'Nee'], $logbook->in_overview, ['class' => 'form-control']) }}
 </div>
 
 <button type="submit" class="btn btn-primary pull-left">Opslaan</button>

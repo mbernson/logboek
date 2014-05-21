@@ -8,7 +8,7 @@ class EntriesController extends \BaseController {
 	 * @return Response
 	 */
 	public function index() {
-		$entries = Entry::with('logbook')
+		$entries = Entry::inOverview()
 			->orderBy('finished_at', 'desc')
 			->orderBy('started_at', 'desc')
 			->paginate(10);

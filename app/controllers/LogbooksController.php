@@ -43,7 +43,7 @@ class LogbooksController extends \BaseController {
 	public function store() {
 		$logbook = new Logbook();
 		$logbook->unguard();
-		$logbook->fill(Input::only('title', 'user_id'));
+		$logbook->fill(Input::only('title', 'user_id', 'in_overview'));
 
 		if($logbook->validate())
 			$logbook->save();
@@ -96,6 +96,7 @@ class LogbooksController extends \BaseController {
 	public function update($logbook_id) {
 		$logbook = Logbook::findOrFail($logbook_id);
 		$logbook->unguard();
+		$logbook->fill(Input::only('title', 'user_id', 'in_overview'));
 
 		if($logbook->validate())
 			$logbook->save();
