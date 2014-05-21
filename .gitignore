@@ -9,3 +9,5 @@ Thumbs.db
 # Ignore any production/local configuration
 app/config/production
 app/config/local
+
+public/downloads/*
