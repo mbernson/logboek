@@ -30,6 +30,7 @@
 		</tr>
 		</table>
 
+		@if($entry->hasWs())
 		<h3>7 W's</h3>
 		<table class="table">
 		@foreach($entry->get7Ws() as $title => $value)
@@ -41,5 +42,6 @@
 			@endif
 		@endforeach
 		</table>
+		@endif
 	</div>
 </div>

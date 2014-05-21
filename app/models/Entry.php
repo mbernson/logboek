@@ -92,4 +92,13 @@ class Entry extends Model {
 		}
 		return $results;
 	}	
+
+	public function hasWs() {
+		foreach($this->attributes as $key => $value) {
+			if(substr($key, 0, 1) == 'w' && !empty($value))
+				return true;
+		}
+		return false;
+	}
+
 }
