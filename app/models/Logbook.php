@@ -7,6 +7,8 @@ class Logbook extends Model {
 		'title' => 'required',
 	];
 
+	// Relations
+
 	public function entries() {
 		return $this->hasMany('Entry', 'logbook_id');
 	}
