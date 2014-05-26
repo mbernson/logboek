@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" href="/favicon.ico">
 
-	<title>Sign in</title>
+	<title>{{ Lang::get('messages.log_in') }}</title>
 
 	<!-- Bootstrap core CSS -->
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -27,16 +27,16 @@
 	<div class="container">
 
 		<form class="form-signin" role="form" action="/login" method="post">
-			<h2 class="form-signin-heading">Please sign in</h2>
+			<h2 class="form-signin-heading">{{ Lang::get('messages.please_log_in') }}</h2>
 
 			@include('partials.alert')
 
-			<input type="text" name="username" class="form-control" placeholder="Username" required autofocus>
-			<input type="password" name="password" class="form-control" placeholder="Password" required>
+			<input type="text" name="username" class="form-control" placeholder="{{ Lang::get('messages.username') }}" required autofocus>
+			<input type="password" name="password" class="form-control" placeholder="{{ Lang::get('messages.password') }}" required>
 			<label class="checkbox">
-				<input type="checkbox" name="remember" value="true"> Remember me
+				<input type="checkbox" name="remember" value="true"> {{ Lang::get('messages.remember_me') }}
 			</label>
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+			<button class="btn btn-lg btn-primary btn-block" type="submit">{{ Lang::get('messages.log_in') }}</button>
 		</form>
 
 	</div> <!-- /container -->
