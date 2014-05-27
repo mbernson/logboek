@@ -19,7 +19,7 @@
 </div>
 
 <div class="form-group">
-        {{ Form::label('date_received', 'Datum ontvangen') }}
+        {{ Form::label('date_received', 'Datum verzending') }}
         {{ Form::text('date_received', $evidence->date_received, ['class' => 'form-control']) }}
 </div>
 

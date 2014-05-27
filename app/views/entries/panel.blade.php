@@ -29,6 +29,25 @@
 			<td>{{ $entry->finished_at }}</td>
 		</tr>
 		</table>
+		
+		@if($entry->evidence_id != 0)
+		<h3>Bewijs</h3>
+		<?php $evidence = $entry->getEvidence($entry->evidence_id); ?>
+		<table class="table">
+			<tr>
+				<th>Naam</th>
+				<td>{{ link_to_action('evidences.show', $evidence->title, [$entry->evidence_id]) }}</td>
+			</tr>
+			<tr>
+				<th>Afzender</th>
+				<td>{{ $evidence->sender; }} </td>
+			</tr>
+			<tr>
+				<th>Datum ontvangen</th>
+				<td>{{ $evidence->date_received; }}</td>
+			</tr>
+		</table>
+		@endif
 
 		@if($entry->hasWs())
 		<h3>7 W's</h3>

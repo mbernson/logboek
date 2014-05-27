@@ -32,6 +32,8 @@ class EntriesController extends \BaseController {
 		return View::make('entries.create', [
 			'logbook' => $logbook,
 			'entry' => $entry,
+			'evidences' => Evidence::all(),
+			'choices' => $this->getEvidenceChoices()
 		]);
 	}
 
@@ -45,7 +47,7 @@ class EntriesController extends \BaseController {
 		$logbook = Logbook::findOrFail($logbook_id);
 
 		if($logbook->user_id == (Auth::user()->id) OR $logbook->user_id == 0) {
-			$entry = new Entry(Input::only('title', 'body', 'started_at', 'finished_at', 'who', 'what', 'where', 'which', 'way', 'when', 'why'));
+			$entry = new Entry(Input::only('title', 'body', 'started_at', 'finished_at', 'evidence_id', 'who', 'what', 'where', 'which', 'way', 'when', 'why'));
 
 			$entry->logbook_id = $logbook->id;
 
@@ -85,6 +87,15 @@ class EntriesController extends \BaseController {
 		]);
 	}
 
+	private function getEvidenceChoices() {
+		$evidences = Evidence::all();
+		$choices = [
+			0 => 'Selecteer bewijs'
+		];
+		$choices = array_merge($choices, array_pluck($evidences, 'title', 'id'));
+
+		return $choices;
+	}
 
 	/**
 	 * Show the form for editing the specified resource.
@@ -99,6 +110,8 @@ class EntriesController extends \BaseController {
 		return View::make('entries.edit', [
 			'logbook' => $logbook,
 			'entry' => $entry,
+			'evidences' => Evidence::all(),
+			'choices' => $this->getEvidenceChoices()
 		]);
 	}
 
@@ -116,7 +129,7 @@ class EntriesController extends \BaseController {
 
 			$entry = Entry::findOrFail($entry_id);
 
-			$entry->fill(Input::only('title', 'body', 'started_at', 'finished_at', 'who', 'what', 'where', 'which', 'way', 'when', 'why'));
+			$entry->fill(Input::only('title', 'body', 'started_at', 'finished_at', 'evidence_id', 'who', 'what', 'where', 'which', 'way', 'when', 'why'));
 
 			if($entry->validate())
 				$entry->save();

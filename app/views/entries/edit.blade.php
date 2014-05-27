@@ -29,6 +29,11 @@
 	{{ Form::text('finished_at', $entry->finished_at, ['class' => 'form-control', 'placeholder' => 'Als je dit leeg laat wordt het de datum dat je op "Opslaan" drukt']) }}
 </div>
 
+<div class="form-group">
+	{{ Form::label('evidence_id', 'Bewijsstuk') }}
+	{{ Form::select('evidence_id', $choices, $entry->evidence_id, ['class' => 'form-control']) }}
+</div>
+
 <div class="panel-group" id="accordion">
 <div class="panel panel-default">
 <div class="panel-heading">

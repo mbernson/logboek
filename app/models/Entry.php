@@ -7,7 +7,7 @@ class Entry extends Model {
 
 	protected $softDelete = true;
 
-	protected $fillable = ['title', 'body', 'started_at', 'finished_at', 'who', 'what', 'where', 'which', 'way', 'when', 'why'];
+	protected $fillable = ['title', 'body', 'started_at', 'finished_at', 'evidence_id', 'who', 'what', 'where', 'which', 'way', 'when', 'why'];
 
 	protected $rules = [
 		'title' => 'required',
@@ -82,6 +82,11 @@ class Entry extends Model {
 			$this->finished_at = new DateTime();
 
 		return parent::save($options);
+	}
+
+	public function getEvidence($evidence_id) {
+		 $evidence = Evidence::findOrFail($evidence_id);
+		 return $evidence;
 	}
 
 	public function get7Ws() {
