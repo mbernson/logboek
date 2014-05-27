@@ -42,6 +42,7 @@
 						<li {{ Request::is('logbooks') ? 'class="active"' : '' }}>{{ link_to_route('logbooks.index', 'Logboeken') }}</li>
 						<li {{ Request::is('users') ? 'class="active"' : '' }}>{{ link_to_route('users.index', 'Gebruikers') }}</li>
 						<li {{ Request::is('tasks') ? 'class="active"' : '' }}>{{ link_to_route('tasks.index', 'Taken') }}</li>
+						<li {{ Request::is('files') ? 'class="active"' : '' }}>{{ link_to_route('files.index', 'Bestanden') }}</li>
 						<li {{ Request::is('evidences') ? 'class="active"' : '' }}>{{ link_to_route('evidences.index', 'Bewijzen') }}</li>
 						<li {{ Request::is('intro') ? 'class="active"' : '' }}>{{ link_to('/intro', 'Over') }}</li>
 					</ul>

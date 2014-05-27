@@ -23,6 +23,8 @@ Route::group(['before' => 'auth'], function() {
     Route::resource('users', 'UsersController');
     Route::resource('tasks', 'TasksController');
     Route::resource('evidences', 'EvidenceController');
+    Route::resource('files', 'FilesController');
+    Route::get('/files/{id}/download', 'FilesController@download');
 
     Route::post('/tasks/{id}/toggle', 'TasksController@toggle');
 
