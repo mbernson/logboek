@@ -12,6 +12,11 @@ class Attachment extends Model {
 		'extension' => 'required',
 	];
 
+	protected $fillable = [
+		'title', 'description',
+		'hash', 'hash_algorithm'
+	];
+
 	public function calculatedHash() {
 		$hash = '';
 		switch($this->hash_algorithm) {

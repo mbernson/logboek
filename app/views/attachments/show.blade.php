@@ -65,7 +65,7 @@
 	</tr>
 </table>
 
-{{-- link_to_action('attachments.edit', 'Bewerken', [$attachment->id], ['class' => 'btn btn-success']) --}}
+{{ link_to_action('attachments.edit', 'Bewerken', [$attachment->id], ['class' => 'btn btn-success']) }}
 
 {{ Form::open(['route' => ['attachments.destroy', $attachment->id], 'method' => 'delete']) }}
 	<button type="submit" class="btn btn-danger pull-right">Verwijderen</button>

@@ -19,6 +19,7 @@
 	<p><em>Je kunt bij het schrijven gebruik maken van <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet">Markdown</a>.</em></p>
 </div>
 
+@if($attachment->isNew())
 <div class="form-group">
 	{{ Form::label('upload', 'Bestand') }}
 	{{ Form::file('upload') }}
@@ -26,6 +27,7 @@
 	<p><em>Je mag bestanden uploaden van maximaal {{ $max_size }} groot.</em></p>
 	@endif
 </div>
+@endif
 
 <div class="form-group">
 	{{ Form::label('hash', 'Hash') }}
@@ -36,7 +38,11 @@
 	{{ Form::select('hash_algorithm', Attachment::hashAlgorithmChoices(), $attachment->hash_algorithm, ['class' => 'form-control']) }}
 </div>
 
+@if($attachment->isNew())
 <button type="submit" class="btn btn-primary btn-lg">Uploaden</button>
+@else
+<button type="submit" class="btn btn-primary btn-lg">Opslaan</button>
+@endif
 
 {{ Form::close() }}
 

@@ -115,7 +115,30 @@ class AttachmentsController extends \BaseController {
 	 * @return Response
 	 */
 	public function update($attachment_id) {
-		//
+		$attachment = Attachment::findOrFail($attachment_id);
+
+		if($attachment->user_id != (Auth::user()->id)) {
+			return Redirect::to(route('attachments.show', [$attachment->id]))
+				->with('message', [
+					'content' => 'Geen rechten om bestand te updaten!',
+					'class' => 'danger'
+				]);
+		}
+
+		$attachment->fill(Input::only('title', 'description',
+			'hash', 'hash_algorithm'));
+
+		if($attachment->validate()) {
+			$attachment->save();
+		} else {
+			return View::make('attachments.edit', ['attachment' => $attachment])
+				->withErrors($attachment->validator());
+		}
+		return Redirect::to(route('attachments.index'))
+			->with('message', [
+				'content' => 'Bestand met succes geupdated!',
+				'class' => 'success'
+			]);
 	}
 
 
