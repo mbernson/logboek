@@ -11,7 +11,7 @@ class CreateFilesTable extends Migration {
 	 * @return void
 	 */
 	public function up() {
-		Schema::create('files', function($table) {
+		Schema::create('attachments', function($table) {
 			$table->increments('id');
 			$table->integer('user_id'); // The file's owner
 
@@ -39,7 +39,7 @@ class CreateFilesTable extends Migration {
 	 * @return void
 	 */
 	public function down() {
-		Schema::drop('files');
+		Schema::drop('attachments');
 	}
 
 }

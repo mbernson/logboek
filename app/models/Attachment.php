@@ -1,7 +1,7 @@
 <?php
 
-class File extends Model {
-	protected $table = 'files';
+class Attachment extends Model {
+	protected $table = 'attachments';
 
 	protected $softDelete = true;
 
@@ -22,7 +22,7 @@ class File extends Model {
 			$hash = sha1_file($this->fullPath());
 			break;
 		default:
-			Log::error("Unsupported hash $this->hash_algorithm at file #$this->id");
+			Log::error("Unsupported hash $this->hash_algorithm at attachment #$this->id");
 
 			return false;
 		}
@@ -74,7 +74,7 @@ class File extends Model {
 	 * Return the path to the file for downloading
 	 */
 	public function downloadPath() {
-		return action('FilesController@download', [$this->id]);
+		return action('AttachmentsController@download', [$this->id]);
 	}
 
 	public function	escapedFilename() {
@@ -84,7 +84,7 @@ class File extends Model {
 	// Allowed algorithms and extensions
 
 	public static $image_extensions = [
-		'jpg', 'png', 'gif'
+		'jpg', 'jpeg', 'png', 'gif'
 	];
 
 	public static $hash_algorithms = [
