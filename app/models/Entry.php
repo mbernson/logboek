@@ -32,6 +32,10 @@ class Entry extends Model {
 		return $this->belongsTo('Logbook', 'logbook_id');
 	}
 
+	public function files() {
+		return $this->morphToMany('File', 'attachable');
+	}
+
 	// Mutators
 
 	public function setBodyAttribute($value) {

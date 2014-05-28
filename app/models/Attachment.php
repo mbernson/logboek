@@ -51,6 +51,10 @@ class Attachment extends Model {
 		return $this->belongsTo('User', 'user_id');
 	}
 
+	public function entries() {
+		return $this->morphedByMany('Entry', 'attachable');
+	}
+
 	// Path functions
 
 	const BASE_PATH = '/uploads/';
