@@ -51,6 +51,10 @@ class Attachment extends Model {
 		return $this->belongsTo('User', 'user_id');
 	}
 
+	public function entries() {
+		return $this->morphedByMany('Entry', 'attachable');
+	}
+
 	// Path functions
 
 	const BASE_PATH = '/uploads/';
@@ -59,18 +63,22 @@ class Attachment extends Model {
 	 * Return the path to the file's folder
 	 */
 	public function folderPath() {
-		if(empty($this->path))
-			return storage_path().self::BASE_PATH;
-		else
+		if(empty($this->path)) {
+			if($this->public)
+				return public_path().self::BASE_PATH;
+			else
+				return storage_path().self::BASE_PATH;
+		} else {
 			return $this->path;
+		}
 	}
 
 	/**
-	 * Return the full path to the file
+	 * Return the complete path to the file
 	 */
 	public function fullPath() {
 		if(empty($this->path))
-			return storage_path().self::BASE_PATH.$this->filename;
+			return $this->folder_path().$this->filename;
 		else
 			return $this->path.$this->filename;
 	}
@@ -79,11 +87,29 @@ class Attachment extends Model {
 	 * Return the path to the file for downloading
 	 */
 	public function downloadPath() {
-		return action('AttachmentsController@download', [$this->id]);
+		if($this->public)
+			return url(self::BASE_PATH.$this->filename);
+		else
+			return action('AttachmentsController@download', [$this->id]);
 	}
 
 	public function	escapedFilename() {
+		// @TODO: Implement me
 		return $this->filename;
+	}
+
+	// Accessors
+
+	public function getPublicAttribute() {
+		if(isset($this->attributes['public']))
+			return (boolean) $this->attributes['public'];
+		return false;
+	}
+
+	// Mutators
+
+	public function setPublicAttribute($value) {
+		$this->attributes['public'] = (int) $value;
 	}
 
 	// Allowed algorithms and extensions

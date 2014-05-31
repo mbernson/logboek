@@ -29,6 +29,14 @@
 </div>
 @endif
 
+@if($attachment->isNew())
+<div class="form-group">
+	{{ Form::checkbox('public', 1, $attachment->public) }}
+	{{ Form::label('public', 'Publiek') }}
+	<p><em>Vink dit aan om het bestand vanaf een publieke URL te kunnen benaderen.</em></p>
+</div>
+@endif
+
 <div class="form-group">
 	{{ Form::label('hash', 'Hash') }}
 	{{ Form::text('hash', $attachment->hash, ['class' => 'form-control', 'placeholder' => 'a28h2b1337fafa42a28h2b1337fafa42']) }}

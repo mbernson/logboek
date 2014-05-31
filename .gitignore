@@ -12,3 +12,4 @@ app/config/local
 
 # Uploads
 app/storage/uploads
+public/uploads
