@@ -21,6 +21,12 @@
 		<th>Bestandsnaam</th>
 		<td>{{ $attachment->filename }} </td>
 	</tr>
+	@if($attachment->public)
+	<tr>
+		<th>URL</th>
+		<td><input type="text" value="{{ $attachment->downloadPath() }}" class="form-control" /></td>
+	</tr>
+	@endif
 	<tr>
 		<th>Bestandsklasse</th>
 		<td>{{ $attachment->type }} </td>

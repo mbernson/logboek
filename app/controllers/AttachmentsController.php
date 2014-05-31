@@ -35,7 +35,7 @@ class AttachmentsController extends \BaseController {
 		$att = new Attachment();
 		$att->unguard();
 		$att->fill(Input::only('title', 'description',
-			'hash', 'hash_algorithm'));
+			'hash', 'hash_algorithm', 'public'));
 
 		if(!Input::hasFile('upload')) {
 			Session::flash('message', [
