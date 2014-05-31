@@ -37,7 +37,7 @@
 	</tr>
 	<tr>
 		<th>Grootte</th>
-		<td>{{ format_bytes($attachment->attachmentsize) }}</td>
+		<td>{{ format_bytes($attachment->filesize) }}</td>
 	</tr>
 	<tr>
 		<th>Hash</th>
