@@ -88,11 +88,14 @@ class EntriesController extends \BaseController {
 	}
 
 	private function getEvidenceChoices() {
-		$evidences = Evidence::all();
+		$evidences = Evidence::select('id', 'title')->get();
+
 		$choices = [
 			0 => 'Selecteer bewijs'
 		];
-		$choices = array_merge($choices, array_pluck($evidences, 'title', 'id'));
+		foreach($evidences as $evidence) {
+			$choices[$evidence->id] = $evidence->title;
+		}
 
 		return $choices;
 	}
