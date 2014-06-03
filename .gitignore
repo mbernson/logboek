@@ -13,3 +13,6 @@ app/config/local
 # Uploads
 app/storage/uploads
 public/uploads
+
+# Downloads
+public/downloads
