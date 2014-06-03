@@ -1,0 +1,33 @@
+#cipher-form label {
+    font-weight: bold;
+    width: 1em;
+    display: inline-block;
+    text-align: right;
+    padding-right: 4px;
+}
+
+#cipher-form label:after {
+    content ":";
+}
+
+form#cipher-form input[type='text'] {
+    width: 48px;
+}
+
+form#cipher-form textarea {
+    display: block;
+}
+
+form#cipher-form div {
+    display: inline-block;
+    width: 10%;
+}
+
+form#cipher-form input[type='submit'] {
+    display: block;
+}
+
+#cipher-form textarea {
+    font-size: 125%;
+    font-family: Menlo, fixed;
+}

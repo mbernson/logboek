@@ -34,4 +34,6 @@ Route::group(['before' => 'auth'], function() {
     Route::post('/tasks/{id}/toggle', 'TasksController@toggle');
 
     Route::any('/logout', 'UsersController@logout');
+
+    Route::get('/cipher', 'DashboardController@cipher_tool');
 });

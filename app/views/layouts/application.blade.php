@@ -16,6 +16,8 @@
 
 	<link href="/css/application.css" rel="stylesheet">
 
+	<link href="/css/cipher.css" rel="stylesheet">
+
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
 			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -44,6 +46,7 @@
 						<li {{ Request::is('tasks') ? 'class="active"' : '' }}>{{ link_to_route('tasks.index', 'Taken') }}</li>
 						<li {{ Request::is('attachments') ? 'class="active"' : '' }}>{{ link_to_route('attachments.index', 'Bestanden') }}</li>
 						<li {{ Request::is('evidences') ? 'class="active"' : '' }}>{{ link_to_route('evidences.index', 'Bewijzen') }}</li>
+						<li {{ Request::is('cipher') ? 'class="active"' : '' }}>{{ link_to('/cipher', 'Decryptietool') }}</li>
 						<li {{ Request::is('intro') ? 'class="active"' : '' }}>{{ link_to('/intro', 'Over') }}</li>
 					</ul>
 
