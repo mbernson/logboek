@@ -2,6 +2,8 @@
 
 class Export extends Model {
 
+	protected $table = 'exports';
+
 	// Relations
 
 	public function user() {
@@ -29,6 +31,17 @@ class Export extends Model {
 	 */
 	public function downloadPath() {
 		return '/downloads/'.$this->filename;
+	}
+
+	protected function updateFileSize() {
+		$this->filesize = filesize($this->fullPath()) / 1024; // In kilobytes
+	}
+
+	// Overrides
+
+	public function delete() {
+		unlink($this->fullPath());
+		return parent::delete();
 	}
 
 }

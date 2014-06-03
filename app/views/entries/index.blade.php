@@ -6,11 +6,6 @@
 	<h1>{{{ $title }}}</h1>
 @endif
 
-<p>
-	<a class="btn btn-primary" href="/entries/import">Importeren</a>
-	<a class="btn btn-primary" href="/entries/export">Exporteren</a>
-</p>
-
 @foreach($entries as $entry)
 
 	@include('entries.panel', ['entry' => $entry])

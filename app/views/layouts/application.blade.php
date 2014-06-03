@@ -44,6 +44,7 @@
 						<li {{ Request::is('tasks') ? 'class="active"' : '' }}>{{ link_to_route('tasks.index', 'Taken') }}</li>
 						<li {{ Request::is('attachments') ? 'class="active"' : '' }}>{{ link_to_route('attachments.index', 'Bestanden') }}</li>
 						<li {{ Request::is('evidences') ? 'class="active"' : '' }}>{{ link_to_route('evidences.index', 'Bewijzen') }}</li>
+						<li {{ Request::is('exports') ? 'class="active"' : '' }}>{{ link_to_action('ExportsController@index', 'Exports') }}</li>
 						<li {{ Request::is('intro') ? 'class="active"' : '' }}>{{ link_to('/intro', 'Over') }}</li>
 					</ul>
 
