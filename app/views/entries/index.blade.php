@@ -7,7 +7,6 @@
 @endif
 
 <p>
-	<a class="btn btn-primary" href="/entries/import">Importeren</a>
 	<a class="btn btn-primary" href="/entries/export">Exporteren</a>
 </p>
 
