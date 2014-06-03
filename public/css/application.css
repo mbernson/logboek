@@ -28,6 +28,10 @@ textarea.markdown {
 	border: none;
 }
 
+.entry-panel img {
+	max-width: 100%;
+}
+
 #sidebar > p {
 	text-align: center;
 }

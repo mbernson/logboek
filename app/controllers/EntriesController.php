@@ -29,11 +29,13 @@ class EntriesController extends \BaseController {
 	 */
 	public function create($logbook_id) {
 		$logbook = Logbook::findOrFail($logbook_id);
-
 		$entry = new Entry();
+
 		return View::make('entries.create', [
 			'logbook' => $logbook,
-			'entry' => $entry
+			'entry' => $entry,
+			'evidences' => Evidence::all(),
+			'choices' => $this->getEvidenceChoices()
 		]);
 	}
 
@@ -47,7 +49,7 @@ class EntriesController extends \BaseController {
 		$logbook = Logbook::findOrFail($logbook_id);
 
 		if($logbook->user_id == (Auth::user()->id) OR $logbook->user_id == 0) {
-			$entry = new Entry(Input::only('title', 'body', 'started_at', 'finished_at'));
+			$entry = new Entry(Input::only('title', 'body', 'started_at', 'finished_at', 'evidence_id', 'who', 'what', 'where', 'which', 'way', 'when', 'why'));
 
 			$entry->logbook_id = $logbook->id;
 
@@ -87,6 +89,18 @@ class EntriesController extends \BaseController {
 		]);
 	}
 
+	private function getEvidenceChoices() {
+		$evidences = Evidence::select('id', 'title')->get();
+
+		$choices = [
+			0 => 'Selecteer bewijs'
+		];
+		foreach($evidences as $evidence) {
+			$choices[$evidence->id] = $evidence->title;
+		}
+
+		return $choices;
+	}
 
 	/**
 	 * Show the form for editing the specified resource.
@@ -97,9 +111,12 @@ class EntriesController extends \BaseController {
 	public function edit($logbook_id, $entry_id) {
 		$logbook = Logbook::findOrFail($logbook_id);
 		$entry = Entry::findOrFail($entry_id);
+
 		return View::make('entries.edit', [
 			'logbook' => $logbook,
-			'entry' => $entry
+			'entry' => $entry,
+			'evidences' => Evidence::all(),
+			'choices' => $this->getEvidenceChoices()
 		]);
 	}
 
@@ -117,7 +134,7 @@ class EntriesController extends \BaseController {
 
 			$entry = Entry::findOrFail($entry_id);
 
-			$entry->fill(Input::only('title', 'body', 'started_at', 'finished_at'));
+			$entry->fill(Input::only('title', 'body', 'started_at', 'finished_at', 'evidence_id', 'who', 'what', 'where', 'which', 'way', 'when', 'why'));
 
 			if($entry->validate())
 				$entry->save();

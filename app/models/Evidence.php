@@ -1,6 +1,8 @@
 <?php
 
 class Evidence extends Model {
+	protected $softDelete = true;
+
 	protected $fillable = ['id', 'title', 'hash', 'date_received', 'sender', 'original_message', 'encrypted_message', 'software'];
 
 	protected $rules = [
@@ -36,7 +38,7 @@ class Evidence extends Model {
 	}
 
 	// Scopes
-	
+
 	public function scopeNewest($query) {
 		return $query->orderBy('date_received');
 	}

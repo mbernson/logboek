@@ -10,4 +10,9 @@ Thumbs.db
 app/config/production
 app/config/local
 
-public/downloads/*
+# Uploads
+app/storage/uploads
+public/uploads
+
+# Downloads
+public/downloads

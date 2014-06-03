@@ -7,7 +7,7 @@ class Entry extends Model {
 
 	protected $softDelete = true;
 
-	protected $fillable = ['title', 'body', 'started_at', 'finished_at'];
+	protected $fillable = ['title', 'body', 'started_at', 'finished_at', 'evidence_id', 'who', 'what', 'where', 'which', 'way', 'when', 'why'];
 
 	protected $rules = [
 		'title' => 'required',
@@ -30,6 +30,10 @@ class Entry extends Model {
 
 	public function logbook() {
 		return $this->belongsTo('Logbook', 'logbook_id');
+	}
+
+	public function files() {
+		return $this->morphToMany('File', 'attachable');
 	}
 
 	// Mutators
@@ -83,4 +87,27 @@ class Entry extends Model {
 
 		return parent::save($options);
 	}
+
+	public function getEvidence($evidence_id) {
+		 $evidence = Evidence::findOrFail($evidence_id);
+		 return $evidence;
+	}
+
+	public function get7Ws() {
+		$results = [];
+		foreach($this->attributes as $key => $value) {
+			if(substr($key, 0, 1) == 'w')
+				$results[$key] = $value;
+		}
+		return $results;
+	}	
+
+	public function hasWs() {
+		foreach($this->attributes as $key => $value) {
+			if(substr($key, 0, 1) == 'w' && !empty($value))
+				return true;
+		}
+		return false;
+	}
+
 }

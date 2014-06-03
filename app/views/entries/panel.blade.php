@@ -29,5 +29,38 @@
 			<td>{{ $entry->finished_at }}</td>
 		</tr>
 		</table>
+		
+		@if($entry->evidence_id != 0)
+		<h3>Bewijs</h3>
+		<?php $evidence = $entry->getEvidence($entry->evidence_id); ?>
+		<table class="table">
+			<tr>
+				<th>Naam</th>
+				<td>{{ link_to_action('evidences.show', $evidence->title, [$entry->evidence_id]) }}</td>
+			</tr>
+			<tr>
+				<th>Afzender</th>
+				<td>{{ $evidence->sender; }} </td>
+			</tr>
+			<tr>
+				<th>Datum ontvangen</th>
+				<td>{{ $evidence->date_received; }}</td>
+			</tr>
+		</table>
+		@endif
+
+		@if($entry->hasWs())
+		<h3>7 W's</h3>
+		<table class="table">
+		@foreach($entry->get7Ws() as $title => $value)
+			@if(!empty($value))
+			<tr>
+				<th>{{ ucfirst(Lang::get("messages.$title")) }}</th>
+				<td>{{{ $value }}}</td>
+			</tr>
+			@endif
+		@endforeach
+		</table>
+		@endif
 	</div>
 </div>
