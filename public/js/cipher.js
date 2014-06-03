@@ -1,4 +1,4 @@
-var Crypt = function() {
+var Cypher = function() {
     var alphabet = 'abcdefghijklmnopqrstuvwxyz'.split(''),
         upperAlphabet = alphabet.map(function(letter) {
             return letter.toUpperCase();
@@ -123,6 +123,6 @@ var Crypt = function() {
     };
 };
 
-document.addEventListener("DOMContentLoaded", function(e) {
-    new Crypt().init();
+document.addEventListener("DOMContentLoaded", function() {
+    new Cypher().init();
 }, true);

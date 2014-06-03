@@ -2,10 +2,10 @@
 
 @section('content')
 
-<h1>Cipher tool</h1> 
+<h1>Ciphertool</h1> 
 
 <form id="cipher-form"></form>
 
-<script src="/js/crypt.js"></script>
+<script src="/js/cipher.js"></script>
 
 @stop
