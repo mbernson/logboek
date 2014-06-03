@@ -9,8 +9,7 @@ class AttachmentsController extends \BaseController {
 	 */
 	public function index() {
 		return View::make('attachments.index', [
-			'attachments' => Attachment::orderBy('created_at', 'desc')
-				->orderBy('updated_at', 'desc')
+			'attachments' => Attachment::orderBy('id', 'desc')
 				->paginate(25)
 		]);
 	}
