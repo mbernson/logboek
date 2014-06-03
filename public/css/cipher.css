@@ -18,7 +18,7 @@ form#cipher-form textarea {
     display: block;
 }
 
-form#cipher-form div {
+form#cipher-form div > div {
     display: inline-block;
     width: 10%;
 }
@@ -30,4 +30,6 @@ form#cipher-form input[type='submit'] {
 #cipher-form textarea {
     font-size: 125%;
     font-family: Menlo, fixed;
+    margin: .5em 0;
+    width: 100%;
 }

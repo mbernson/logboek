@@ -15,7 +15,27 @@ var Cypher = function() {
 
     addToMap(alphabet);
 
-    var form, sourceText, targetText;
+    var form = document.getElementById('cipher-form'),
+	inputs = form.querySelector('.inputs'),
+       	sourceText = form.querySelector('textarea[name=source]'),
+	targetText = form.querySelector('textarea[name=target]');
+
+    var action = function(event) {
+        var target = event.target;
+
+        if(target.type == 'text') {
+            map[target.name] = target.value;
+        }
+        decode();
+    };
+
+    form.addEventListener('keyup', action, true);
+    form.addEventListener('change', action, true);
+    form.addEventListener('submit', function(event) {
+    	event.preventDefault();
+    	decode();
+    }, true);
+
     var addInput = function(letter) {
         var div = document.createElement('div');
         var input = document.createElement('input'),
@@ -36,50 +56,14 @@ var Cypher = function() {
 
         div.appendChild(label);
         div.appendChild(input);
-        form.appendChild(div);
-
-        var action = function(event) {
-            var target = event.target;
-
-            if(target.type == 'text') {
-                map[target.name] = target.value;
-            }
-            decode();
-        };
-        form.addEventListener('change', action, true);
-        form.addEventListener('keyup', action, true);
-        form.addEventListener('submit', function(event) {
-            event.preventDefault();
-            decode();
-        }, true);
+	inputs.appendChild(div);
     };
 
     this.init = function() {
-        form = document.getElementById('cipher-form');
         alphabet.map(addInput);
-        form.appendChild(document.createElement('hr'));
 
-        sourceText = document.createElement('textarea');
-        sourceText.setAttribute('name', 'source');
-        sourceText.setAttribute('rows', 10);
-        sourceText.setAttribute('cols', 50);
-        sourceText.innerText = 'nvrrulap,ArpUbTuipXtujqpQvbkiTxlusui,TpGuiHubpiaxktlVoKuDjtpiuTxwvboaituOuiDjrrtuIuKurux.TxOtdxUxigvjptapouGakTcUuxIupiduLupijjbk.OuiKuYtdluhvulkuTxwvboaituOvuiuxDjrrtuHubkubCjxxux.Pvbbe.Lb.DjwwbvjqdaxxtuQqq.ovytruwtpg.nvo';
-        form.appendChild(sourceText);
-
-        targetText = document.createElement('textarea');
-        targetText.setAttribute('name', 'targetText');
-        targetText.setAttribute('rows', 10);
-        targetText.setAttribute('cols', 50);
-        form.appendChild(targetText);
-
-        var submit = document.createElement('input');
-        submit.setAttribute('type', 'submit');
-        submit.setAttribute('value', 'Decode');
-        form.appendChild(submit);
-
-        var loadButton = document.createElement('button');
-        loadButton.innerHTML = 'Load JSON';
-        loadButton.addEventListener('click', function() {
+        document.getElementById('load-button')
+		.addEventListener('click', function() {
             try {
                 var data = JSON.parse(prompt('Plak je JSON hier'));
             } catch(e) {
@@ -87,16 +71,13 @@ var Cypher = function() {
             }
             if(data) load(data);
         }, true);
-        form.appendChild(loadButton);
 
         this.decode();
 
-        var dumpButton = document.createElement('button');
-        dumpButton.innerHTML = 'Dump JSON to console';
-        dumpButton.addEventListener('click', function() {
+        document.getElementById('dump-button')
+		.addEventListener('click', function() {
             console.log(JSON.stringify(map, undefined, 1));
         });
-        form.appendChild(dumpButton);
     }
 
     var load = this.load = function(data) {
