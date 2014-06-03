@@ -6,13 +6,15 @@
 	"require": {
 		"laravel/framework": "4.1.*",
 		"vtalbot/markdown": "1.5",
-		"imagine/imagine": "0.5.*"
+		"imagine/imagine": "0.5.*",
+		"keboola/csv": "1.1.*"
 	},
 	"autoload": {
 		"classmap": [
 			"app/commands",
 			"app/controllers",
 			"app/models",
+			"app/jobs",
 			"app/database/migrations",
 			"app/database/seeds",
 			"app/tests/TestCase.php"
