@@ -7,6 +7,9 @@ use Entry;
 
 class CSV extends \Export {
 
+	protected $content_type = 'text/csv';
+	protected $extension = 'csv';
+
 	public function __construct(array $attributes = array()) {
 		parent::__construct($attributes);
 		$this->type = 'csv';

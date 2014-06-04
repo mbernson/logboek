@@ -9,6 +9,9 @@ use PDF as DOMPDF;
 
 class PDF extends \Export {
 
+	protected $content_type = 'application/pdf';
+	protected $extension = 'pdf';
+
 	public function __construct(array $attributes = array()) {
 		parent::__construct($attributes);
 		$this->type = 'pdf';

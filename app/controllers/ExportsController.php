@@ -8,48 +8,28 @@ class ExportsController extends \BaseController {
 		]);
 	}
 
-	public function create($type = 'csv') {
+	private static function getExportForType($type) {
 		switch($type) {
 		case 'csv':
-			return $this->exportCSV();
+			return new Exports\CSV();
 		case 'pdf':
-			return $this->exportPDF();
+			return new Exports\PDF();
 		default:
-			App::abort(404);
+			throw new Exception("Uknown type '$type'");
 		}
 	}
 
-	private function exportCSV() {
-		if(Entry::count() == 0)
-			throw new Exception('No entries available');
+	public function create($type = 'csv') {
+		try { $export = static::getExportForType($type); }
+		catch(Exception $e) { App::abort(404); }
 
-		$export = new Exports\CSV();
 		$export->user_id = Auth::user()->id;
-		$export->filename = date('YmdHis').'_logboek_export.csv';
+		$export->filename = $export->generateFilename();
 		$export->path = $export->folderPath();
 
 		if($export->run() && $export->save()) {
 			return Response::download($export->fullPath(), $export->filename, [
-				'Content-type' => 'text/csv'
-			]);
-		} else {
-			return Redirect::to(action('ExportsController@index'))
-			->with('message', [
-				'content' => 'Er is iets mis gegaan met exporteren.',
-				'class' => 'danger'
-			]);
-		}
-	}
-
-	public function exportPDF() {
-		$export = new Exports\PDF();
-		$export->user_id = Auth::user()->id;
-		$export->filename = date('YmdHis').'_logboek_export.pdf';
-		$export->path = $export->folderPath();
-
-		if($export->run() && $export->save()) {
-			return Response::download($export->fullPath(), $export->filename, [
-				'Content-type' => 'application/pdf'
+				'Content-type' => $export->getContentType()
 			]);
 		} else {
 			return Redirect::to(action('ExportsController@index'))
