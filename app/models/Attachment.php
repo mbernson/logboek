@@ -119,7 +119,7 @@ class Attachment extends Model {
 	];
 
 	public static $hash_algorithms = [
-		'sha1', 'md5'
+		'md5', 'sha1'
 	];
 
 	public static function hashAlgorithmChoices() {

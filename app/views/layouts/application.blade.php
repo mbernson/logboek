@@ -16,6 +16,8 @@
 
 	<link href="/css/application.css" rel="stylesheet">
 
+	<link href="/css/cipher.css" rel="stylesheet">
+
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
 			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -40,11 +42,12 @@
 					<ul class="nav navbar-nav">
 						<li {{ Request::is('entries') || Request::is('/') ? 'class="active"' : '' }}>{{ link_to('/entries', 'Entries') }}</li>
 						<li {{ Request::is('logbooks') ? 'class="active"' : '' }}>{{ link_to_route('logbooks.index', 'Logboeken') }}</li>
-						<li {{ Request::is('users') ? 'class="active"' : '' }}>{{ link_to_route('users.index', 'Gebruikers') }}</li>
 						<li {{ Request::is('tasks') ? 'class="active"' : '' }}>{{ link_to_route('tasks.index', 'Taken') }}</li>
 						<li {{ Request::is('attachments') ? 'class="active"' : '' }}>{{ link_to_route('attachments.index', 'Bestanden') }}</li>
 						<li {{ Request::is('evidences') ? 'class="active"' : '' }}>{{ link_to_route('evidences.index', 'Bewijzen') }}</li>
 						<li {{ Request::is('exports') ? 'class="active"' : '' }}>{{ link_to_action('ExportsController@index', 'Exports') }}</li>
+						<li {{ Request::is('cipher') ? 'class="active"' : '' }}>{{ link_to('/cipher', 'Ciphertool') }}</li>
+						<li {{ Request::is('users') ? 'class="active"' : '' }}>{{ link_to_route('users.index', 'Gebruikers') }}</li>
 						<li {{ Request::is('intro') ? 'class="active"' : '' }}>{{ link_to('/intro', 'Over') }}</li>
 					</ul>
 

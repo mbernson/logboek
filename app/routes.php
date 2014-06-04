@@ -35,4 +35,6 @@ Route::group(['before' => 'auth'], function() {
     Route::delete('/exports/{export_id}', 'ExportsController@destroy');
 
     Route::any('/logout', 'UsersController@logout');
+
+    Route::get('/cipher', 'DashboardController@cipher_tool');
 });

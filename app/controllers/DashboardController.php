@@ -6,4 +6,8 @@ class DashboardController extends \BaseController {
 		return View::make('intro');
 	}
 
+	public function cipher_tool() {
+		return View::make('cipher');
+	}
+
 }
