@@ -6,7 +6,7 @@
 
 <p>
 	{{ link_to_action('ExportsController@create', 'Nieuwe CSV export', ['csv'], ['class' => 'btn btn-primary btn-large']) }}
-	{{ link_to_action('ExportsController@create', 'Nieuwe PDF export', ['pdf'], ['class' => 'btn btn-primary btn-large']) }}
+	{{ link_to_action('ExportsController@create', 'Nieuw PDF verslag', ['pdf'], ['class' => 'btn btn-primary btn-large']) }}
 </p>
 
 <table class="table table-hover">
