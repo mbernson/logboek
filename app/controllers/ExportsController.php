@@ -26,11 +26,20 @@ class ExportsController extends \BaseController {
 		$export->user_id = Auth::user()->id;
 		$export->filename = $export->generateFilename();
 		$export->path = $export->folderPath();
+		
+		$save = Input::has('save') ? (bool) Input::get('save') : true;
 
-		if($export->run() && $export->save()) {
-			return Response::download($export->fullPath(), $export->filename, [
-				'Content-type' => $export->getContentType()
-			]);
+		if($export->run($save)) {
+			if($save == false) {
+				$res = Response::make($export->pdf);
+				$res->header('Content-type', $export->getContentType());
+				return $res;
+			} else {
+				$export->save();
+				return Response::download($export->fullPath(), $export->filename, [
+					'Content-type' => $export->getContentType()
+				]);
+			}
 		} else {
 			return Redirect::to(action('ExportsController@index'))
 			->with('message', [

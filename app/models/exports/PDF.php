@@ -21,20 +21,23 @@ class PDF extends \Export {
 
 	public $pdf;
 
-	public function run() {
+	public function run($save = true) {
 		$view = View::make('pdfs.report', [
 			'title' => 'IPFIT1 groep 2',
 			'logbooks' => Logbook::all(),
-			'chapters' => [], 'chapter' => 0,
 			'generated_at' => date('d-m-Y H:i'),
 		]);
 
 		$pdf = DOMPDF::load($view->render(), 'A4', 'portrait')->output();
-		$this->pdf = $pdf;
+		if($save) {
+			if(!File::put($this->fullPath(), $pdf))
+				return false;
 
-		File::put($this->fullPath(), $pdf);
-
-		$this->updateFileSize();
+			$this->updateFileSize();
+		} else {
+			$this->pdf = $pdf;
+			$this->filesize = 0;
+		}
 
 		return true;
 	}
