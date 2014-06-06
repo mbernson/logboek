@@ -130,26 +130,26 @@ margin: 32px;
 
 	<tr>
 		<td>
-			<img src="{{ asset('uploads/kitten.jpg') }}" />
+			<img src="http://placekitten.com/200/240" />
 			Mathijs Bernson<br>s1082020
 		</td>
 		<td>
-			<img src="{{ asset('uploads/kitten.jpg') }}" />
+			<img src="http://placekitten.com/200/240" />
 			Mathijs Bernson<br>s1082020
 		</td>
 		<td>
-			<img src="{{ asset('uploads/kitten.jpg') }}" />
+			<img src="http://placekitten.com/200/240" />
 			Mathijs Bernson<br>s1082020
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<img src="{{ asset('uploads/kitten.jpg') }}" />
+			<img src="http://placekitten.com/200/240" />
 			Mathijs Bernson<br>s1082020
 		</td>
 		<td></td>
 		<td>
-			<img src="{{ asset('uploads/kitten.jpg') }}" />
+			<img src="http://placekitten.com/200/240" />
 			Mathijs Bernson<br>s1082020
 		</td>
 	</tr>
@@ -163,12 +163,11 @@ margin: 32px;
 
 <h1>Inhoudsopgave</h1>
 
-<ol>
+<ul>
 @foreach($logbooks as $logbook)
-	{{-- <li>{{ $logbook->title }} ....................... pagina %%CH{{ $chapter++; }}%%</li> --}}
 	<li>{{ $logbook->title }}</li>
 @endforeach
-</ol>
+</ul>
 
 </div>
 
