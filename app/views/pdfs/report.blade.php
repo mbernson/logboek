@@ -175,6 +175,7 @@ margin: 32px;
 
 <h1>Logboeken</h1>
 
+
 @foreach($logbooks as $logbook)
 
 @include('pdfs.partials.logbook', ['logbook' => $logbook, 'entries' => $logbook->entries])

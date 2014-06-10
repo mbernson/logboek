@@ -9,7 +9,7 @@
 @if(empty($entry->html_body))
 <p><em>Geen inhoud.</em></p>
 @else
-{{ $entry->html_body }}
+{{ stripslashes($entry->html_body) }}
 @endif
 
 @endforeach
