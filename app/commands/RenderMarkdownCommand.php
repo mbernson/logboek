@@ -39,8 +39,22 @@ class RenderMarkdownCommand extends Command {
 
 		$type = $this->argument('type');
 
+		if(!empty($this->option('id'))) {
+			$item = call_user_func([$type, 'find'], $this->option('id'));
+			if(!$item) {
+				$this->error("$type #$id not found.");
+				return false;
+			}
+			$items = [$item];
+		} else {
+			$items = call_user_func([$type, 'all']);
+		}
+
+		$this->updateItems($items);
+	}
+
+	private function updateItems($items) {
 		$count = 0;
-		$items = call_user_func([$type, 'all']);
 		foreach($items as $item) {
 			$this->info("Processing item $item->id, '$item->title'");
 			$this->updateMarkdown($item);
@@ -62,6 +76,7 @@ class RenderMarkdownCommand extends Command {
 	 */
 	protected function getArguments() {
 		return array(
+			array('type', InputArgument::REQUIRED, 'The name of the model to re-render.'),
 		);
 	}
 
@@ -72,7 +87,7 @@ class RenderMarkdownCommand extends Command {
 	 */
 	protected function getOptions() {
 		return array(
-			array('ids', null, InputOption::VALUE_OPTIONAL, "The ID's of certain models to re-render.", null),
+			array('id', null, InputOption::VALUE_OPTIONAL, "The ID of a model to re-render.", null),
 		);
 	}
 
