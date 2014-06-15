@@ -4,8 +4,12 @@ class Export extends Model {
 
 	protected $table = 'exports';
 
+	// Subclasses are expected to implement these properties
+
 	protected $content_type;
 	protected $extension;
+
+	public $content;
 
 	// Relations
 

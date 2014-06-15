@@ -19,8 +19,6 @@ class PDF extends \Export {
 		$this->type = 'pdf';
 	}
 
-	public $pdf;
-
 	private function getView() {
 		return View::make('pdfs.report', [
 			'title' => 'IPFIT1 groep 2',
@@ -52,7 +50,7 @@ class PDF extends \Export {
 
 			$this->updateFileSize();
 		} else {
-			$this->pdf = $pdf;
+			$this->content = $pdf;
 			$this->filesize = 0;
 		}
 
