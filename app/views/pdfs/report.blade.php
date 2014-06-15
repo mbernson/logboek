@@ -22,18 +22,18 @@ body {
 	position: fixed;
 	left: 0;
 	right: 0;
-	color: #aaa;
+	color: gray;
 	font-size: 0.9em;
 }
 
 #header {
 	top: 0;
-	border-bottom: 0.1pt solid #aaa;
+	border-bottom: 0.1pt solid gray;
 }
 
 #footer {
 	bottom: 0;
-	border-top: 0.1pt solid #aaa;
+	border-top: 0.1pt solid gray;
 }
 
 #header table,
@@ -64,6 +64,15 @@ hr {
 
 pre, code {
 	font-size: 8pt;
+}
+
+pre {
+	max-width: 94%;
+	text-align: left;
+}
+
+blockquote {
+	
 }
 
 #voorblad {
@@ -129,29 +138,16 @@ margin: 32px;
 	<table id="projectleden">
 
 	<tr>
+		@for($i = 0; $i < count($users); $i++)
 		<td>
-			<img src="http://placekitten.com/200/240" />
-			Mathijs Bernson<br>s1082020
+			<img src="{{ $users[$i]->picture->downloadPath() }}" />
+			{{{ $users[$i]->first_name }}} {{{ $users[$i]->last_name }}}<br>
+			{{{ $users[$i]->student_number }}}
 		</td>
-		<td>
-			<img src="http://placekitten.com/200/240" />
-			Mathijs Bernson<br>s1082020
-		</td>
-		<td>
-			<img src="http://placekitten.com/200/240" />
-			Mathijs Bernson<br>s1082020
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<img src="http://placekitten.com/200/240" />
-			Mathijs Bernson<br>s1082020
-		</td>
-		<td></td>
-		<td>
-			<img src="http://placekitten.com/200/240" />
-			Mathijs Bernson<br>s1082020
-		</td>
+		@if(($i+1) % 3 === 0)
+		</tr><tr>
+		@endif
+		@endfor
 	</tr>
 
 	</table>
