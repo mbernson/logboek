@@ -4,6 +4,35 @@ var Cypher = function() {
             return letter.toUpperCase();
         });
 
+    var detectable_words = {
+    	'Cg': 'Is',
+    	'Aq.': 'Gr.',
+    	'CbV': 'Ben',
+
+	    'Ykvo': 'Hebt',
+	    'Aklwb': 'Geluk',
+
+    	'oiq': 'hoi',
+    	'yzllt': 'hallo',
+	    'stllkazg': 'collegas',
+	    'Pkqbklchb': 'Werkelijk',
+	    'Jkqqwbo': 'Verrukt',
+
+	    'bqzggkq': 'krasser',
+	    'Ebxkkrb': 'Krasser',
+	    'Hweeqtwphzuuck': 'Juffrouwjannie',
+	    'Uckwpg': 'Nieuws',
+	    'Yckqvch': 'Hierbij',
+
+	    'Ytwiku': 'Houden',
+	    'Zlnyku': 'Alphen',
+
+	    'Pzsyoku': 'Wachten',
+	    'Ikxkgxzkbkq': 'Demesmaeker',
+	    'Aqtko': 'Groet',
+	    'Xzokqczzl': 'Materiaal'
+    };
+
     var map = { };
 
     function addToMap(letters) {
@@ -78,12 +107,50 @@ var Cypher = function() {
 		.addEventListener('click', function() {
             console.log(JSON.stringify(map, undefined, 1));
         });
+
+        document.getElementById('learn-button')
+		.addEventListener('click', function() {
+		detect();
+        });
+
+        document.getElementById('prettify-button')
+		.addEventListener('click', function() {
+		sourceText.value = prettify(sourceText.value);
+        });
     }
 
     var load = this.load = function(data) {
         map = data;
         decode();
     };
+
+    function learnWord(source, target) {
+	    source.split('').map(function(from_letter, index) {
+		    var to_letter = target[index];
+		    map[from_letter.toLowerCase()] = to_letter.toLowerCase();
+	    });
+    }
+
+    function detect() {
+	    var source = sourceText.value;
+	    for(var source_word in detectable_words) {
+		    if(source.indexOf(source_word) != -1)
+			    learnWord(source_word, detectable_words[source_word]);
+	    }
+	    decode();
+    }
+
+    function prettify(str) {
+	    return str.split('')
+		    .map(function(letter) {
+			    if(letter == ',' || letter == '.')
+			    return letter + ' ';
+			    else if(letter === letter.toUpperCase())
+			    return ' ' + letter;
+			    else
+			    return letter;
+		    }).join('').replace('  ', ' ').replace('  ', ' ').replace('  ', ' '); // Fixme
+    }
 
     var decode = this.decode = function() {
         var source = sourceText.value.split(''), result;
