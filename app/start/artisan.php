@@ -12,3 +12,4 @@
 */
 
 Artisan::add(new RenderMarkdownCommand);
+Artisan::add(new ExportCommand);
