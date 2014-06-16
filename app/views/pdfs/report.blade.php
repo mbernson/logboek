@@ -16,7 +16,7 @@
 
 	<tr>
 		<td>{{ $title }}</td>
-		<td style="text-align: right;">Tekst</td>
+		<td style="text-align: right;"></td>
 	</tr>
 
 	</table>
@@ -60,7 +60,7 @@
 	<tr>
 		@for($i = 0; $i < count($users); $i++)
 		<td>
-			<img src="{{ $users[$i]->picture->downloadPath() }}" />
+			<img src="{{ $users[$i]->picture->downloadPath() }}" height="240" />
 			{{{ $users[$i]->first_name }}} {{{ $users[$i]->last_name }}}<br>
 			{{{ $users[$i]->student_number }}}
 		</td>
