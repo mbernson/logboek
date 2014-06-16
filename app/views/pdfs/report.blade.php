@@ -73,21 +73,17 @@
 	</table>
 </div>
 
-<hr>
-
 <div id="inhhoudsopgave">
 
 <h1>Inhoudsopgave</h1>
 
-<ul>
+<ol>
 @foreach($logbooks as $logbook)
 	<li>{{ $logbook->title }}</li>
 @endforeach
-</ul>
+</ol>
 
 </div>
-
-<hr>
 
 <h1>Logboeken</h1>
 
@@ -97,6 +93,34 @@
 @include('pdfs.partials.logbook', ['logbook' => $logbook, 'entries' => $logbook->entries])
 
 @endforeach
+
+<div id="bestanden">
+<h1>Bestanden</h1>
+
+<table class="table">
+<tr>
+	<th>Titel</th>
+	<th>Bestandsnaam</th>
+	<th>Eigenaar</th>
+	<th>Grootte</th>
+	<th>Hash type</th>
+	<th>Hash</th>
+	<th>Geupload op</th>
+</tr>
+@foreach($attachments as $att)
+<tr>
+	<td>{{ empty($att->title) ? '<em>Geen titel</em>' : $att->title }}</td>
+	<td>{{ $att->filename }}</td>
+	<td>{{ $att->user->username }}</td>
+	<td>{{ format_bytes($att->filesize) }}</td>
+	<td>{{ strtoupper($att->hash_algorithm) }}</td>
+	<td>{{ $att->hash }}</td>
+	<td>{{ $att->created_at }}</td>
+</tr>
+@endforeach
+</table>
+</div>
+
 
 </body>
 </html>

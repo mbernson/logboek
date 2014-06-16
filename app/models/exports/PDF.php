@@ -19,9 +19,10 @@ class PDF extends \Export {
 	private function getView() {
 		return View::make('pdfs.report', [
 			'title' => 'IPFIT1 groep 2',
+			'generated_at' => date('d-m-Y H:i'),
 			'users' => static::getUsers(),
 			'logbooks' => static::getLogbooks(),
-			'generated_at' => date('d-m-Y H:i'),
+			'attachments' => static::getAttachments(),
 		]);
 	}
 
