@@ -38,8 +38,9 @@ class RenderMarkdownCommand extends Command {
 		$this->info('Markdown renderer running...');
 
 		$type = $this->argument('type');
+		$id = $this->option('id');
 
-		if(!empty($this->option('id'))) {
+		if(!empty($id)) {
 			$item = call_user_func([$type, 'find'], $this->option('id'));
 			if(!$item) {
 				$this->error("$type #$id not found.");
