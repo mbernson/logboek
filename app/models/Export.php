@@ -2,6 +2,15 @@
 
 class Export extends Model {
 
+	protected $table = 'exports';
+
+	// Subclasses are expected to implement these properties
+
+	protected $content_type;
+	protected $extension;
+
+	public $content;
+
 	// Relations
 
 	public function user() {
@@ -29,6 +38,42 @@ class Export extends Model {
 	 */
 	public function downloadPath() {
 		return '/downloads/'.$this->filename;
+	}
+
+	public function generateFilename() {
+		return date('YmdHis').'_logboek_export.'.$this->extension;
+	}
+
+	public function getContentType() {
+		return $this->content_type;
+	}
+
+	protected function updateFileSize() {
+		$this->filesize = filesize($this->fullPath()) / 1024; // In kilobytes
+	}
+
+	// Overrides
+
+	public function delete() {
+		unlink($this->fullPath());
+		return parent::delete();
+	}
+
+	// Convenience methods for export data
+
+	protected static function getUsers() {
+		return User::with('picture')
+			->where('id', '!=', 0)
+			->where('username', 'not like', 'test%')
+			->get();
+	}
+
+	protected static function getLogbooks() {
+		return Logbook::all();
+	}
+
+	protected static function getAttachments() {
+		return Attachment::orderBy('id', 'asc')->get();
 	}
 
 }

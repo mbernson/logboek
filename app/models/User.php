@@ -20,7 +20,11 @@ class User extends Model implements UserInterface, RemindableInterface {
 	protected $hidden = array('password');
 
 	public function logbooks() {
-		return $this->hasMany('LogBook', 'user_id');
+		return $this->hasMany('Logbook', 'user_id');
+	}
+
+	public function picture() {
+		return $this->belongsTo('Attachment', 'picture_id');
 	}
 
 	protected $rules = [

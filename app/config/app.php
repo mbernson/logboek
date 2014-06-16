@@ -130,6 +130,7 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
 		'VTalbot\Markdown\MarkdownServiceProvider',
+		'Thujohn\Pdf\PdfServiceProvider',
 
 	),
 
@@ -198,6 +199,7 @@ return array(
 		'View'            => 'Illuminate\Support\Facades\View',
 
 		'Markdown' => 'VTalbot\Markdown\Facades\Markdown',
+		'PDF' => 'Thujohn\Pdf\PdfFacade',
 
 	),
 

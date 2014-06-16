@@ -18,6 +18,8 @@
 <button id="dump-button"class="btn btn-success" >Dump JSON to console</button>
 </p>
 
+<button id="prettify-button"class="btn btn-warning" >Prettify source</button>
+<button id="learn-button"class="btn btn-warning" >Attempt to decode</button>
 <input type="submit" value="Decode" class="btn btn-primary" />
 
 </form>
