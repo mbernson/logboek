@@ -21,9 +21,6 @@ Route::group(['before' => 'auth'], function() {
     Route::resource('logbooks.entries', 'EntriesController');
 
     Route::get('/entries', 'EntriesController@index');
-    Route::get('/entries/import', 'EntriesController@import');
-    Route::get('/entries/export', 'EntriesController@export');
-    Route::get('/entries/export/{type}', 'EntriesController@export');
 
     Route::resource('users', 'UsersController');
     Route::resource('tasks', 'TasksController');
@@ -32,6 +29,10 @@ Route::group(['before' => 'auth'], function() {
     Route::get('/attachment/{id}/download', 'AttachmentsController@download');
 
     Route::post('/tasks/{id}/toggle', 'TasksController@toggle');
+
+    Route::get('/exports', 'ExportsController@index');
+    Route::get('/exports/create/{type}', 'ExportsController@create');
+    Route::delete('/exports/{export_id}', 'ExportsController@destroy');
 
     Route::any('/logout', 'UsersController@logout');
 

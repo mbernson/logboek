@@ -7,7 +7,8 @@
 		"laravel/framework": "4.1.*",
 		"vtalbot/markdown": "1.5",
 		"imagine/imagine": "0.5.*",
-		"keboola/csv": "1.1.*"
+		"keboola/csv": "1.1.*",
+		"thujohn/pdf": "1.0.*"
 	},
 	"autoload": {
 		"classmap": [

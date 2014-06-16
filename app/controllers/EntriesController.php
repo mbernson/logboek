@@ -1,7 +1,5 @@
 <?php
 
-use Keboola\Csv\CsvFile;
-
 class EntriesController extends \BaseController {
 
 	/**
@@ -173,48 +171,6 @@ class EntriesController extends \BaseController {
 				'content' => 'Entry met succes verwijderd!',
 				'class' => 'danger'
 			]);
-	}
-
-	public function import() {
-	}
-
-	public function export($type = '') {
-		if($type == 'csv')
-			return $this->exportCSV($type);
-
-		$exports = Export::paginate(20);
-		return View::make('entries.export', [
-			'exports' => $exports
-		]);
-	}
-
-	private function exportCSV($type) {
-		if(Entry::count() == 0)
-			throw new Exception('No entries available');
-
-		$export = new Export();
-		$export->user_id = Auth::user()->id;
-		$export->filename = date('YmdHis').'_logboek_export.csv';
-		$export->path = $export->folderPath();
-		$export->type = $type;
-
-		$csv = new CsvFile($export->fullPath());
-
-		$entries = Entry::all();
-		$header = array_keys((new Entry())->toArray());
-
-		$csv->writeRow($header);
-		foreach($entries as $entry) {
-			$row = array_values($entry->toArray());
-			$csv->writeRow($row);
-		}
-
-		$export->filesize = filesize($export->fullPath()) / 1024; // In kilobytes
-		$export->save();
-
-		return Response::download($export->fullPath(), $export->filename, [
-			'Content-type' => 'text/csv'
-		]);
 	}
 
 }
