@@ -69,7 +69,7 @@ class Export extends Model {
 	}
 
 	protected static function getLogbooks() {
-		return Logbook::all();
+		return [Logbook::first()];
 	}
 
 	protected static function getAttachments() {
