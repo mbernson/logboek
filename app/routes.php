@@ -37,4 +37,8 @@ Route::group(['before' => 'auth'], function() {
     Route::any('/logout', 'UsersController@logout');
 
     Route::get('/cipher', 'DashboardController@cipher_tool');
+
+    Route::get('/phpinfo', function() {
+	phpinfo();
+    });
 });
