@@ -59,4 +59,21 @@ class Export extends Model {
 		return parent::delete();
 	}
 
+	// Convenience methods for export data
+
+	protected static function getUsers() {
+		return User::with('picture')
+			->where('id', '!=', 0)
+			->where('username', 'not like', 'test%')
+			->get();
+	}
+
+	protected static function getLogbooks() {
+		return Logbook::all();
+	}
+
+	protected static function getAttachments() {
+		return Attachment::orderBy('id', 'asc')->get();
+	}
+
 }

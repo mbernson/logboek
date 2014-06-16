@@ -2,10 +2,6 @@
 
 namespace Exports;
 
-use Entry;
-use User;
-use Logbook;
-
 use File;
 use View;
 
@@ -20,11 +16,10 @@ class Markdown extends \Export {
 	}
 
 	private function getView() {
-		$users = User::where('id', '!=', 0);
 		return View::make('markdown.report', [
 			'title' => 'IPFIT1 groep 2',
-			'users' => $users,
-			'logbooks' => Logbook::all(),
+			'users' => static::getUsers(),
+			'logbooks' => static::getLogbooks(),
 			'generated_at' => date('d-m-Y H:i'),
 		]);
 	}

@@ -2,9 +2,6 @@
 
 namespace Exports;
 
-use Entry;
-use Logbook;
-
 use File;
 use View;
 use PDF as DOMPDF;
@@ -22,7 +19,8 @@ class PDF extends \Export {
 	private function getView() {
 		return View::make('pdfs.report', [
 			'title' => 'IPFIT1 groep 2',
-			'logbooks' => Logbook::all(),
+			'users' => static::getUsers(),
+			'logbooks' => static::getLogbooks(),
 			'generated_at' => date('d-m-Y H:i'),
 		]);
 	}
