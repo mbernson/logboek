@@ -4,6 +4,8 @@ class Export extends Model {
 
 	protected $table = 'exports';
 
+	protected $logbooks = 'all';
+
 	// Subclasses are expected to implement these properties
 
 	protected $content_type;
@@ -59,7 +61,23 @@ class Export extends Model {
 		return parent::delete();
 	}
 
+	// Export functions
+
+	protected function getView() {
+		return View::make('pdfs.report', [
+			'title' => 'IPFIT1 groep 2',
+			'generated_at' => date('d-m-Y H:i'),
+			'users' => static::getUsers(),
+			'logbooks' => static::getLogbooks($this->logbooks),
+			'attachments' => static::getAttachments(),
+		]);
+	}
+
 	// Convenience methods for export data
+
+	public function setLogbooks($val) {
+		$this->logbooks = $val;
+	}
 
 	protected static function getUsers() {
 		return User::with('picture')
@@ -68,8 +86,14 @@ class Export extends Model {
 			->get();
 	}
 
-	protected static function getLogbooks() {
-		return [Logbook::first()];
+	protected static function getLogbooks($range) {
+		$id = intval($range);
+		if($range == 'all')
+			return Logbook::all();
+		elseif($id != 0)
+			return [Logbook::find($id)];
+		else
+			return [Logbook::first()];
 	}
 
 	protected static function getAttachments() {

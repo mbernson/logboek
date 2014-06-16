@@ -16,16 +16,6 @@ class PDF extends \Export {
 		$this->type = 'pdf';
 	}
 
-	private function getView() {
-		return View::make('pdfs.report', [
-			'title' => 'IPFIT1 groep 2',
-			'generated_at' => date('d-m-Y H:i'),
-			'users' => static::getUsers(),
-			'logbooks' => static::getLogbooks(),
-			'attachments' => static::getAttachments(),
-		]);
-	}
-
 	private function generatePDF() {
 		$view = $this->getView();
 		$html = $view->render();

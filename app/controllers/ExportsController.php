@@ -4,6 +4,7 @@ class ExportsController extends \BaseController {
 
 	public function index() {
 		return View::make('exports.index', [
+			'logbooks' => Logbook::select('id', 'title')->get(),
 			'exports' => Export::paginate(25)
 		]);
 	}
@@ -28,7 +29,8 @@ class ExportsController extends \BaseController {
 		$export->user_id = Auth::user()->id;
 		$export->filename = $export->generateFilename();
 		$export->path = $export->folderPath();
-		
+		$export->setLogbooks(Input::get('logbooks'));
+
 		$save = Input::has('save') ? (bool) Input::get('save') : true;
 
 		if($export->run($save)) {
@@ -54,7 +56,6 @@ class ExportsController extends \BaseController {
 	public function destroy($export_id) {
 		$export = Export::findOrFail($export_id);
 		$export->delete();
-
 		return Redirect::to(action('ExportsController@index'))
 			->with('message', [
 				'content' => 'Export verwijderd.',

@@ -15,15 +15,6 @@ class Markdown extends \Export {
 		$this->type = 'markdown';
 	}
 
-	private function getView() {
-		return View::make('markdown.report', [
-			'title' => 'IPFIT1 groep 2',
-			'users' => static::getUsers(),
-			'logbooks' => static::getLogbooks(),
-			'generated_at' => date('d-m-Y H:i'),
-		]);
-	}
-
 	private function generateMarkdown() {
 		$view = $this->getView();
 		return $view->render();

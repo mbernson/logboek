@@ -6,9 +6,27 @@
 
 <p>
 	{{ link_to_action('ExportsController@create', 'Nieuwe CSV export', ['csv'], ['class' => 'btn btn-primary btn-large']) }}
-	{{ link_to_action('ExportsController@create', 'Nieuw PDF verslag', ['pdf'], ['class' => 'btn btn-primary btn-large']) }}
-	{{ link_to('./exports/create/pdf?save=0', 'Bekijk PDF verslag', ['class' => 'btn btn-primary btn-large']) }}
-	{{ link_to('./exports/create/markdown?save=0', 'Bekijk Markdown verslag', ['class' => 'btn btn-primary btn-large']) }}
+	{{ link_to('./exports/create/markdown?save=0', 'Nieuwe Markdown export', ['class' => 'btn btn-primary btn-large']) }}
+</p>
+
+<p>
+<form method="get" action="./exports/create/pdf">
+	<label for="save">Opslaan</label>
+	<select name="save">
+		<option value="0">Nee</option>
+		<option value="1">Ja</option>
+	</select>
+	<br />
+	<label for="logbooks">Inbegrepen logboek(en)</label>
+	<select name="logbooks">
+		@foreach($logbooks as $logbook)
+		<option value="{{ $logbook->id }}">{{{ $logbook->title }}}</option>
+		@endforeach
+		<option value="all">Alle logboeken</option>
+	</select>
+	<br />
+	<input type="submit" value="Nieuwe PDF" class="btn btn-primary btn-large" />
+</form>
 </p>
 
 <table class="table table-hover">
