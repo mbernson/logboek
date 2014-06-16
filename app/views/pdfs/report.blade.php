@@ -5,78 +5,7 @@
 
 <title>IPFIT1 Forensisch</title>
 
-<style type="text/css">
-@page {
-	margin: 1.5cm;
-}
-
-body {
-	font-family: sans-serif;
-	font-size: 11pt;
-	margin: 0.5cm 0;
-	text-align: justify;
-}
-
-#header,
-#footer {
-	position: fixed;
-	left: 0;
-	right: 0;
-	color: #aaa;
-	font-size: 0.9em;
-}
-
-#header {
-	top: 0;
-	border-bottom: 0.1pt solid #aaa;
-}
-
-#footer {
-	bottom: 0;
-	border-top: 0.1pt solid #aaa;
-}
-
-#header table,
-#footer table {
-	width: 100%;
-	border-collapse: collapse;
-	border: none;
-}
-
-#header td,
-#footer td {
-	padding: 0;
-	width: 50%;
-}
-
-.page-number {
-	text-align: center;
-}
-
-.page-number:before {
-	content: "Pagina " counter(page);
-}
-
-hr {
-	page-break-after: always;
-	border: 0;
-}
-
-pre, code {
-	font-size: 8pt;
-}
-
-#voorblad {
-	text-align: center;
-}
-
-#voorblad table {
-	margin: 0 auto;
-}
-#voorblad table tr {
-margin: 32px;
-}
-</style>
+<link rel="stylesheet" type="text/css" href="css/pdf.css" />
 
 </head>
 
@@ -129,57 +58,69 @@ margin: 32px;
 	<table id="projectleden">
 
 	<tr>
+		@for($i = 0; $i < count($users); $i++)
 		<td>
-			<img src="http://placekitten.com/200/240" />
-			Mathijs Bernson<br>s1082020
+			<img src="{{ $users[$i]->picture->downloadPath() }}" />
+			{{{ $users[$i]->first_name }}} {{{ $users[$i]->last_name }}}<br>
+			{{{ $users[$i]->student_number }}}
 		</td>
-		<td>
-			<img src="http://placekitten.com/200/240" />
-			Mathijs Bernson<br>s1082020
-		</td>
-		<td>
-			<img src="http://placekitten.com/200/240" />
-			Mathijs Bernson<br>s1082020
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<img src="http://placekitten.com/200/240" />
-			Mathijs Bernson<br>s1082020
-		</td>
-		<td></td>
-		<td>
-			<img src="http://placekitten.com/200/240" />
-			Mathijs Bernson<br>s1082020
-		</td>
+		@if(($i+1) % 3 === 0)
+		</tr><tr>
+		@endif
+		@endfor
 	</tr>
 
 	</table>
 </div>
 
-<hr>
-
 <div id="inhhoudsopgave">
 
 <h1>Inhoudsopgave</h1>
 
-<ul>
+<ol>
 @foreach($logbooks as $logbook)
 	<li>{{ $logbook->title }}</li>
 @endforeach
-</ul>
+</ol>
 
 </div>
 
-<hr>
-
 <h1>Logboeken</h1>
+
 
 @foreach($logbooks as $logbook)
 
 @include('pdfs.partials.logbook', ['logbook' => $logbook, 'entries' => $logbook->entries])
 
 @endforeach
+
+<div id="bestanden">
+<h1>Bestanden</h1>
+
+<table class="table">
+<tr>
+	<th>Titel</th>
+	<th>Bestandsnaam</th>
+	<th>Eigenaar</th>
+	<th>Grootte</th>
+	<th>Hash type</th>
+	<th>Hash</th>
+	<th>Geupload op</th>
+</tr>
+@foreach($attachments as $att)
+<tr>
+	<td>{{ empty($att->title) ? '<em>Geen titel</em>' : $att->title }}</td>
+	<td>{{ $att->filename }}</td>
+	<td>{{ $att->user->username }}</td>
+	<td>{{ format_bytes($att->filesize) }}</td>
+	<td>{{ strtoupper($att->hash_algorithm) }}</td>
+	<td>{{ $att->hash }}</td>
+	<td>{{ $att->created_at }}</td>
+</tr>
+@endforeach
+</table>
+</div>
+
 
 </body>
 </html>

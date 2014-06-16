@@ -10,7 +10,7 @@ return array(
 	'DOMPDF_ENABLE_PHP' => false,
 	'DOMPDF_ENABLE_REMOTE' => true,
 	'DOMPDF_ENABLE_CSS_FLOAT' => false,
-	'DOMPDF_ENABLE_JAVASCRIPT' => true,
+	'DOMPDF_ENABLE_JAVASCRIPT' => false,
 	'DEBUGPNG' => true,
 	'DEBUGKEEPTEMP' => false,
 	'DEBUGCSS' => false,

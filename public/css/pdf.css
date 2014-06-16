@@ -1,0 +1,90 @@
+@page {
+	margin: 1.5cm;
+}
+
+body {
+	font-family: sans-serif;
+	font-size: 11pt;
+	margin: 0.5cm 0;
+	text-align: justify;
+}
+
+#header,
+#footer {
+	position: fixed;
+	left: 0;
+	right: 0;
+	color: gray;
+	font-size: 0.9em;
+}
+
+#header {
+	top: 0;
+	border-bottom: 0.1pt solid gray;
+}
+
+#footer {
+	bottom: 0;
+	border-top: 0.1pt solid gray;
+}
+
+#header table,
+#footer table {
+	width: 100%;
+	border-collapse: collapse;
+	border: none;
+}
+
+#header td,
+#footer td {
+	padding: 0;
+	width: 50%;
+}
+
+.page-number {
+	text-align: center;
+}
+
+.page-number:before {
+	content: "Pagina " counter(page);
+}
+
+hr {
+	border-color: gray;
+	height: 1px !important;
+}
+
+pre, code {
+	font-size: 8pt;
+}
+
+pre {
+	max-width: 94%;
+	text-align: left;
+}
+
+blockquote {
+}
+
+#voorblad {
+	text-align: center;
+}
+
+#voorblad table {
+	margin: 0 auto;
+}
+#voorblad table tr {
+	margin: 32px;
+}
+
+.meta th, .meta td {
+	text-align: left;
+	padding: .5ex 1ex;
+	font-size: 10pt;
+}
+
+/* #bestanden */
+
+#voorblad, #inhhoudsopgave, .logbook {
+	page-break-after: always;
+}

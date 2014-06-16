@@ -4,8 +4,12 @@ class Export extends Model {
 
 	protected $table = 'exports';
 
+	// Subclasses are expected to implement these properties
+
 	protected $content_type;
 	protected $extension;
+
+	public $content;
 
 	// Relations
 
@@ -53,6 +57,23 @@ class Export extends Model {
 	public function delete() {
 		unlink($this->fullPath());
 		return parent::delete();
+	}
+
+	// Convenience methods for export data
+
+	protected static function getUsers() {
+		return User::with('picture')
+			->where('id', '!=', 0)
+			->where('username', 'not like', 'test%')
+			->get();
+	}
+
+	protected static function getLogbooks() {
+		return Logbook::all();
+	}
+
+	protected static function getAttachments() {
+		return Attachment::orderBy('id', 'asc')->get();
 	}
 
 }

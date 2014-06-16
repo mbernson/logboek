@@ -14,6 +14,8 @@ class ExportsController extends \BaseController {
 			return new Exports\CSV();
 		case 'pdf':
 			return new Exports\PDF();
+		case 'markdown':
+			return new Exports\Markdown();
 		default:
 			throw new Exception("Uknown type '$type'");
 		}
@@ -31,7 +33,7 @@ class ExportsController extends \BaseController {
 
 		if($export->run($save)) {
 			if($save == false) {
-				$res = Response::make($export->pdf);
+				$res = Response::make($export->content);
 				$res->header('Content-type', $export->getContentType());
 				return $res;
 			} else {
