@@ -33,7 +33,7 @@ var Cypher = function() {
 	    'Xzokqczzl': 'Materiaal'
     };
 
-    var map = { };
+    var map = window.map = { };
 
     function addToMap(letters) {
         letters.map(function(letter) {
@@ -127,9 +127,12 @@ var Cypher = function() {
     function learnWord(source, target) {
 	    source.split('').map(function(from_letter, index) {
 		    var to_letter = target[index];
+			if(from_letter == to_letter) return;
 		    map[from_letter.toLowerCase()] = to_letter.toLowerCase();
 	    });
     }
+
+window.learn = learnWord;
 
     function detect() {
 	    var source = sourceText.value;

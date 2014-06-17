@@ -23,6 +23,10 @@ class User extends Model implements UserInterface, RemindableInterface {
 		return $this->hasMany('Logbook', 'user_id');
 	}
 
+	public function attachments() {
+		return $this->hasMany('Attachment', 'user_id');
+	}
+
 	public function picture() {
 		return $this->belongsTo('Attachment', 'picture_id');
 	}

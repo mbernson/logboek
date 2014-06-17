@@ -69,7 +69,7 @@ class Export extends Model {
 			'generated_at' => date('d-m-Y H:i'),
 			'users' => static::getUsers(),
 			'logbooks' => static::getLogbooks($this->logbooks),
-			'attachments' => static::getAttachments(),
+			'attachments' => static::getAttachments($this->logbooks),
 		]);
 	}
 
@@ -96,7 +96,13 @@ class Export extends Model {
 			return [Logbook::first()];
 	}
 
-	protected static function getAttachments() {
+	protected static function getAttachments($range) {
+		return [];
+		$id = intval($range);
+		if($id != 0)
+			return Logbook::find($id)
+			->user
+			->attachments;
 		return Attachment::orderBy('id', 'asc')->get();
 	}
 

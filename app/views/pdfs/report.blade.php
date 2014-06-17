@@ -44,11 +44,11 @@
 	</tr>
 	<tr>
 		<td>Datum</td>
-		<td>06-05-2014</td>
+		<td>17-06-2014</td>
 	</tr>
 	<tr>
 		<td>Versie</td>
-		<td>0.1 (concept)</td>
+		<td>1.0 (definitief)</td>
 	</tr>
 
 	</table>
@@ -94,6 +94,7 @@
 
 @endforeach
 
+@if(count($attachments) > 0)
 <div id="bestanden">
 <h1>Bestanden</h1>
 
@@ -120,6 +121,7 @@
 @endforeach
 </table>
 </div>
+@endif
 
 
 </body>
