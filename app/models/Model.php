@@ -19,11 +19,7 @@ abstract class Model extends Eloquent {
 	public function validate() {
 		$this->validator = Validator::make($this->attributes, $this->rules());
 
-		if($this->validator->fails()) {
-			return false;
-		}
-
-		return true;
+		return $this->validator->passes();
 	}
 
 	protected $validator;
