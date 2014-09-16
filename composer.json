@@ -2,7 +2,7 @@
 	"name": "duckson/logboek",
 	"description": "A web-app for organizing IT-forensics logs",
 	"keywords": ["application", "forensics"],
-	"license": "MIT",
+	"license": "GPL",
 	"require": {
 		"laravel/framework": "4.1.*",
 		"vtalbot/markdown": "1.5",

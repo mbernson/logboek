@@ -26,3 +26,7 @@ Logboek's primary features are:
 * Point a virtualhost to `<logboek_directory>/public`
 * Visit the site. The default login is `owner` with password `changeme`. (You can change this and add more users after logging in)
 * Celebrate!
+
+## License
+
+This project is released under the [GPL v3 license](https://github.com/mbernson/logboek/blob/master/LICENSE.txt).
