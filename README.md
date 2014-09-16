@@ -17,14 +17,16 @@ Logboek's primary features are:
 
 ## Installation
 
-* Clone the project into any place you like.
+* Clone the project
 * Run `composer install`
 * Copy the configuration folder `app/config/production.example` to `app/config/production`
-* Edit your production configuration
+  * Use `app/config/local.example` and `app/config/local` for development
+* Edit your configuration
 * Run `chmod -R 755 app/storage`
 * Run `php artisan migrate` and `php artisan db:seed`
-* Point a virtualhost to `<logboek_directory>/public`
-* Visit the site. The default login is `owner` with password `changeme`. (You can change this and add more users after logging in)
+* Point a virtualhost to `<cloned_directory>/public`
+* Visit the site. The default login is `owner` with password `changeme`
+  * You can change this and add more users after logging in
 * Celebrate!
 
 ## License
