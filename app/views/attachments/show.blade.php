@@ -67,23 +67,15 @@
 	</tr>
 	<tr>
 		<th></th>
-		<td>{{ link_to($attachment->downloadPath(), 'Dowload', ['class' => 'btn btn-primary']) }}</td>
+		<td>
+				{{ link_to_action('attachments.edit', 'Bewerken', [$attachment->id], ['class' => 'btn btn-success']) }}
+				{{ link_to($attachment->downloadPath(), 'Dowload', ['class' => 'btn btn-primary']) }}
+
+				{{ Form::open(['route' => ['attachments.destroy', $attachment->id], 'method' => 'delete']) }}
+					<button type="submit" class="btn btn-danger pull-right">Verwijderen</button>
+				{{ Form::close() }}
+		</td>
 	</tr>
 </table>
-
-<p>
-{{ link_to_action('attachments.edit', 'Bewerken', [$attachment->id], ['class' => 'btn btn-success']) }}
-</p>
-
-<hr />
-
-{{ Form::open(['route' => ['attachments.destroy', $attachment->id], 'method' => 'delete']) }}
-	<button type="submit" class="btn btn-danger pull-right">Verwijderen</button>
-{{ Form::close() }}
-
-<hr />
-
-<p><a class="btn btn-primary btn-lg" href="{{ action('attachments.create') }}">Nieuw bestand</a></p>
-
 
 @stop

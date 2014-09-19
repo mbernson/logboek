@@ -8,10 +8,12 @@ class UsersController extends \BaseController {
 	 * @return Response
 	 */
 	public function index() {
+		$settings = DB::table('settings')->get();
+		$suspects = DB::table('suspects')->get();
 		$users = User::orderBy('username')
 			->paginate(self::$per_page);
 
-		return View::make('users.index', ['users' => $users]);
+		return View::make('settings.index', ['settings' => $settings, 'users' => $users, 'suspects' => $suspects]);
 	}
 
 	/**
@@ -91,7 +93,7 @@ class UsersController extends \BaseController {
 		$user = new User();
 
 		$user->unguard();
-		$user->fill(Input::only('username', 'email', 'password'));
+		$user->fill(Input::only('username', 'email', 'password', 'rights', 'first_name', 'last_name'));
 
 		if($user->validate()) {
 			$user->password = Hash::make(Input::get('password'));
@@ -102,7 +104,7 @@ class UsersController extends \BaseController {
 				->withErrors($user->validator());
 		}
 
-		return Redirect::to(route('users.index'))
+		return Redirect::to(route('settings.index'))
 			->with('message', [
 				'content' => 'Gebruiker met succes aangemaakt!',
 				'class' => 'success'
@@ -144,7 +146,7 @@ class UsersController extends \BaseController {
 		$user = User::findOrFail($user_id);
 
 		$user->unguard();
-		$user->fill(Input::only('username', 'email'));
+		$user->fill(Input::only('username', 'email', 'rights', 'first_name', 'last_name'));
 		if(Input::has('password'))
 			$user->password = Input::get('password');
 
@@ -158,7 +160,7 @@ class UsersController extends \BaseController {
 				->withErrors($user->validator());
 		}
 
-		return Redirect::to(route('users.index'))
+		return Redirect::to(route('settings.index'))
 			->with('message', [
 				'content' => 'Gebruiker met succes geupdated!',
 				'class' => 'success'
@@ -172,8 +174,15 @@ class UsersController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id) {
-		//
+	public function destroy($user_id) {
+		$entry = User::findOrFail($user_id);
+		$entry->delete();
+
+		return Redirect::to(route('settings.index'))
+			->with('message', [
+				'content' => 'Gebruiker met succes verwijderd!',
+				'class' => 'success'
+			]);
 	}
 
 

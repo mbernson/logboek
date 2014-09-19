@@ -6,6 +6,10 @@
 
 <p><a class="btn btn-primary btn-lg" href="{{ action('logbooks.create') }}">Nieuw logboek</a></p>
 
+@if($logbooks->count() == 0)
+	<p>Er zijn <b>geen</b> logboeken gevonden!</p>
+@else
+
 <table class="table table-hover">
 	<tr>
 		<th>ID</th>
@@ -32,5 +36,7 @@
 	@endforeach
 
 </table>
+
+@endif
 
 @stop

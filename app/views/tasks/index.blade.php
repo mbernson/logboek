@@ -6,6 +6,10 @@
 
 <p><a class="btn btn-primary btn-lg" href="{{ action('tasks.create') }}">Nieuwe taak</a></p>
 
+	@if($tasks->count() == 0)
+		<p>Er zijn <b>geen</b> taken gevonden!</p>
+	@else
+
 	<table class="table table-hover">
 		<tr>
 			<th>ID</th>
@@ -25,9 +29,8 @@
 			@if($task->status == 0)
 				<td>Openstaand</td>
 			@else
-			<td>Afgesloten</td>
+				<td>Afgesloten</td>
 			@endif
-
 			<td><div class="btn-group btn-group-xs">
 			<button type="button" data-default-class="btn-success" class="btn btn-default {{ $task->status ? 'btn-success' : '' }}">Ja</button>
 			<button type="button" data-default-class="btn-danger" class="btn btn-default {{ $task->status ? '' : 'btn-danger' }}">Nee</button>
@@ -36,6 +39,8 @@
 		@endforeach
 
 	</table>
+
+	@endif
 
 {{ $tasks->links() }}
 

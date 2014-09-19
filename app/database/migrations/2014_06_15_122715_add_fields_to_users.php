@@ -14,8 +14,8 @@ class AddFieldsToUsers extends Migration {
 		Schema::table('users', function($table) {
 			$table->string('first_name');
 			$table->string('last_name');
-			$table->integer('picture_id');
-			$table->string('student_number');
+			$table->integer('picture_id')->default(0);
+			$table->string('student_number')->default(0);
 		});
 	}
 

@@ -21,7 +21,7 @@ class AttachmentsController extends \BaseController {
 	 * @return Response
 	 */
 	public function create() {
-		return View::make('attachments.create', ['attachment' => new Attachment]);
+		return View::make('attachments.create', ['attachment' => new Attachment()]);
 	}
 
 
