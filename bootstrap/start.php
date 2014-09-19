@@ -24,8 +24,14 @@ $app = new Illuminate\Foundation\Application;
 |
 */
 
-$env = $app->detectEnvironment(function() { 
-	return 'local';
+$env = $app->detectEnvironment(function() {
+	$extension = pathinfo($_SERVER['SERVER_NAME'], PATHINFO_EXTENSION);
+
+	if($extension == 'dev') {
+		return 'local';
+	}
+
+	return 'production';
 });
 
 /*
