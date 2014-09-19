@@ -6,6 +6,8 @@ class LogbooksTableSeeder extends Seeder {
 
 		// Create a personal logbook for every user
 		foreach(User::all() as $user) {
+			if(substr($user->email, 0, 6) === 'system') continue;
+
 			$name = ucfirst($user->username);
 
 			$logbook = new Logbook(['title' => "$name's logboek", 'user_id' => $user->id]);

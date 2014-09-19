@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class addEvidenceColumnToEntries extends Migration {
+class AddEvidenceColumnToEntries extends Migration {
 
 	/**
 	 * Run the migrations.

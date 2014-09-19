@@ -12,10 +12,10 @@ class AddFieldsToUsers extends Migration {
 	 */
 	public function up() {
 		Schema::table('users', function($table) {
-			$table->string('first_name');
-			$table->string('last_name');
-			$table->integer('picture_id');
-			$table->string('student_number');
+			$table->string('first_name')->nullable();
+			$table->string('last_name')->nullable();
+			$table->integer('picture_id')->nullable();
+			$table->string('student_number')->nullable();
 		});
 	}
 
