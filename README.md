@@ -23,6 +23,7 @@ Logboek's primary features are:
   * Use `app/config/local.example` and `app/config/local` for development
 * Edit your configuration
 * Run `chmod -R 755 app/storage`
+* Generate a secret key with `php artisan key:generate`
 * Run `php artisan migrate` and `php artisan db:seed`
 * Point a virtualhost to `<cloned_directory>/public`
 * Visit the site. The default login is `owner` with password `changeme`
