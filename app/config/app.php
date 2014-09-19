@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'url' => 'https://logboek.duckson.nl',
+	'url' => 'https://logboek.dev',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -87,7 +87,9 @@ return array(
 	|
 	*/
 
-	'key' => '6GZ6TPYXpu0H518DxgFgewuklZBV21yS',
+	'key' => 'put your own key here!',
+
+	'cipher' => MCRYPT_RIJNDAEL_256,
 
 	/*
 	|--------------------------------------------------------------------------
