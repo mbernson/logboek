@@ -18,17 +18,15 @@ class BaseController extends Controller {
 	}
 
 	public function __construct() {
-		View::share('logbooks', Logbook::all()
-			->take(10));
+		View::share('logbooks_visible', Logbook::inOverview()->get());
 
 		if(Auth::check()) {
 			View::share('user_logbook', Logbook::where('user_id', Auth::user()->id)
 				->first());
 		}
 
-		View::share('recent_tasks', Task::open()->newest()
-			// https://www.youtube.com/watch?v=o2In5a9LDNg
-			->take(5)
-			->get());
+		View::share('recent_tasks', Task::open()
+			->newest()
+			->take(5)->get());
 	}
 }

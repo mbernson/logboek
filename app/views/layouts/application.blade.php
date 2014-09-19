@@ -87,7 +87,7 @@
 
 			<h3>Logboeken</h3>
 			<div class="list-group">
-				@foreach($logbooks as $logbook)
+				@foreach($logbooks_visible as $logbook)
 				{{ link_to_action('logbooks.show', $logbook->title, [$logbook->id], [
 				'class' => 'list-group-item '.(Request::is('logbooks/'.$logbook->id, 'logbooks/'.$logbook->id.'/*') ? 'active' : '')
 				]) }}

@@ -20,4 +20,11 @@ class Logbook extends Model {
 	public function owner() {
 		return $this->user();
 	}
+
+	// Scopes
+
+
+	public function scopeInOverview($query) {
+		return $query->where('in_overview', '=', '1');
+	}
 }

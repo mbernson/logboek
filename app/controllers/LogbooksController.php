@@ -19,7 +19,8 @@ class LogbooksController extends \BaseController {
 	 * @return Response
 	 */
 	public function index() {
-		return View::make('logbooks.index');
+		return View::make('logbooks.index')
+			->with('logbooks', Logbook::all());
 	}
 
 
@@ -29,9 +30,8 @@ class LogbooksController extends \BaseController {
 	 * @return Response
 	 */
 	public function create() {
-		return View::make('logbooks.create', [
-			'logbook' => new Logbook()
-		]);
+		return View::make('logbooks.create')
+			->with('logbook', new Logbook());
 	}
 
 
