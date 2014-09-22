@@ -8,12 +8,16 @@ class SuspectsController extends \BaseController {
    * @return Response
    */
   public function index() {
-    $settings = DB::table('settings')->get();
-    $suspects = DB::table('suspects')->get();
+    $settings = Setting::all();
+    $suspects = Suspect::all();
     $users = User::orderBy('username')
       ->paginate(self::$per_page);
 
-    return View::make('settings.index', ['settings' => $settings, 'users' => $users, 'suspects' => $suspects]);
+	return View::make('settings.index', [
+		'settings' => $settings,
+		'users' => $users,
+		'suspects' => $suspects
+	]);
   }
 
   /**
@@ -34,10 +38,7 @@ class SuspectsController extends \BaseController {
    * @return Response
    */
   public function store() {
-    $suspect = new Suspect();
-
-    $suspect->unguard();
-    $suspect->fill(Input::only('name', 'alias'));
+    $suspect = new Suspect(Input::only('name', 'alias'));
 
     if($suspect->validate()) {
       $suspect->save();
@@ -75,7 +76,6 @@ class SuspectsController extends \BaseController {
   public function update($suspect_id) {
     $suspect = Suspect::findOrFail($suspect_id);
 
-    $suspect->unguard();
     $suspect->fill(Input::only('name', 'alias'));
 
     if($suspect->validate()) {
