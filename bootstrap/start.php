@@ -24,14 +24,15 @@ $app = new Illuminate\Foundation\Application;
 |
 */
 
-$env = $app->detectEnvironment(array(
+$env = $app->detectEnvironment(function() {
+	$extension = pathinfo($_SERVER['SERVER_NAME'], PATHINFO_EXTENSION);
 
-	'local' => array(
-		'your-machine-name',
-		'MathBook-Pro'
-	),
+	if($extension == 'dev') {
+		return 'local';
+	}
 
-));
+	return 'production';
+});
 
 /*
 |--------------------------------------------------------------------------

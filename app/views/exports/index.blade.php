@@ -29,6 +29,10 @@
 </form>
 </p>
 
+@if($exports->count() == 0)
+	<p>Er zijn <b>geen</b> exports gevonden!</p>
+@else
+
 <table class="table table-hover">
 	<tr>
 		<th>ID</th>
@@ -58,6 +62,7 @@
 
 </table>
 
+@endif
 {{ $exports->links() }}
 
 @stop

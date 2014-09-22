@@ -5,11 +5,13 @@ class EvidenceController extends \BaseController {
 	public function __construct() {
 		parent::__construct();
 
-		$users_options = [];
-		foreach(User::all() as $user)
-			$users_options[$user->id] = $user->username;
+		$suspects = Suspect::all();
+		$suspects_options = null;
 
-		View::share(['users_options' => $users_options]);
+		foreach($suspects as $suspect)
+			$suspects_options[$suspect->id] = $suspect->name;
+
+		View::share(['suspects_options' => $suspects_options]);
 	}
 
 	/**

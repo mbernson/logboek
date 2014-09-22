@@ -8,6 +8,9 @@
 <a class="btn btn-primary btn-lg" href="{{ action('evidences.create') }}">Nieuw bewijs</a>
 </p>
 
+	@if($evidences->count() == 0)
+		<p>Er zijn <b>geen</b> bewijzen gevonden!</p>
+	@else
 
 <table class="table table-hover">
 	<tr>
@@ -28,6 +31,8 @@
 	</tr>
 	@endforeach
 </table>
+
+	@endif
 
 {{ $evidences->links() }}
 

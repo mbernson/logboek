@@ -16,6 +16,7 @@ class CreateUsersTable extends Migration {
 			$table->string('email')->unique();
 			$table->string('username', 16)->unique();
 			$table->string('password', 64);
+			$table->integer('rights')->default(0); // Default user rights
 
 			$table->string('remember_token', 100)->nullable();
 

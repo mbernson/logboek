@@ -3,9 +3,9 @@
 @section('content')
 
 @if($user->isNew())
-{{ Form::open(['route' => ['users.store', $user->id]]) }}
+	{{ Form::open(['route' => ['users.store', $user->id]]) }}
 @else
-{{ Form::open(['route' => ['users.update', $user->id], 'method' => 'put']) }}
+	{{ Form::open(['route' => ['users.update', $user->id], 'method' => 'put']) }}
 @endif
 
 <div class="form-group">
@@ -23,7 +23,30 @@
 	{{ Form::password('password', ['class' => 'form-control']) }}
 </div>
 
+<div class="form-group">
+	{{ Form::label('first_name', 'Voornaam') }}
+	{{ Form::text('first_name', $user->first_name, ['class' => 'form-control']) }}
+</div>
+
+<div class="form-group">
+	{{ Form::label('last_name', 'Achternaam') }}
+	{{ Form::text('last_name', $user->last_name, ['class' => 'form-control']) }}
+</div>
+
+<div class="form-group">
+	{{ Form::label('rights', 'Gebruikers rechten') }}
+	{{ Form::select('rights', ['0' => 'gebruiker', '1' => 'administrator'], $user->rights, ['class' => 'form-control']) }}
+</div>
+
 <button type="submit" class="btn btn-primary btn-lg">Opslaan</button>
+
+{{ Form::close() }}
+
+{{ Form::open(['route' => ['users.destroy', $user->id], 'method' => 'delete']) }}
+
+	<div class="pull-right">
+		<button type="submit" class="btn btn-danger pull-right">Verwijderen</button>
+	</div>
 
 {{ Form::close() }}
 

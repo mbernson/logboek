@@ -6,6 +6,10 @@
 
 <p><a class="btn btn-primary btn-lg" href="{{ action('attachments.create') }}">Nieuw bestand</a></p>
 
+	@if($attachments->count() == 0)
+		<p>Er zijn <b>geen</b> bestanden gevonden!</p>
+	@else
+
 	<table class="table table-hover">
 		<tr>
 			<th>ID</th>
@@ -26,6 +30,8 @@
 		@endforeach
 
 	</table>
+
+	@endif
 
 {{ $attachments->links() }}
 

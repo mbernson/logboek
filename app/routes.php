@@ -22,6 +22,8 @@ Route::group(['before' => 'auth'], function() {
 
     Route::get('/entries', 'EntriesController@index');
 
+    Route::resource('settings', 'SettingsController');
+    Route::resource('suspects', 'SuspectsController');
     Route::resource('users', 'UsersController');
     Route::resource('tasks', 'TasksController');
     Route::resource('evidences', 'EvidenceController');

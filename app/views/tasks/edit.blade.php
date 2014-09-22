@@ -30,10 +30,8 @@
 </div>
 
 <div class="form-group">
-	<?php $status = ["0" => "openstaand", "1" => "afgesloten"]; ?>
-
         {{ Form::label('status', 'Taak status') }}
-        {{ Form::select('status', $status, null, ['class' => 'form-control']) }}
+        {{ Form::select('status', ['0' => 'openstaand', '1' => 'afgesloten'], $task->status, ['class' => 'form-control']) }}
 </div>
 
 <button type="submit" class="btn btn-primary btn-lg">Opslaan</button>

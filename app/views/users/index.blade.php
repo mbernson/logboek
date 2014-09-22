@@ -14,6 +14,7 @@
 	<th>Gebruikersnaam</th>
 	<th>E-mail adres</th>
 	<th>Toegevoegd op</th>
+	<th>Rechten</th>
 </tr>
 
 @foreach($users as $user)
@@ -23,6 +24,7 @@
 	<td>{{ link_to_action('users.edit', $user->username, [$user->id]) }}</td>
 	<td>{{ $user->email }}</td>
 	<td>{{ $user->created_at }}</td>
+	<td>{{ $user->right }}</td>
 </tr>
 
 @endforeach

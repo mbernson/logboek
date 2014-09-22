@@ -24,10 +24,14 @@
 </div>
 
 <div class="form-group">
-	<?php $sender_name = ["JuffrouwJannie" => "JuffrouwJannie", "Demesmaeker" => "Demesmaeker", "Vondelaar" => "Vondelaar",	"Krasser" => "Krasser"]; ?>
+	{{ Form::label('sender', 'Verdachte') }}
 
-	{{ Form::label('sender', 'Verzender') }}
-	{{ Form::select('sender', $sender_name, $evidence->sender, ['class' => 'form-control']) }}
+	@if(count($suspects_options) > 0)
+		{{ Form::select('sender', $suspects_options, $evidence->sender, ['class' => 'form-control']) }}
+	@else
+		<i>Geen verdachten gevonden.</i>
+	@endif
+
 </div>
 
 <div class="form-group">

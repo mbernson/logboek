@@ -169,7 +169,7 @@ class EntriesController extends \BaseController {
 		return Redirect::to(route('logbooks.show', [$logbook_id]))
 			->with('message', [
 				'content' => 'Entry met succes verwijderd!',
-				'class' => 'danger'
+				'class' => 'success'
 			]);
 	}
 
