@@ -20,41 +20,41 @@ class SettingsController extends \BaseController {
 		View::share('features', $this->features);
 	}
 
-		/**
-		 * Display a listing of the resource.
-		 *
-		 * @return Response
-		 */
-		public function index() {
-			return View::make('settings.index');
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return Response
+	 */
+	public function index() {
+		return View::make('settings.index');
+	}
+
+	public function update($setting_id) {
+		if($setting_id == 'menu') {
+			$features = ['settings', 'intro'];
+			$input = Input::only($this->features);
+
+			foreach($input as $feature => $enabled)
+				if($enabled) $features[] = $feature;
+
+			$input = join(';', $features);
+		} else {
+			$input = Input::get($setting_id.'_value');
 		}
 
-		public function update($setting_id) {
-			if($setting_id == 'menu') {
-				$features = ['settings', 'intro'];
-				$input = Input::only($this->features);
-
-				foreach($input as $feature => $enabled)
-					if($enabled) $features[] = $feature;
-
-				$input = join(';', $features);
-			} else {
-				$input = Input::get($setting_id.'_value');
-			}
-
-			if(Setting::set($setting_id, $input)) {
-				return Redirect::to(route('settings.index'))
-					->with('message', [
-						'content' => 'Instellingen met succes geupdated!',
-						'class' => 'success'
-					]);
-			} else {
-				return View::make('settings.index')
-					->with('message', [
-						'content' => 'Er is iets misgegaan met de instelling. :(',
-						'class' => 'warning'
-					]);
-			}
+		if(Setting::set($setting_id, $input)) {
+			return Redirect::to(route('settings.index'))
+				->with('message', [
+					'content' => 'Instellingen met succes geupdated!',
+					'class' => 'success'
+				]);
+		} else {
+			return View::make('settings.index')
+				->with('message', [
+					'content' => 'Er is iets misgegaan met de instelling. :(',
+					'class' => 'warning'
+				]);
 		}
+	}
 
 }

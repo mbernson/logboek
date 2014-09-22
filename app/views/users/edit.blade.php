@@ -3,9 +3,9 @@
 @section('content')
 
 @if($user->isNew())
-{{ Form::open(['route' => ['users.store', $user->id]]) }}
+	{{ Form::open(['route' => ['users.store', $user->id]]) }}
 @else
-{{ Form::open(['route' => ['users.update', $user->id], 'method' => 'put']) }}
+	{{ Form::open(['route' => ['users.update', $user->id], 'method' => 'put']) }}
 @endif
 
 <div class="form-group">

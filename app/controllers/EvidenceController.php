@@ -8,8 +8,8 @@ class EvidenceController extends \BaseController {
 		$suspects = Suspect::all();
 		$suspects_options = null;
 
-			foreach($suspects as $suspect)
-				$suspects_options[$suspect->id] = $suspect->name;
+		foreach($suspects as $suspect)
+			$suspects_options[$suspect->id] = $suspect->name;
 
 		View::share(['suspects_options' => $suspects_options]);
 	}
