@@ -104,7 +104,7 @@
 			@section('sidebar')
 
 			<h3>Logboeken</h3>
-			@if(count($logbooks) === 0)
+			@if(count($logbooks_visible) === 0)
 				<p><div style="align:left;">Geen logboeken gevonden.</div></p>
 			@else
 			<div class="list-group">
