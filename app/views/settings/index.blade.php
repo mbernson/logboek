@@ -17,8 +17,6 @@
   <li><a href="#users" role="tab" data-toggle="tab">Gebruikers</a></li>
 </ul>
 
-{{ Form::open(['route' => ['settings.update', $settings[0]->id], 'method' => 'put', 'settings' => true]) }}
-
 <div class="tab-content">
   <div class="tab-pane active" id="default">
 
@@ -26,54 +24,42 @@
         <p><br />Voor deze instellingen zijn <b>administrator</b> rechten nodig.</p>
       @else
 
+	  <br />
+	{{ Form::open(['route' => ['settings.update', 'project_name'], 'method' => 'put', 'settings' => true]) }}
       <div class="form-group">
-        {{ Form::label('project_name', 'Project naam') }}
-        {{ Form::text('project_name', $settings[0]->project_name, ['class' => 'form-control']) }}
+        {{ Form::label('project_name_value', 'Project naam') }}
+        {{ Form::text('project_name_value', Setting::get('project_name'), ['class' => 'form-control']) }}
       </div>
 
       <button type="submit" class="btn btn-primary btn-lg">Opslaan</button>
+	{{ Form::close() }}
 
       @endif
 
   </div>
+
   <div class="tab-pane" id="menu">
 
       @if(Auth::user()->rights === 0)
         <p><br />Voor deze instellingen zijn <b>administrator</b> rechten nodig.</p>
       @else
 
+      {{ Form::open(['route' => ['settings.update', 'menu'], 'method' => 'put', 'settings' => true]) }}
+	  <br />
       <p>Aangevinkte onderdelen worden zichtbaar gemaakt in het menu.</p>
 
       <div class="form-group">
-          {{ Form::checkbox('vw_menu_entries', 1, $settings[0]->vw_menu_entries) }}
-          {{ Form::label('vw_menu_entries', 'Entries') }}
+		@foreach($features as $feature)
+		@if($feature != 'settings' && $feature != 'intro')
+		  {{ Form::checkbox($feature, 1, Setting::contains('menu', $feature)) }}
+          {{ Form::label('vw_menu_entries', ucfirst($feature)) }}
+		@endif
         <br />
-          {{ Form::checkbox('vw_menu_logbooks', 1, $settings[0]->vw_menu_logbooks) }}
-          {{ Form::label('vw_menu_logbooks', 'Logboeken') }}
-        <br />
-          {{ Form::checkbox('vw_menu_tasks', 1, $settings[0]->vw_menu_tasks) }}
-          {{ Form::label('vw_menu_tasks', 'Taken') }}
-        <br />
-          {{ Form::checkbox('vw_menu_attachments', 1, $settings[0]->vw_menu_attachments) }}
-          {{ Form::label('vw_menu_attachments', 'Bestanden') }}
-        <br />
-          {{ Form::checkbox('vw_menu_evidences', 1, $settings[0]->vw_menu_evidences) }}
-          {{ Form::label('vw_menu_evidences', 'Bewijzen') }}
-        <br />
-          {{ Form::checkbox('vw_menu_exports', 1, $settings[0]->vw_menu_exports) }}
-          {{ Form::label('vw_menu_exports', 'Exports') }}
-        <br />
-          {{ Form::checkbox('vw_menu_cipher', 1, $settings[0]->vw_menu_cipher) }}
-          {{ Form::label('vw_menu_cipher', 'Ciphertool') }}
-        <br />
-          {{ Form::checkbox('vw_menu_settings', 1, $settings[0]->vw_menu_settings, ['disabled' => 'disabled']) }}
-          {{ Form::label('vw_menu_settings', 'Instellingen') }}
-        <br />
-          {{ Form::checkbox('vw_menu_intro', 1, $settings[0]->vw_menu_intro, ['disabled' => 'disabled']) }}
-          {{ Form::label('vw_menu_intro', 'Over') }}
-      </div>
+		@endforeach
 
-      <button type="submit" class="btn btn-primary btn-lg">Opslaan</button>
+      <input type="submit" class="btn btn-primary btn-lg" value="Opslaan" />
+      {{ Form::close() }}
+      </div>
 
       @endif
 
@@ -146,7 +132,5 @@
       </table>
   </div>
 </div>
-
-{{ Form::close() }}
 
 @stop

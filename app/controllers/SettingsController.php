@@ -2,43 +2,59 @@
 
 class SettingsController extends \BaseController {
 
-  /**
-   * Display a listing of the resource.
-   *
-   * @return Response
-   */
-  public function index() {
-    $settings = DB::table('settings')->get();
-    $suspects = DB::table('suspects')->get();
-    $users = User::orderBy('username')
-      ->paginate(self::$per_page);
+	public function __construct() {
+		parent::__construct();
 
-    return View::make('settings.index', ['settings' => $settings, 'users' => $users, 'suspects' => $suspects]);
-  }
+		$users = User::orderBy('username')
+			->paginate(self::$per_page);
 
-  public function update($setting_id) {
-    $users = User::orderBy('username')
-      ->paginate(self::$per_page);
-    $settings = DB::table('settings')->get();
+		$this->features = [
+			'entries', 'logbooks', 'tasks',
+			'attachments', 'evidences', 'exports',
+			'cipher', 'settings', 'intro'
+		];
 
-    $setting = Setting::findOrFail($setting_id);
+		View::share('users', $users);
+		View::share('settings', Setting::all());
+		View::share('suspects', Suspect::all());
+		View::share('features', $this->features);
+	}
 
-    $setting->fill(Input::only(['project_name', 'vw_menu_entries', 'vw_menu_logbooks',
-                                'vw_menu_logbooks', 'vw_menu_tasks', 'vw_menu_attachments',
-                                'vw_menu_evidences', 'vw_menu_exports', 'vw_menu_cipher']));
+		/**
+		 * Display a listing of the resource.
+		 *
+		 * @return Response
+		 */
+		public function index() {
+			return View::make('settings.index');
+		}
 
-    if($setting->validate()) {
-      $setting->save();
-    } else {
-      return View::make('settings.index', ['settings' => $settings, 'users' => $users])
-        ->withErrors($setting->validator());
-    }
+		public function update($setting_id) {
+			if($setting_id == 'menu') {
+				$features = ['settings', 'intro'];
+				$input = Input::only($this->features);
 
-    return Redirect::to(route('settings.index'))
-      ->with('message', [
-        'content' => 'Instellingen met succes geupdated!',
-        'class' => 'success'
-      ]);
-  }
+				foreach($input as $feature => $enabled)
+					if($enabled) $features[] = $feature;
+
+				$input = join(';', $features);
+			} else {
+				$input = Input::get($setting_id.'_value');
+			}
+
+			if(Setting::set($setting_id, $input)) {
+				return Redirect::to(route('settings.index'))
+					->with('message', [
+						'content' => 'Instellingen met succes geupdated!',
+						'class' => 'success'
+					]);
+			} else {
+				return View::make('settings.index')
+					->with('message', [
+						'content' => 'Er is iets misgegaan met de instelling. :(',
+						'class' => 'warning'
+					]);
+			}
+		}
 
 }

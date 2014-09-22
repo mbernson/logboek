@@ -6,8 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" href="/favicon.ico">
 
-	<!-- Get Title (project name) -->
-	<title>{{ $project_name = DB::table('settings')->pluck('project_name'); }}</title>
+	<title>{{ Setting::get('project_name') }}</title>
 
 	<!-- Bootstrap core CSS -->
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -36,36 +35,36 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="/">{{ $project_name = DB::table('settings')->pluck('project_name'); }}</a>
+					<a class="navbar-brand" href="/">{{ Setting::get('project_name') }}</a>
 				</div>
 				<div class="collapse navbar-collapse">
 
 					<ul class="nav navbar-nav">
-						@if(DB::table('settings')->pluck('vw_menu_entries') === 1)
+						@if(Setting::contains('menu', 'entries'))
 							<li {{ Request::is('entries') || Request::is('/') ? 'class="active"' : '' }}>{{ link_to('/entries', 'Entries') }}</li>
 						@endif
-						@if(DB::table('settings')->pluck('vw_menu_logbooks') === 1)
+						@if(Setting::contains('menu', 'logbooks'))
 							<li {{ Request::is('logbooks') ? 'class="active"' : '' }}>{{ link_to_route('logbooks.index', 'Logboeken') }}</li>
 						@endif
-						@if(DB::table('settings')->pluck('vw_menu_tasks') === 1)
+						@if(Setting::contains('menu', 'tasks'))
 							<li {{ Request::is('tasks') ? 'class="active"' : '' }}>{{ link_to_route('tasks.index', 'Taken') }}</li>
 						@endif
-						@if(DB::table('settings')->pluck('vw_menu_attachments') === 1)
+						@if(Setting::contains('menu', 'attachments'))
 							<li {{ Request::is('attachments') ? 'class="active"' : '' }}>{{ link_to_route('attachments.index', 'Bestanden') }}</li>
 						@endif
-						@if(DB::table('settings')->pluck('vw_menu_evidences') === 1)
+						@if(Setting::contains('menu', 'evidences'))
 							<li {{ Request::is('evidences') ? 'class="active"' : '' }}>{{ link_to_route('evidences.index', 'Bewijzen') }}</li>
 						@endif
-						@if(DB::table('settings')->pluck('vw_menu_exports') === 1)
+						@if(Setting::contains('menu', 'exports'))
 							<li {{ Request::is('exports') ? 'class="active"' : '' }}>{{ link_to_action('ExportsController@index', 'Exports') }}</li>
 						@endif
-						@if(DB::table('settings')->pluck('vw_menu_cipher') === 1)
+						@if(Setting::contains('menu', 'cipher'))
 							<li {{ Request::is('cipher') ? 'class="active"' : '' }}>{{ link_to('/cipher', 'Ciphertool') }}</li>
 						@endif
-						@if(DB::table('settings')->pluck('vw_menu_settings') === 1)
+						@if(Setting::contains('menu', 'settings'))
 							<li {{ Request::is('settings') ? 'class="active"' : '' }}>{{ link_to_route('settings.index', 'Instellingen') }}</li>
 						@endif
-						@if(DB::table('settings')->pluck('vw_menu_intro') === 1)
+						@if(Setting::contains('menu', 'intro'))
 							<li {{ Request::is('intro') ? 'class="active"' : '' }}>{{ link_to('/intro', 'Over') }}</li>
 						@endif
 					</ul>

@@ -1,17 +1,30 @@
 <?php
 
 class Setting extends Model {
+  protected $fillable = ['key', 'value'];
 
-  protected $table = 'settings';
+  protected static $expireTime = 240; // minutes
 
-  protected $softDelete = false;
+  public static function get($key) {
+	  if(Cache::has($key)) {
+		  return Cache::get($key);
+	  }
+	  $value = Setting::find($key, ['key']);
+	  Cache::put($key, $value, self::$expireTime);
+	  return $value;
+  }
 
-  protected $fillable = ['id', 'project_name', 'vw_menu_entries', 'vw_menu_logbooks',
-                         'vw_menu_tasks', 'vw_menu_attachments', 'vw_menu_evidences',
-                         'vw_menu_exports', 'vw_menu_cipher'];
+  public static function set($key, $value) {
+	  $setting = Setting::firstOrNew(['key' => $key]);
+	  $setting->key = $key;
+	  $setting->value = $value;
 
-  protected $rules = [
-    'project_name' => 'required',
-    ];
+	  Cache::put($key, $value, self::$expireTime);
 
+	  return $setting->save();
+  }
+
+  public static function contains($key, $string) {
+	  return strpos(static::get($key), $string) !== false;
+  }
 }
