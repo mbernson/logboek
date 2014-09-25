@@ -47,8 +47,9 @@ class UsersController extends \BaseController {
 			return false;
 
 		$username = Auth::user()->username;
+		$project_name = Setting::get('project_name');
 		return [
-			'content' => "Welkom bij het IPFIT-logboek, $username!",
+			'content' => "Welkom bij het $project_name logboek, $username!",
 			'class' => 'success'
 		];
 	}
