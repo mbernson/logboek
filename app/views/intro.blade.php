@@ -3,8 +3,8 @@
 @section('content')
 
 <div class="jumbotron">
-	<h1>{{ $project_name = DB::table('settings')->pluck('project_name'); }}</h1>
-	<p>Welkom bij de logboek-applicatie van project {{ $project_name = DB::table('settings')->pluck('project_name'); }}! In deze applicatie kan alle informatie met betrekking tot het forensisch onderzoek op een veilige, centrale plek worden opgeslagen. Aangezien het nog in de ontwikkelfase zit, is de applicatie nog niet helemaal af en compleet.<br />Mocht je tegen dingen aanlopen of idee&euml;n hebben, meld dit dan s.v.p. op <a href="//gitlab.com/l0ngestever/logboek/issues">Github</a>.</p>
+	<h1>{{ Setting::get('project_name') }}</h1>
+	<p>Welkom bij de logboek-applicatie van project {{ Setting::get('project_name') }}! In deze applicatie kan alle informatie met betrekking tot het forensisch onderzoek op een veilige, centrale plek worden opgeslagen. Aangezien het nog in de ontwikkelfase zit, is de applicatie nog niet helemaal af en compleet.<br />Mocht je tegen dingen aanlopen of idee&euml;n hebben, meld dit dan s.v.p. op <a href="//gitlab.com/l0ngestever/logboek/issues">Github</a>.</p>
 </div>
 
 <div class="row">

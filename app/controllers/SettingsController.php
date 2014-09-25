@@ -11,7 +11,7 @@ class SettingsController extends \BaseController {
 		$this->features = [
 			'entries', 'logbooks', 'tasks',
 			'attachments', 'evidences', 'exports',
-			'cipher', 'settings', 'intro'
+			'cipher'
 		];
 
 		View::share('users', $users);
@@ -31,7 +31,7 @@ class SettingsController extends \BaseController {
 
 	public function update($setting_id) {
 		if($setting_id == 'menu') {
-			$features = ['settings', 'intro'];
+			$features = [];
 			$input = Input::only($this->features);
 
 			foreach($input as $feature => $enabled)

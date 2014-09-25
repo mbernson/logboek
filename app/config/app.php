@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'url' => 'https://logboek.duckson.nl',
+	'url' => 'http://logboek.dev',
 
 	/*
 	|--------------------------------------------------------------------------

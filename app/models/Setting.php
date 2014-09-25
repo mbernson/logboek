@@ -9,9 +9,12 @@ class Setting extends Model {
 	  if(Cache::has($key)) {
 		  return Cache::get($key);
 	  }
-	  $value = Setting::find($key, ['key']);
-	  Cache::put($key, $value, self::$expireTime);
-	  return $value;
+
+	  $result = static::where('key', '=', $key);
+	  $setting = $result->first();
+
+	  Cache::put($setting->key, $setting->value, self::$expireTime);
+	  return $setting->value;
   }
 
   public static function set($key, $value) {

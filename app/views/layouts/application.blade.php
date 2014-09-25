@@ -61,12 +61,9 @@
 						@if(Setting::contains('menu', 'cipher'))
 							<li {{ Request::is('cipher') ? 'class="active"' : '' }}>{{ link_to('/cipher', 'Ciphertool') }}</li>
 						@endif
-						@if(Setting::contains('menu', 'settings'))
-							<li {{ Request::is('settings') ? 'class="active"' : '' }}>{{ link_to_route('settings.index', 'Instellingen') }}</li>
-						@endif
-						@if(Setting::contains('menu', 'intro'))
-							<li {{ Request::is('intro') ? 'class="active"' : '' }}>{{ link_to('/intro', 'Over') }}</li>
-						@endif
+
+						<li {{ Request::is('settings') ? 'class="active"' : '' }}>{{ link_to_route('settings.index', 'Instellingen') }}</li>
+						<li {{ Request::is('intro') ? 'class="active"' : '' }}>{{ link_to('/intro', 'Over') }}</li>
 					</ul>
 
 					@if(Auth::check())

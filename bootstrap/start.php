@@ -26,8 +26,7 @@ $app = new Illuminate\Foundation\Application;
 
 $env = $app->detectEnvironment([
 	'local' => [
-		'your-machine-name',
-		'MathBook-Pro'
+		'your-machine-name'
 	]
 ]);
 

@@ -5,6 +5,7 @@ class UserTableSeeder extends Seeder {
 			[
 				'username' => 'owner',
 				'email' => 'owner@example.com',
+				'rights' => 1
 			]
 		);
 
