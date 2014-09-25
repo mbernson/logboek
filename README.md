@@ -1,19 +1,25 @@
 # Logboek
 
-This is a web-application for organizing (logging) information for (ICT-)forensic investigations. It lets different users maintain any number of logbooks and store text-entries within them.
+This is a web-application for organizing and logging information for (ICT-)forensic investigations. It lets different users maintain any number of logbooks and store text-entries within them.
 
 ## Features
 
 Logboek's primary features are:
 
-* Maintaining forensic journals (logbooks) during your investigation.
+* Maintaining forensic journals during your investigation.
 * Assigning tasks to people in your team.
-* Securely storing evidence files.
+* Securely storing (and verifying) evidence files.
+
+Also included are ways to:
+
+* Export journals to CSV, Markdown and PDF.
+* Keep a list of suspects.
+* Solve mono-alphabatic ciphers.
 
 ## Requirements
 
-* PHP > 5.4
-* MySQL > 5.4
+* PHP >= 5.4
+* MySQL >= 5.5
 
 ## Installation
 
