@@ -1,9 +1,11 @@
 <?php
 
-class Attachment extends Model {
-	protected $table = 'attachments';
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
-	protected $softDelete = true;
+class Attachment extends Model {
+	use SoftDeletingTrait;
+
+	protected $table = 'attachments';
 
 	protected $rules = [
 		'hash' => 'required',

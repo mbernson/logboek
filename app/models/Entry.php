@@ -1,11 +1,12 @@
 <?php
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
 class Entry extends Model {
-	protected $table = 'entries';
+	use SoftDeletingTrait;
 
-	protected $softDelete = true;
+	protected $table = 'entries';
 
 	protected $fillable = ['title', 'body', 'started_at', 'finished_at', 'evidence_id', 'who', 'what', 'where', 'which', 'way', 'when', 'why'];
 
@@ -100,7 +101,7 @@ class Entry extends Model {
 				$results[$key] = $value;
 		}
 		return $results;
-	}	
+	}
 
 	public function hasWs() {
 		foreach($this->attributes as $key => $value) {

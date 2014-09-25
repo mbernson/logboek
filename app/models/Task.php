@@ -1,9 +1,11 @@
 <?php
 
-class Task extends Model {
-	protected $fillable = ['name', 'user_id', 'description', 'status', 'deadline'];
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
-	protected $softDelete = true;
+class Task extends Model {
+	use SoftDeletingTrait;
+
+	protected $fillable = ['name', 'user_id', 'description', 'status', 'deadline'];
 
 	protected $rules = [
 		'name' => 'required',
