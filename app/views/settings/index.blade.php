@@ -65,70 +65,78 @@ $(function () {
 
 	</div>
 	<div class="tab-pane" id="suspects">
-		<br />
-		<p>
-			<a class="btn btn-primary btn-lg" href="{{ action('suspects.create') }}">Nieuwe verdachte</a>
-		</p>
-
-		@if(count($suspects) == 0)
-			<p>Er zijn <b>geen</b> verdachten gevonden!</p>
+		@if(Auth::user()->rights === 0)
+			<p><br />Voor deze instellingen zijn <b>administrator</b> rechten nodig.</p>
 		@else
+			<br />
+			<p>
+				<a class="btn btn-primary btn-lg" href="{{ action('suspects.create') }}">Nieuwe verdachte</a>
+			</p>
 
-		<table class="table table-hover">
-		<tr>
-			<th>ID</th>
-			<th>Naam</th>
-			<th>Alias</th>
-			<th>Toegevoegd op</th>
-		</tr>
+			@if(count($suspects) == 0)
+				<p>Er zijn <b>geen</b> verdachten gevonden!</p>
+			@else
 
-		@foreach($suspects as $suspect)
-
+			<table class="table table-hover">
 			<tr>
-				<td>{{ $suspect->id }}</td>
-				<td>{{ link_to_action('suspects.edit', $suspect->name, [$suspect->id]) }}</td>
-				<td>{{ $suspect->alias }}</td>
-				<td>{{ $suspect->created_at }}</td>
+				<th>ID</th>
+				<th>Naam</th>
+				<th>Alias</th>
+				<th>Toegevoegd op</th>
 			</tr>
 
-		@endforeach
+			@foreach($suspects as $suspect)
 
-		</table>
+				<tr>
+					<td>{{ $suspect->id }}</td>
+					<td>{{ link_to_action('suspects.edit', $suspect->name, [$suspect->id]) }}</td>
+					<td>{{ $suspect->alias }}</td>
+					<td>{{ $suspect->created_at }}</td>
+				</tr>
 
+			@endforeach
+
+			</table>
+
+			@endif
 		@endif
 
 	</div>
 	<div class="tab-pane" id="users">
-		<br />
-		<p>
-			<a class="btn btn-primary btn-lg" href="{{ action('users.create') }}">Nieuwe gebruiker</a>
-		</p>
 
-		<table class="table table-hover">
-		<tr>
-			<th>ID</th>
-			<th>Gebruikersnaam</th>
-			<th>E-mail adres</th>
-			<th>Toegevoegd op</th>
-			<th>Rechten</th>
-		</tr>
+		@if(Auth::user()->rights === 0)
+			<p><br />Voor deze instellingen zijn <b>administrator</b> rechten nodig.</p>
+		@else
+			<br />
+			<p>
+				<a class="btn btn-primary btn-lg" href="{{ action('users.create') }}">Nieuwe gebruiker</a>
+			</p>
 
-		@foreach($users as $user)
+			<table class="table table-hover">
+			<tr>
+				<th>ID</th>
+				<th>Gebruikersnaam</th>
+				<th>E-mail adres</th>
+				<th>Toegevoegd op</th>
+				<th>Rechten</th>
+			</tr>
 
-		<tr>
-			<td>{{ $user->id }}</td>
-			<td>{{ link_to_action('users.edit', $user->username, [$user->id]) }}</td>
-			<td>{{ $user->email }}</td>
-			<td>{{ $user->created_at }}</td>
-			@if($user->rights == 0)
-				<td>Gebruiker</td>
-			@else
-				<td>Administrator</td>
-			@endif
-		</tr>
+			@foreach($users as $user)
 
-		@endforeach
+			<tr>
+				<td>{{ $user->id }}</td>
+				<td>{{ link_to_action('users.edit', $user->username, [$user->id]) }}</td>
+				<td>{{ $user->email }}</td>
+				<td>{{ $user->created_at }}</td>
+				@if($user->rights == 0)
+					<td>Gebruiker</td>
+				@else
+					<td>Administrator</td>
+				@endif
+			</tr>
 
+			@endforeach
+		@endif
 		</table>
 	</div>
 </div>

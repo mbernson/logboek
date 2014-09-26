@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 class TasksController extends \BaseController {
 
 	public function __construct() {
@@ -21,6 +21,7 @@ class TasksController extends \BaseController {
 	public function index() {
 		$tasks = Task::newest()->paginate(static::$per_page);
 		return View::make('tasks.index', ['tasks' => $tasks]);
+
 	}
 
 	public function toggle($id) {
@@ -82,9 +83,17 @@ class TasksController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id) {
-		$task = Task::findOrFail($id);
-		return View::make('tasks.show', ['task' => $task]);
+	public function show($task_id) {
+		try{
+			$task = Task::findOrFail($task_id);
+			return View::make('tasks.show', ['task' => $task]);
+		} catch(ModelNotFoundException $e) {
+			return Redirect::to(route('tasks.index'))
+				->with('message', [
+					'content' => 'Taak niet gevonden!',
+					'class' => 'danger'
+				]);
+		}
 	}
 
 
@@ -95,8 +104,16 @@ class TasksController extends \BaseController {
 	 * @return Response
 	 */
 	public function edit($task_id) {
-		$task = Task::findOrFail($task_id);
-		return View::make('tasks.edit', ['task' => $task]);
+		try{
+			$task = Task::findOrFail($task_id);
+			return View::make('tasks.edit', ['task' => $task]);
+		} catch(ModelNotFoundException $e) {
+			return Redirect::to(route('tasks.index'))
+				->with('message', [
+					'content' => 'Taak niet gevonden!',
+					'class' => 'danger'
+				]);
+		}
 	}
 
 

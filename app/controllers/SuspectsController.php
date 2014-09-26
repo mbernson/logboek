@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 class SuspectsController extends \BaseController {
 
 	/**
@@ -60,8 +60,16 @@ class SuspectsController extends \BaseController {
 	 * @return Response
 	 */
 	public function edit($suspect_id) {
-		$suspect = Suspect::findOrFail($suspect_id);
-		return View::make('suspects.edit', ['suspect' => $suspect]);
+		try{
+			$suspect = Suspect::findOrFail($suspect_id);
+			return View::make('suspects.edit', ['suspect' => $suspect]);
+		} catch(ModelNotFoundException $e) {
+			return Redirect::to(route('settings.index'))
+				->with('message', [
+					'content' => 'Verdachte niet gevonden!',
+					'class' => 'danger'
+				]);
+		}
 	}
 
 	/**

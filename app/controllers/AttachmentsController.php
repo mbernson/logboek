@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 class AttachmentsController extends \BaseController {
 
 	/**
@@ -88,9 +88,17 @@ class AttachmentsController extends \BaseController {
 	 * @return Response
 	 */
 	public function show($attachment_id) {
-		return View::make('attachments.show', [
-			'attachment' => Attachment::findOrFail($attachment_id)
-		]);
+		try{
+			return View::make('attachments.show', [
+				'attachment' => Attachment::findOrFail($attachment_id)
+			]);
+		} catch(ModelNotFoundException $e) {
+			return Redirect::to(route('attachments.index'))
+				->with('message', [
+					'content' => 'Bestand niet gevonden!',
+					'class' => 'danger'
+				]);
+		}
 	}
 
 
@@ -101,9 +109,17 @@ class AttachmentsController extends \BaseController {
 	 * @return Response
 	 */
 	public function edit($attachment_id) {
-		return View::make('attachments.edit', [
-			'attachment' => Attachment::findOrFail($attachment_id)
-		]);
+		try{
+			return View::make('attachments.edit', [
+				'attachment' => Attachment::findOrFail($attachment_id)
+			]);
+		} catch(ModelNotFoundException $e) {
+			return Redirect::to(route('attachments.index'))
+				->with('message', [
+					'content' => 'Bestand niet gevonden!',
+					'class' => 'danger'
+				]);
+		}
 	}
 
 
