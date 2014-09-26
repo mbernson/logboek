@@ -132,15 +132,23 @@ class UsersController extends \BaseController {
 	 * @return Response
 	 */
 	public function edit($user_id) {
-		try{
-			$user = User::findOrFail($user_id);
-			return View::make('users.edit', ['user' => $user]);
-		} catch(ModelNotFoundException $e) {
-    	return Redirect::to(route('settings.index'))
+		if(Auth::user()->rights === 0 && Auth::user()->id != $user_id) {
+			return Redirect::to(route('settings.index'))
 				->with('message', [
-					'content' => 'Gebruiker niet gevonden!',
+					'content' => 'Geen rechten!',
 					'class' => 'danger'
 				]);
+		} else {
+			try{
+				$user = User::findOrFail($user_id);
+				return View::make('users.edit', ['user' => $user]);
+			} catch(ModelNotFoundException $e) {
+	    	return Redirect::to(route('settings.index'))
+					->with('message', [
+						'content' => 'Gebruiker niet gevonden!',
+						'class' => 'danger'
+					]);
+			}
 		}
 	}
 
