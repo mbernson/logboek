@@ -27,4 +27,10 @@
 
 {{ Form::close() }}
 
+@if($logbook->isNew() == false)
+	{{ Form::open(['route' => ['logbooks.destroy', $logbook->id], 'method' => 'delete']) }}
+		<button type="submit" class="btn btn-danger pull-right">Verwijderen</button>
+	{{ Form::close() }}
+@endif
+
 @stop

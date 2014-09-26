@@ -168,8 +168,8 @@ class AttachmentsController extends \BaseController {
 		$attachment->delete();
 		return Redirect::to(route('attachments.index'))
 			->with('message', [
-				'content' => 'Bestand verwijderd!',
-				'class' => 'danger'
+				'content' => 'Bestand met succes verwijderd!',
+				'class' => 'success'
 			]);
 
 	}

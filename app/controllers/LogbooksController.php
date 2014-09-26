@@ -131,7 +131,13 @@ class LogbooksController extends \BaseController {
 	 * @return Response
 	 */
 	public function destroy($logbook_id) {
-		//
+		$logbook = Logbook::findOrFail($logbook_id);
+		$logbook->delete();
+		return Redirect::to(route('logbooks.index'))
+			->with('message', [
+				'content' => 'Logboek met succes verwijderd!',
+				'class' => 'success'
+			]);
 	}
 
 
