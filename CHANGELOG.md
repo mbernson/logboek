@@ -1,5 +1,20 @@
 # Logboek changelog
 
+## v1.1
+
+Major features
+
+* Adding not found views (entry, logbook, etc.)
+* Adding settings support
+
+## v1.0
+
+We're feature complete and stable now. There's lots of new stuff since 0.4, including:
+
+* Additional metadata per entry
+* Attachments and (public) files with hash checking
+* CSV, Markdown and limited PDF exporting
+
 ## v0.4
 
 Major features
