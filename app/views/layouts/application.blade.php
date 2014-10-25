@@ -141,7 +141,7 @@
 
 <footer class="muted">
 	<p class="pull-left">&copy; 2014 <a href="http://duckson.nl">Mathijs Bernson</a>, <a href="http://bartmauritz.nl">Bart Mauritz</a></p>
-	<p class="pull-right"><a href="https://github.com/mbernson/logboek/">Source</a> | <a href="https://github.com/mbernson/logboek/blob/master/LICENSE.txt">GPL License</a></p>
+	<p class="pull-right"><a href="https://github.com/l0ngestever/logboek/">Source</a> | <a href="https://github.com/l0ngestever/logboek/blob/master/LICENSE.txt">GPL License</a></p>
 </footer>
 
 </div><!--/.container-->
