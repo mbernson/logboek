@@ -60,7 +60,7 @@
 	<tr>
 		@for($i = 0; $i < count($users); $i++)
 		<td>
-			<img src="{{ $users[$i]->picture->downloadPath() }}" height="240" />
+					{{-- <img src="{{ $users[$i]->picture->downloadPath() }}" height="240" /> --}}
 			{{{ $users[$i]->first_name }}} {{{ $users[$i]->last_name }}}<br>
 			{{{ $users[$i]->student_number }}}
 		</td>
@@ -123,6 +123,47 @@
 </div>
 @endif
 
+@if(count($evidences) > 0)
+<div id="bewijzen">
+<h1>Bewijzen</h1>
+
+<table class="table">
+<tr>
+	<th>Titel</th>
+	<th>Hash</th>
+	<th>Ontvangen op</th>
+	<th>Orgineel bericht</th>
+</tr>
+@foreach($evidences as $att)
+<tr>
+	<td>{{ empty($att->title) ? '<em>Geen titel</em>' : $att->title }}</td>
+	<td>{{ $att->hash }}</td>
+	<td>{{ $att->date_received }}</td>
+	<td>{{ $att->original_message }}</td>
+</tr>
+@endforeach
+</table>
+</div>
+@endif
+
+@if(count($suspects) > 0)
+<div id="verdachten">
+<h1>Verdachten</h1>
+
+<table class="table">
+<tr>
+	<th>Naam</th>
+	<th>Alias</th>
+</tr>
+@foreach($suspects as $att)
+<tr>
+	<td>{{ $att->name }}</td>
+	<td>{{ $att->alias }}</td>
+</tr>
+@endforeach
+</table>
+</div>
+@endif
 
 </body>
 </html>

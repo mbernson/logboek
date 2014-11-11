@@ -70,6 +70,8 @@ class Export extends Model {
 			'users' => static::getUsers(),
 			'logbooks' => static::getLogbooks($this->logbooks),
 			'attachments' => static::getAttachments($this->logbooks),
+			'evidences' => Evidence::all(),
+			'suspects' => Suspect::all()
 		]);
 	}
 

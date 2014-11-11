@@ -87,7 +87,7 @@ return array(
 	|
 	*/
 
-	'key' => 'put your own key here!',
+	'key' => 'dV2WjPrD0m9fFkzjRhYnB9qgGIF88Gt1',
 
 	'cipher' => MCRYPT_RIJNDAEL_256,
 
