@@ -3,7 +3,7 @@
 <html>
 <head>
 
-<title>IPFIT1 Forensisch</title>
+<title>IPFJUR Forensisch</title>
 
 <link rel="stylesheet" type="text/css" href="css/pdf.css" />
 
@@ -81,7 +81,7 @@
 @foreach($logbooks as $logbook)
 	<li>{{ $logbook->title }}</li>
 @endforeach
-@if(count($attachments) > 0)
+@if(count($attachmentsAll) > 0)
 	<li>Bestanden</li>
 @endif
 @if(count($suspects) > 0)
@@ -132,7 +132,7 @@
 </div>
 @endif
 
-@if(count($attachments) > 0)
+@if(count($attachmentsAll) > 0)
 <div id="bestanden">
 <h1>Bestanden</h1>
 
@@ -143,7 +143,7 @@
 	<th>Path</th>
 	<th>Hash</th>
 </tr>
-@foreach($attachments  as $att)
+@foreach($attachmentsAll as $att)
 <tr>
 	<td>{{ empty($att->title) ? '<em>Geen titel</em>' : $att->title }}</td>
 	<td>{{ $att->filename }}</td>

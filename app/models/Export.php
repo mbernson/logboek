@@ -65,11 +65,12 @@ class Export extends Model {
 
 	protected function getView() {
 		return View::make('pdfs.report', [
-			'title' => 'IPFIT1 groep 2',
+			'title' => 'IPFJUR groep 5',
 			'generated_at' => date('d-m-Y H:i'),
 			'users' => static::getUsers(),
 			'logbooks' => static::getLogbooks($this->logbooks),
 			'attachments' => static::getAttachments($this->logbooks),
+			'attachmentsAll' => Attachment::all(),
 			'evidences' => Evidence::all(),
 			'suspects' => Suspect::all()
 		]);
