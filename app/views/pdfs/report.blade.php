@@ -133,21 +133,19 @@
 @endif
 
 @if(count($attachmentsAll) > 0)
-<div id="bestanden">
+<div id="inhoudsopgave">
 <h1>Bestanden</h1>
 
 <table class="table">
 <tr>
 	<th>Titel</th>
 	<th>Filename</th>
-	<th>Path</th>
 	<th>Hash</th>
 </tr>
 @foreach($attachmentsAll as $att)
 <tr>
 	<td>{{ empty($att->title) ? '<em>Geen titel</em>' : $att->title }}</td>
 	<td>{{ $att->filename }}</td>
-	<td>{{ $att->path }}</td>
 	<td>{{ $att->hash }}</td>
 </tr>
 @endforeach
@@ -156,7 +154,7 @@
 @endif
 
 @if(count($evidences) > 0)
-<div id="bewijzen">
+<div id="inhoudsopgave">
 <h1>Bewijzen</h1>
 
 <table class="table">
@@ -179,7 +177,7 @@
 @endif
 
 @if(count($suspects) > 0)
-<div id="verdachten">
+<div id="inhoudsopgave">
 <h1>Verdachten</h1>
 
 <table class="table">
