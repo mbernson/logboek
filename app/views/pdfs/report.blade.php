@@ -36,19 +36,19 @@
 
 	<tr>
 		<td>Module</td>
-		<td>IPFIT1</td>
+		<td>IPFJUR</td>
 	</tr>
 	<tr>
 		<td>Moduleleider</td>
-		<td>Peter van der Wijden</td>
+		<td>Jos Griffioen</td>
 	</tr>
 	<tr>
 		<td>Datum</td>
-		<td>17-06-2014</td>
+		<td>12-11-2014</td>
 	</tr>
 	<tr>
 		<td>Versie</td>
-		<td>1.0 (definitief)</td>
+		<td>1.0 (final)</td>
 	</tr>
 
 	</table>
@@ -81,6 +81,15 @@
 @foreach($logbooks as $logbook)
 	<li>{{ $logbook->title }}</li>
 @endforeach
+@if(count($attachments) > 0)
+	<li>Bestanden</li>
+@endif
+@if(count($suspects) > 0)
+	<li>Verdachten</li>
+@endif
+@if(count($evidences) > 0)
+	<li>Bewijzen</li>
+@endif
 </ol>
 
 </div>
@@ -117,6 +126,29 @@
 	<td>{{ strtoupper($att->hash_algorithm) }}</td>
 	<td>{{ $att->hash }}</td>
 	<td>{{ $att->created_at }}</td>
+</tr>
+@endforeach
+</table>
+</div>
+@endif
+
+@if(count($attachments) > 0)
+<div id="bestanden">
+<h1>Bestanden</h1>
+
+<table class="table">
+<tr>
+	<th>Titel</th>
+	<th>Filename</th>
+	<th>Path</th>
+	<th>Hash</th>
+</tr>
+@foreach($attachments  as $att)
+<tr>
+	<td>{{ empty($att->title) ? '<em>Geen titel</em>' : $att->title }}</td>
+	<td>{{ $att->filename }}</td>
+	<td>{{ $att->path }}</td>
+	<td>{{ $att->hash }}</td>
 </tr>
 @endforeach
 </table>
