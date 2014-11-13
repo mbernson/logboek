@@ -65,7 +65,7 @@ class Export extends Model {
 
 	protected function getView() {
 		return View::make('pdfs.report', [
-			'title' => 'IPFJUR groep 5',
+			'title' => 'CryptWire - Logboek',
 			'generated_at' => date('d-m-Y H:i'),
 			'users' => static::getUsers(),
 			'logbooks' => static::getLogbooks($this->logbooks),

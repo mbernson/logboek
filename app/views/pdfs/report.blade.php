@@ -35,12 +35,8 @@
 	<table>
 
 	<tr>
-		<td>Module</td>
-		<td>IPFJUR</td>
-	</tr>
-	<tr>
-		<td>Moduleleider</td>
-		<td>Jos Griffioen</td>
+		<td>Opdrachtgever</td>
+		<td>Politie (Bureau Hogeschool Leiden)</td>
 	</tr>
 	<tr>
 		<td>Datum</td>
