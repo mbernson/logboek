@@ -15,7 +15,7 @@
 	<table>
 
 	<tr>
-		<td>{{ $title }}</td>
+		<td>{{ $project_name }}</td>
 		<td style="text-align: right;"></td>
 	</tr>
 
@@ -27,8 +27,8 @@
 </div>
 
 <div id="voorblad">
-	<h1>{{ $title }}</h1>
-	<h2>Project forensisch onderzoek</h2>
+	<h1>{{ $project_name }}</h1>
+	<h2>{{ $settings['title'] }}</h2>
 
 	<h2>Logboek</h2>
 
@@ -36,15 +36,15 @@
 
 	<tr>
 		<td>Opdrachtgever</td>
-		<td>Politie (Bureau Hogeschool Leiden)</td>
+		<td>{{ $settings['customer'] }}</td>
 	</tr>
 	<tr>
 		<td>Datum</td>
-		<td>12-11-2014</td>
+		<td>{{ $settings['date'] }}</td>
 	</tr>
 	<tr>
 		<td>Versie</td>
-		<td>1.0 (final)</td>
+		<td>{{ $settings['version'] }}</td>
 	</tr>
 
 	</table>
@@ -56,7 +56,7 @@
 	<tr>
 		@for($i = 0; $i < count($users); $i++)
 		<td>
-					{{-- <img src="{{ $users[$i]->picture->downloadPath() }}" height="240" /> --}}
+			{{-- <img src="{{ $users[$i]->picture->downloadPath() }}" height="240" /> --}}
 			{{{ $users[$i]->first_name }}} {{{ $users[$i]->last_name }}}<br>
 			{{{ $users[$i]->student_number }}}
 		</td>

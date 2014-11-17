@@ -14,6 +14,7 @@ $(function () {
 	<li class="active"><a href="#default" role="tab" data-toggle="tab">Standaard</a></li>
 	<li><a href="#menu" role="tab" data-toggle="tab">Menu</a></li>
 	<li><a href="#suspects" role="tab" data-toggle="tab">Verdachten</a></li>
+	<li><a href="#export" role="tab" data-toggle="tab">Export</a></li>
 	<li><a href="#users" role="tab" data-toggle="tab">Gebruikers</a></li>
 </ul>
 
@@ -27,8 +28,8 @@ $(function () {
 		<br />
 		{{ Form::open(['route' => ['settings.update', 'project_name'], 'method' => 'put', 'settings' => true]) }}
 			<div class="form-group">
-				{{ Form::label('project_name_value', 'Project naam') }}
-				{{ Form::text('project_name_value', Setting::get('project_name'), ['class' => 'form-control']) }}
+				{{ Form::label('project_name', 'Project naam') }}
+				{{ Form::text('project_name', Setting::get('project_name'), ['class' => 'form-control']) }}
 			</div>
 
 			<button type="submit" class="btn btn-primary btn-lg">Opslaan</button>
@@ -99,6 +100,42 @@ $(function () {
 			</table>
 
 			@endif
+		@endif
+
+	</div>
+	<div class="tab-pane" id="export">
+
+		@if(Auth::user()->rights === 0)
+			<p><br />Voor deze instellingen zijn <b>administrator</b> rechten nodig.</p>
+		@else
+
+		<br />
+		{{ Form::open(['route' => ['settings.update', 'export'], 'method' => 'put', 'settings' => true]) }}
+			<div class="form-group">
+				<div class="form-group">
+					{{ Form::label('ex_pdf_title', 'PDF Titel') }}
+					{{ Form::text('ex_pdf_title', Setting::get('ex_pdf_title'), ['class' => 'form-control']) }}
+				</div>
+
+				<div class="form-group">
+					{{ Form::label('ex_pdf_customer', 'PDF Opdrachtgever') }}
+					{{ Form::text('ex_pdf_customer', Setting::get('ex_pdf_customer'), ['class' => 'form-control']) }}
+				</div>
+
+				<div class="form-group">
+					{{ Form::label('ex_pdf_date', 'PDF Datum') }}
+					{{ Form::text('ex_pdf_date', Setting::get('ex_pdf_date'), ['class' => 'form-control']) }}
+				</div>
+
+				<div class="form-group">
+					{{ Form::label('ex_pdf_version', 'PDF Versie') }}
+					{{ Form::text('ex_pdf_version', Setting::get('ex_pdf_version'), ['class' => 'form-control']) }}
+				</div>
+
+				<input type="submit" class="btn btn-primary btn-lg" value="Opslaan" />
+			</div>
+		{{ Form::close() }}
+
 		@endif
 
 	</div>

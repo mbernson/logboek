@@ -33,11 +33,15 @@ class UpdateSettingsTable extends Migration {
 
 		$settings = [
 			'project_name' => 'Logboek',
+			'ex_pdf_title' => 'ex_logboek',
+			'ex_pdf_customer' => 'Opdrachtgever',
+			'ex_pdf_date' => '01-01-1970',
+			'ex_pdf_version' => '1.0',
 			'menu' => join(';', [
 				'entries', 'logbooks', 'tasks',
 				'attachments', 'evidences', 'exports',
-				'cipher', 'settings', 'intro'
-			]),
+				'cipher', 'settings', 'intro',
+			])
 		];
 
 		foreach($settings as $key => $value) {
