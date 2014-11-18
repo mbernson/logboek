@@ -3,9 +3,7 @@
 @section('content')
 
 <h1>Instellingen</h1>
-<?php
-	$rights = (int) Auth::user()->rights;
-?>
+
 <script>
 $(function () {
 	$('#myTab a:last').tab('show')
@@ -23,7 +21,7 @@ $(function () {
 <div class="tab-content">
 	<div class="tab-pane active" id="default">
 
-		@if($rights == 0)
+		@if(Auth::user()->rights) == 0 || Auth::user()->rights) == '0')
 			<p><br />Voor deze instellingen zijn <b>administrator</b> rechten nodig.</p>
 		@else
 
@@ -43,7 +41,7 @@ $(function () {
 
 	<div class="tab-pane" id="menu">
 
-		@if(count(Auth::user()->rights) == 0)
+		@if(Auth::user()->rights) == 0)
 			<p><br />Voor deze instellingen zijn <b>administrator</b> rechten nodig.</p>
 		@else
 
