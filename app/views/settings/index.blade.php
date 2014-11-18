@@ -3,9 +3,6 @@
 @section('content')
 
 <h1>Instellingen</h1>
-<p>
-	{{ var_dump(Auth::user()->rights) }}
-</p>
 
 <script>
 $(function () {
@@ -24,7 +21,7 @@ $(function () {
 <div class="tab-content">
 	<div class="tab-pane active" id="default">
 
-		@if(count(Auth::user()->rights) === 0)
+		@if(count(Auth::user()->rights) == 0)
 			<p><br />Voor deze instellingen zijn <b>administrator</b> rechten nodig.</p>
 		@else
 
