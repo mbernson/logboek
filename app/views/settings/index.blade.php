@@ -3,7 +3,10 @@
 @section('content')
 
 <h1>Instellingen</h1>
-<?php var_dump(Auth::user()->rights); ?>
+<?php
+$test = var_dump(Auth::user()->rights);
+echo (int)$test;
+?>
 
 <script>
 $(function () {
