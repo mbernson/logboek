@@ -31,9 +31,7 @@ class SettingsController extends \BaseController {
 	 * @return Response
 	 */
 	public function index() {
-		return View::make('settings.index', [
-			'rights' => Auth::user()->rights
-		]);
+		return View::make('settings.index');
 	}
 
 	private function updateMenuSettings() {

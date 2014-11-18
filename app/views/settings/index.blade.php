@@ -3,6 +3,9 @@
 @section('content')
 
 <h1>Instellingen</h1>
+<p>
+	{{ var_dump(Auth::user()->rights) }}
+</p>
 
 <script>
 $(function () {
