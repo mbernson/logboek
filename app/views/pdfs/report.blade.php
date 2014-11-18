@@ -71,22 +71,33 @@
 
 <div id="inhhoudsopgave">
 
-<h1>Inhoudsopgave</h1>
+	<h1>Inhoudsopgave</h1>
 
-<ol>
-@foreach($logbooks as $logbook)
-	<li>{{ $logbook->title }}</li>
-@endforeach
-@if(count($attachmentsAll) > 0)
-	<li>Bestanden</li>
-@endif
-@if(count($suspects) > 0)
-	<li>Verdachten</li>
-@endif
-@if(count($evidences) > 0)
-	<li>Bewijzen</li>
-@endif
-</ol>
+		<ol>
+			@foreach($logbooks as $logbook)
+				<li>{{ $logbook->title }}</li>
+			@endforeach
+
+			@if(count($attachmentsAll) > 0)
+				<li>Bestanden</li>
+			@endif
+
+			@if(count($suspects) > 0)
+				<li>Verdachten</li>
+			@endif
+
+			@if(count($evidences) > 0)
+				<li>Bewijzen</li>
+			@endif
+		</ol>
+
+</div>
+
+<div id="disclaimer">
+
+	<h1>Disclaimer</h1>
+
+	<p>{{ $settings['disclaimer'] }}</p>
 
 </div>
 
@@ -129,7 +140,7 @@
 @endif
 
 @if(count($attachmentsAll) > 0)
-<div id="inhoudsopgave">
+<div id="attachments">
 <h1>Bestanden</h1>
 
 <table class="table">
@@ -150,7 +161,7 @@
 @endif
 
 @if(count($evidences) > 0)
-<div id="inhoudsopgave">
+<div id="evidences">
 <h1>Bewijzen</h1>
 
 <table class="table">
@@ -173,7 +184,7 @@
 @endif
 
 @if(count($suspects) > 0)
-<div id="inhoudsopgave">
+<div id="suspects">
 <h1>Verdachten</h1>
 
 <table class="table">

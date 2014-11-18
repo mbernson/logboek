@@ -68,7 +68,8 @@ class Export extends Model {
 			'title' => Setting::get('ex_pdf_title'),
 			'customer' => Setting::get('ex_pdf_customer'),
 			'date' => Setting::get('ex_pdf_date'),
-			'version' => Setting::get('ex_pdf_version')
+			'version' => Setting::get('ex_pdf_version'),
+			'disclaimer' => Setting::get('ex_pdf_disclaimer')
 		];
 
 		return View::make('pdfs.report', [

@@ -37,6 +37,7 @@ class UpdateSettingsTable extends Migration {
 			'ex_pdf_customer' => 'Opdrachtgever',
 			'ex_pdf_date' => '01-01-1970',
 			'ex_pdf_version' => '1.0',
+			'ex_pdf_disclaimer' => '',
 			'menu' => join(';', [
 				'entries', 'logbooks', 'tasks',
 				'attachments', 'evidences', 'exports',

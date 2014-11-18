@@ -132,6 +132,11 @@ $(function () {
 					{{ Form::text('ex_pdf_version', Setting::get('ex_pdf_version'), ['class' => 'form-control']) }}
 				</div>
 
+				<div class="form-group">
+					{{ Form::label('ex_pdf_disclaimer', 'Inhoud') }}
+					{{ Form::textarea('ex_pdf_disclaimer', Setting::get('ex_pdf_disclaimer'), ['class' => 'form-control markdown', 'rows' => 20]) }}
+					<p><em>Je kunt bij het schrijven gebruik maken van <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet" target="_blank">Markdown</a>.</em></p>
+				</div>
 				<input type="submit" class="btn btn-primary btn-lg" value="Opslaan" />
 			</div>
 		{{ Form::close() }}
