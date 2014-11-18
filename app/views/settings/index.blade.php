@@ -40,7 +40,7 @@ $(function () {
 
 	<div class="tab-pane" id="menu">
 
-		@if(count(Auth::user()->rights) == 0)
+		@if(Auth::user()['rights'] == 0)
 			<p><br />Voor deze instellingen zijn <b>administrator</b> rechten nodig.</p>
 		@else
 
@@ -65,7 +65,7 @@ $(function () {
 
 	</div>
 	<div class="tab-pane" id="suspects">
-		@if(count(Auth::user()->rights) == 0)
+		@if(Auth::user()['rights'] == 0)
 			<p><br />Voor deze instellingen zijn <b>administrator</b> rechten nodig.</p>
 		@else
 			<br />
@@ -104,7 +104,7 @@ $(function () {
 	</div>
 	<div class="tab-pane" id="export">
 
-		@if(count(Auth::user()->rights) == 0)
+		@if(Auth::user()['rights'] == 0)
 			<p><br />Voor deze instellingen zijn <b>administrator</b> rechten nodig.</p>
 		@else
 
@@ -145,7 +145,7 @@ $(function () {
 	</div>
 	<div class="tab-pane" id="users">
 
-		@if(count(Auth::user()->rights) == 0)
+		@if(Auth::user()['rights'] == 0)
 			<p><br />Voor deze instellingen zijn <b>administrator</b> rechten nodig.</p>
 		@else
 			<br />
