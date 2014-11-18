@@ -3,6 +3,7 @@
 @section('content')
 
 <h1>Instellingen</h1>
+<?php var_dump(Auth::user()->rights); ?>
 
 <script>
 $(function () {
@@ -41,7 +42,7 @@ $(function () {
 
 	<div class="tab-pane" id="menu">
 
-		@if($rights < 1)
+		@if(count(Auth::user()->rights) == 0)
 			<p><br />Voor deze instellingen zijn <b>administrator</b> rechten nodig.</p>
 		@else
 
@@ -66,7 +67,7 @@ $(function () {
 
 	</div>
 	<div class="tab-pane" id="suspects">
-		@if(Auth::user()->rights === 0)
+		@if(count(Auth::user()->rights) == 0)
 			<p><br />Voor deze instellingen zijn <b>administrator</b> rechten nodig.</p>
 		@else
 			<br />
@@ -105,7 +106,7 @@ $(function () {
 	</div>
 	<div class="tab-pane" id="export">
 
-		@if(Auth::user()->rights === 0)
+		@if(count(Auth::user()->rights) == 0)
 			<p><br />Voor deze instellingen zijn <b>administrator</b> rechten nodig.</p>
 		@else
 
@@ -146,7 +147,7 @@ $(function () {
 	</div>
 	<div class="tab-pane" id="users">
 
-		@if(Auth::user()->rights === 0)
+		@if(count(Auth::user()->rights) == 0)
 			<p><br />Voor deze instellingen zijn <b>administrator</b> rechten nodig.</p>
 		@else
 			<br />
