@@ -4,6 +4,7 @@
 
 <h1>Instellingen</h1>
 <h1>{{ Auth::user()->rights }}</h1>
+<h1>{{ $rights }}</h1>
 
 <script>
 $(function () {
