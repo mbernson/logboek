@@ -42,7 +42,7 @@ $(function () {
 
 	<div class="tab-pane" id="menu">
 
-		@if(Auth::user()->rights === 0)
+		@if($rights < 1)
 			<p><br />Voor deze instellingen zijn <b>administrator</b> rechten nodig.</p>
 		@else
 
