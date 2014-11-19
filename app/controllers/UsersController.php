@@ -132,10 +132,10 @@ class UsersController extends \BaseController {
 	 * @return Response
 	 */
 	public function edit($user_id) {
-		if(Auth::user()->rights === 0 && Auth::user()->id != $user_id) {
+		if(Auth::user()['rights'] == 0 && Auth::user()['id'] != $user_id) {
 			return Redirect::to(route('settings.index'))
 				->with('message', [
-					'content' => 'Geen rechten!',
+					'content' => 'Voor deze handelingen zijn administrator rechten nodig.',
 					'class' => 'danger'
 				]);
 		} else {
