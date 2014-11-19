@@ -14,5 +14,3 @@ app/config/local
 app/storage/uploads
 public/uploads
 
-# Downloads
-public/downloads

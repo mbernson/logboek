@@ -191,11 +191,19 @@
 <tr>
 	<th>Naam</th>
 	<th>Alias</th>
+	<th>Straat</th>
+	<th>Woonplaats</th>
+	<th>E-mail</th>
+	<th>telefoon</th>
 </tr>
 @foreach($suspects as $att)
 <tr>
 	<td>{{ $att->name }}</td>
 	<td>{{ $att->alias }}</td>
+	<td>{{ $att->street }}</td>
+	<td>{{ $att->city }}</td>
+	<td>{{ $att->email }}</td>
+	<td>{{ $att->phone }}</td>
 </tr>
 @endforeach
 </table>

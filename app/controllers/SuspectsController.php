@@ -37,7 +37,7 @@ class SuspectsController extends \BaseController {
 	 * @return Response
 	 */
 	public function store() {
-		$suspect = new Suspect(Input::only('name', 'alias'));
+		$suspect = new Suspect(Input::only('name', 'alias', 'street', 'city', 'email', 'phone'));
 
 		if($suspect->validate()) {
 			$suspect->save();
@@ -81,7 +81,7 @@ class SuspectsController extends \BaseController {
 	public function update($suspect_id) {
 		$suspect = Suspect::findOrFail($suspect_id);
 
-		$suspect->fill(Input::only('name', 'alias'));
+		$suspect->fill(Input::only('name', 'alias', 'street', 'city', 'email', 'phone'));
 
 		if($suspect->validate()) {
 			$suspect->save();

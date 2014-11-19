@@ -13,7 +13,10 @@ class UpdateSuspectsTable extends Migration {
   public function up()
   {
     Schema::table('suspects', function($table) {
-      $table->string('first_name')->after('alias');
+      $table->string('street')->after('alias');
+      $table->string('city')->after('street');
+      $table->string('email')->after('city');
+      $table->string('phone')->after('email');
     });
   }
 
@@ -25,7 +28,10 @@ class UpdateSuspectsTable extends Migration {
   public function down()
   {
     Schema::table('suspects', function($table) {
-      $table->dropColumn('first_name');
+      $table->dropColumn('street');
+      $table->dropColumn('city');
+      $table->dropColumn('email');
+      $table->dropColumn('phone');
     });
   }
 
