@@ -8,12 +8,7 @@ class UsersController extends \BaseController {
 	 * @return Response
 	 */
 	public function index() {
-		$settings = DB::table('settings')->get();
-		$suspects = DB::table('suspects')->get();
-		$users = User::orderBy('username')
-			->paginate(self::$per_page);
-
-		return View::make('settings.index', ['settings' => $settings, 'users' => $users, 'suspects' => $suspects]);
+		return Redirect::to('/settings');
 	}
 
 	/**

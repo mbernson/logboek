@@ -8,16 +8,11 @@ class SuspectsController extends \BaseController {
 	 * @return Response
 	 */
 	public function index() {
-		$settings = Setting::all();
-		$suspects = Suspect::all();
-		$users = User::orderBy('username')
-			->paginate(self::$per_page);
+		return Redirect::to('/settings');
+	}
 
-		return View::make('settings.index', [
-			'settings' => $settings,
-			'users' => $users,
-			'suspects' => $suspects
-		]);
+	public function show() {
+		return Redirect::to('/settings');
 	}
 
 	/**
