@@ -27,9 +27,9 @@ class UpdateSettingsTable extends Migration {
 			'ex_pdf_version' => '1.0',
 			'ex_pdf_disclaimer' => '',
 			'ex_pdf_disclaimer_html' => '',
-			'ex_pdf_sh_evidences' => 'true',
-			'ex_pdf_sh_attachments' => 'true',
-			'ex_pdf_sh_suspects' => 'true',
+			'ex_pdf_sh_evidences' => '1',
+			'ex_pdf_sh_attachments' => '1',
+			'ex_pdf_sh_suspects' => '1',
 
 			'menu' => join(';', [
 				'entries', 'logbooks', 'tasks',
