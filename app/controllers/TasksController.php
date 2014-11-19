@@ -60,7 +60,16 @@ class TasksController extends \BaseController {
 
 		$task->unguard();
 		$task->fill(Input::only(['name', 'user_id', 'description', 'status']));
-		$task->deadline = new DateTime(Input::get('deadline'));
+
+		try {
+			$task->deadline = new DateTime(Input::get('deadline'));
+		} catch(Exception $exception)	{
+			return Redirect::to(route('tasks.create'))
+			->with('message', [
+				'content' => 'Deadline (datum) verkeerde notatie',
+				'class' => 'danger'
+				]);
+		}
 
 		if($task->validate()) {
 			$task->save();
@@ -127,8 +136,18 @@ class TasksController extends \BaseController {
 		$task = Task::findOrFail($task_id);
 
 		$task->fill(Input::only(['name', 'user_id', 'description', 'status']));
-		if(Input::has('deadline'))
-			$task->deadline = new DateTime(Input::get('deadline'));
+
+		if(Input::has('deadline')) {
+			try {
+				$task->deadline = new DateTime(Input::get('deadline'));
+			} catch(Exception $exception)	{
+				return Redirect::to(route('tasks.index'))
+				->with('message', [
+					'content' => 'Deadline (datum) verkeerde notatie',
+					'class' => 'danger'
+					]);
+			}
+		}
 
 		if($task->validate()) {
 			$task->save();
