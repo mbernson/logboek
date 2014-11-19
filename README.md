@@ -33,6 +33,7 @@ Also included are ways to:
 * Ensure your PHP process/server can write:
   * to `app/storage` (`chmod -R 755 app/storage`)
   * to `public/uploads` (`chmod -R 755 public/uploads`)
+  * to `public/downloads` (`chmod -R 775 public/downloads`)
 * Run `php artisan migrate` and `php artisan db:seed`
 * Point a virtualhost to `<cloned_directory>/public`
 * Visit the site. The default login is `owner` with password `changeme`
