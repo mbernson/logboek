@@ -132,9 +132,28 @@ $(function () {
 				</div>
 
 				<div class="form-group">
-					{{ Form::label('ex_pdf_disclaimer', 'Inhoud') }}
+					{{ Form::label('ex_pdf_disclaimer', 'PDF Disclaimer') }}
 					{{ Form::textarea('ex_pdf_disclaimer', Setting::get('ex_pdf_disclaimer'), ['class' => 'form-control markdown', 'rows' => 20]) }}
 					<p><em>Je kunt bij het schrijven gebruik maken van <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet" target="_blank">Markdown</a>.</em></p>
+				</div>
+
+				<p>
+					<i>Selecteer items voor export.</i>
+				</p>
+
+				<div class="form-group">
+					{{ Form::label('ex_pdf_sh_evidences', 'PDF Bewijzen') }}
+					{{ Form::select('ex_pdf_sh_evidences', ['0' => 'Exporteer niet', '1' => 'Exporteer wel'], Setting::get('ex_pdf_sh_evidences'), ['class' => 'form-control']) }}
+				</div>
+
+				<div class="form-group">
+					{{ Form::label('ex_pdf_sh_attachments', 'PDF Bestanden') }}
+					{{ Form::select('ex_pdf_sh_attachments', ['0' => 'Exporteer niet', '1' => 'Exporteer wel'], Setting::get('ex_pdf_sh_attachments'), ['class' => 'form-control']) }}
+				</div>
+
+				<div class="form-group">
+					{{ Form::label('ex_pdf_sh_suspects', 'PDF Verdachte') }}
+					{{ Form::select('ex_pdf_sh_suspects', ['0' => 'Exporteer niet', '1' => 'Exporteer wel'], Setting::get('ex_pdf_sh_suspects'), ['class' => 'form-control']) }}
 				</div>
 				<input type="submit" class="btn btn-primary btn-lg" value="Opslaan" />
 			</div>

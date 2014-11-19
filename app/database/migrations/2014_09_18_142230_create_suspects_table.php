@@ -18,10 +18,6 @@ class CreateSuspectsTable extends Migration {
       $table->softDeletes();
       $table->timestamps();
     });
-
-    DB::insert('insert into settings (project_name) values (?)', [
-      'logboek'
-    ]);
   }
 
   /**

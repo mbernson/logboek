@@ -3,7 +3,7 @@
 class Setting extends Model {
   protected $fillable = ['key', 'value'];
 
-  protected static $expireTime = 240; // minutes
+  protected static $expireTime = 5; // minutes
 
   public static function get($key) {
 	  if(Cache::has($key)) {
