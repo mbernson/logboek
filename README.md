@@ -31,7 +31,7 @@ Also included are ways to:
 * Edit your configuration
 * Generate a secret key with `php artisan key:generate`
 * Ensure your PHP process/server can write:
-  * to `app/storage` (`chmod -R 755 app/storage`)
+  * to `app/storage` (`chmod -R 777 app/storage`)
   * to `public/uploads` (`chmod -R 755 public/uploads`)
   * to `public/downloads` (`chmod -R 775 public/downloads`)
 * Run `php artisan migrate` and `php artisan db:seed`
