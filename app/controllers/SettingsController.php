@@ -10,7 +10,7 @@ class SettingsController extends \BaseController {
 
 		$this->features = [
 			'entries', 'logbooks', 'tasks',
-			'attachments', 'uploads', 'evidences', 'exports',
+			'attachments', 'evidences', 'exports',
 			'cipher'
 		];
 
