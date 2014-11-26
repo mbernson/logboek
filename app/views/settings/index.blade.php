@@ -3,6 +3,7 @@
 @section('content')
 
 <h1>Instellingen</h1>
+
 <script>
 $(function () {
 	$('#myTab a:last').tab('show')

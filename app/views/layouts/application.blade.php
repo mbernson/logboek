@@ -18,6 +18,8 @@
 
 	<link href="/css/cipher.css" rel="stylesheet">
 
+	<link rel="stylesheet" href="/css/dropzone.css" media="all">
+
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>
 	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -49,6 +51,7 @@
 						@if(Setting::contains('menu', 'tasks'))
 							<li {{ Request::is('tasks') ? 'class="active"' : '' }}>{{ link_to_route('tasks.index', 'Taken') }}</li>
 						@endif
+
 						@if(Setting::contains('menu', 'attachments'))
 							<li {{ Request::is('attachments') ? 'class="active"' : '' }}>{{ link_to_route('attachments.index', 'Bestanden') }}</li>
 						@endif
@@ -68,16 +71,16 @@
 
 					@if(Auth::check())
 					<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown">
+						<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Hallo, {{ Auth::user()->username }} <b class="caret"></b></a>
-						<ul class="dropdown-menu">
-						<li>{{ link_to_route('users.edit', 'Profiel bewerken', array(Auth::user()->id)) }}</li>
-						<li class="divider"></li>
-						<li>{{ link_to('/logout', 'Uitloggen') }}</li>
+							<ul class="dropdown-menu" role="menu">
+								<li>{{ link_to_route('users.edit', 'Profiel bewerken', array(Auth::user()->id)) }}</li>
+								<li class="divider"></li>
+								<li>{{ link_to('/logout', 'Uitloggen') }}</li>
+							</ul>
+						</li>
 					</ul>
-				</li>
-			</ul>
-			@endif
+					@endif
 
 			</div><!-- /.nav-collapse -->
 		</div><!-- /.container -->
@@ -152,6 +155,7 @@
 <script src="/js/offcanvas.js"></script>
 <script src="/js/entry.js"></script>
 <script src="/js/tasks.js"></script>
+<script src="/js/dropzone.js"></script>
 
 @if(App::environment('production') && Config::get('app.piwik_enabled') == true)
 

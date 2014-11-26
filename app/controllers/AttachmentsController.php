@@ -8,9 +8,18 @@ class AttachmentsController extends \BaseController {
 	 * @return Response
 	 */
 	public function index() {
+		$uploads = DB::table('uploads')->select('name', 'owner', 'md5', 'sha1')
+								->where('owner', Auth::user()->username)
+								->orderBy('updated_at', 'desc')
+								->paginate(25);
+		$alluploads = DB::table('uploads')->select('name', 'owner', 'md5', 'sha1')
+								->orderBy('updated_at', 'desc')
+								->paginate(25);
 		return View::make('attachments.index', [
 			'attachments' => Attachment::orderBy('id', 'desc')
-				->paginate(25)
+				->paginate(25),
+			'uploads' => $uploads,
+			'alluploads' => $alluploads
 		]);
 	}
 
@@ -122,6 +131,35 @@ class AttachmentsController extends \BaseController {
 		}
 	}
 
+	public function upload(){
+		try{
+			$file = Input::file('file');
+			$extension = File::extension($file->getClientOriginalName());
+			$directory = 'uploads/';
+
+			$date = date('Ymdhis');
+			$rand = substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 5);
+			$filename = $date .'_'. $rand . '.' . $extension;
+
+			$upload_success = Input::file('file')->move($directory, $filename);
+			$timestamp = date('Y-m-d H:i:s');
+
+			DB::table('uploads')->insert(
+				array('name' => $filename,
+							'owner' => Auth::user()->username,
+							'md5' => md5_file('uploads/'. $filename),
+							'sha1' => sha1_file('uploads/'. $filename),
+							'created_at' => $timestamp,
+							'updated_at' => $timestamp,
+				));
+		} catch(ModelNotFoundException $e) {
+			return Redirect::to(route('attachments.index'))
+			->with('message', [
+				'content' => 'Bestand niet gevonden!',
+				'class' => 'danger'
+				]);
+		}
+	}
 
 	/**
 	 * Update the specified resource in storage.
@@ -132,13 +170,13 @@ class AttachmentsController extends \BaseController {
 	public function update($attachment_id) {
 		$attachment = Attachment::findOrFail($attachment_id);
 
-		if($attachment->user_id != (Auth::user()->id)) {
-			return Redirect::to(route('attachments.show', [$attachment->id]))
-				->with('message', [
-					'content' => 'Geen rechten om bestand te updaten!',
-					'class' => 'danger'
-				]);
-		}
+			if($attachment->user_id != (Auth::user()->id)) {
+				return Redirect::to(route('attachments.show', [$attachment->id]))
+					->with('message', [
+						'content' => 'Geen rechten om bestand te updaten!',
+						'class' => 'danger'
+					]);
+			}
 
 		$attachment->fill(Input::only('title', 'description',
 			'hash', 'hash_algorithm'));
@@ -155,7 +193,6 @@ class AttachmentsController extends \BaseController {
 				'class' => 'success'
 			]);
 	}
-
 
 	/**
 	 * Remove the specified resource from storage.

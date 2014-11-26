@@ -10,7 +10,7 @@ class SettingsController extends \BaseController {
 
 		$this->features = [
 			'entries', 'logbooks', 'tasks',
-			'attachments', 'evidences', 'exports',
+			'attachments', 'uploads', 'evidences', 'exports',
 			'cipher'
 		];
 
@@ -44,7 +44,7 @@ class SettingsController extends \BaseController {
 
 		$input = join(';', $features);
 
-		return Setting::set($setting_id, $input);
+		return Setting::set('menu', $input);
 	}
 
 	private function updateExportSettings() {

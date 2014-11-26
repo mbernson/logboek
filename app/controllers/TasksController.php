@@ -57,7 +57,6 @@ class TasksController extends \BaseController {
 	 */
 	public function store() {
 		$task = new Task();
-
 		$task->unguard();
 		$task->fill(Input::only(['name', 'user_id', 'description', 'status']));
 
