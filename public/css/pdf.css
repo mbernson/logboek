@@ -81,6 +81,11 @@ blockquote {
 	margin: 32px;
 }
 
+.entry img {
+	width: 90%;
+	max-width: 90%;
+}
+
 .meta th, .meta td {
 	text-align: left;
 	padding: .5ex 1ex;
