@@ -35,7 +35,11 @@
 
 <div class="form-group">
 	{{ Form::label('rights', 'Gebruikers rechten') }}
-	{{ Form::select('rights', ['0' => 'gebruiker', '1' => 'administrator'], $user->rights, ['class' => 'form-control']) }}
+	@if(Auth::user()['rights'] == 0)
+		<p>Voor deze wijziging zijn <b>administrator</b> rechten nodig.</p>
+	@else
+		{{ Form::select('rights', ['0' => 'gebruiker', '1' => 'administrator'], $user->rights, ['class' => 'form-control']) }}
+	@endif
 </div>
 
 <button type="submit" class="btn btn-primary btn-lg">Opslaan</button>

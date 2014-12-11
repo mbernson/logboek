@@ -14,6 +14,12 @@ class SettingsController extends \BaseController {
 			'cipher'
 		];
 
+		$this->export_features = [
+			'ex_pdf_title', 'ex_pdf_customer', 'ex_pdf_date',
+			'ex_pdf_version', 'ex_pdf_disclaimer', 'ex_pdf_sh_evidences',
+			'ex_pdf_sh_attachments', 'ex_pdf_sh_suspects'
+		];
+
 		View::share('users', $users);
 		View::share('settings', Setting::all());
 		View::share('suspects', Suspect::all());
@@ -29,20 +35,46 @@ class SettingsController extends \BaseController {
 		return View::make('settings.index');
 	}
 
+	private function updateMenuSettings() {
+		$features = [];
+		$input = Input::only($this->features);
+
+		foreach($input as $feature => $enabled)
+			if($enabled) $features[] = $feature;
+
+		$input = join(';', $features);
+
+		return Setting::set('menu', $input);
+	}
+
+	private function updateExportSettings() {
+		$input = Input::only($this->export_features);
+
+		$input['ex_pdf_disclaimer_html'] = Markdown::string($input['ex_pdf_disclaimer']);
+
+			foreach($input as $key => $value) {
+					Setting::set($key, $value);
+			}
+		return true;
+	}
+
 	public function update($setting_id) {
-		if($setting_id == 'menu') {
-			$features = [];
-			$input = Input::only($this->features);
+		$succes = false;
 
-			foreach($input as $feature => $enabled)
-				if($enabled) $features[] = $feature;
-
-			$input = join(';', $features);
-		} else {
-			$input = Input::get($setting_id.'_value');
+		switch($setting_id) {
+			case 'menu':
+				$success = $this->updateMenuSettings();
+				break;
+			case 'export':
+				$success = $this->updateExportSettings();
+				break;
+			case 'project_name':
+				$input = Input::get($setting_id);
+				$success = Setting::set($setting_id, $input);
+				break;
 		}
 
-		if(Setting::set($setting_id, $input)) {
+		if($success) {
 			return Redirect::to(route('settings.index'))
 				->with('message', [
 					'content' => 'Instellingen met succes geupdated!',

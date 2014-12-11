@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 class EntriesController extends \BaseController {
 
 	/**
@@ -79,12 +79,20 @@ class EntriesController extends \BaseController {
 	 * @return Response
 	 */
 	public function show($logbook_id, $entry_id) {
-		$logbook = Logbook::findOrFail($logbook_id);
-		$entry = Entry::findOrFail($entry_id);
-		return View::make('entries.show', [
-			'logbook' => $logbook,
-			'entry' => $entry
-		]);
+		try{
+				$logbook = Logbook::findOrFail($logbook_id);
+				$entry = Entry::findOrFail($entry_id);
+				return View::make('entries.show', [
+					'logbook' => $logbook,
+					'entry' => $entry
+				]);
+		} catch(ModelNotFoundException $e) {
+			return Redirect::to(route('logbooks.index'))
+				->with('message', [
+					'content' => 'Entry niet gevonden!',
+					'class' => 'danger'
+				]);
+		}
 	}
 
 	private function getEvidenceChoices() {
@@ -107,15 +115,23 @@ class EntriesController extends \BaseController {
 	 * @return Response
 	 */
 	public function edit($logbook_id, $entry_id) {
-		$logbook = Logbook::findOrFail($logbook_id);
-		$entry = Entry::findOrFail($entry_id);
+		try{
+				$logbook = Logbook::findOrFail($logbook_id);
+				$entry = Entry::findOrFail($entry_id);
 
-		return View::make('entries.edit', [
-			'logbook' => $logbook,
-			'entry' => $entry,
-			'evidences' => Evidence::all(),
-			'choices' => $this->getEvidenceChoices()
-		]);
+				return View::make('entries.edit', [
+					'logbook' => $logbook,
+					'entry' => $entry,
+					'evidences' => Evidence::all(),
+					'choices' => $this->getEvidenceChoices()
+				]);
+		} catch(ModelNotFoundException $e) {
+			return Redirect::to(route('logbooks.index'))
+				->with('message', [
+					'content' => 'Entry niet gevonden!',
+					'class' => 'danger'
+				]);
+		}
 	}
 
 

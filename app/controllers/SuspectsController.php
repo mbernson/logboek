@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 class SuspectsController extends \BaseController {
 
 	/**
@@ -8,16 +8,11 @@ class SuspectsController extends \BaseController {
 	 * @return Response
 	 */
 	public function index() {
-		$settings = Setting::all();
-		$suspects = Suspect::all();
-		$users = User::orderBy('username')
-			->paginate(self::$per_page);
+		return Redirect::to('/settings');
+	}
 
-		return View::make('settings.index', [
-			'settings' => $settings,
-			'users' => $users,
-			'suspects' => $suspects
-		]);
+	public function show() {
+		return Redirect::to('/settings');
 	}
 
 	/**
@@ -37,7 +32,7 @@ class SuspectsController extends \BaseController {
 	 * @return Response
 	 */
 	public function store() {
-		$suspect = new Suspect(Input::only('name', 'alias'));
+		$suspect = new Suspect(Input::only('name', 'alias', 'street', 'city', 'email', 'phone'));
 
 		if($suspect->validate()) {
 			$suspect->save();
@@ -60,8 +55,16 @@ class SuspectsController extends \BaseController {
 	 * @return Response
 	 */
 	public function edit($suspect_id) {
-		$suspect = Suspect::findOrFail($suspect_id);
-		return View::make('suspects.edit', ['suspect' => $suspect]);
+		try{
+			$suspect = Suspect::findOrFail($suspect_id);
+			return View::make('suspects.edit', ['suspect' => $suspect]);
+		} catch(ModelNotFoundException $e) {
+			return Redirect::to(route('settings.index'))
+				->with('message', [
+					'content' => 'Verdachte niet gevonden!',
+					'class' => 'danger'
+				]);
+		}
 	}
 
 	/**
@@ -73,7 +76,7 @@ class SuspectsController extends \BaseController {
 	public function update($suspect_id) {
 		$suspect = Suspect::findOrFail($suspect_id);
 
-		$suspect->fill(Input::only('name', 'alias'));
+		$suspect->fill(Input::only('name', 'alias', 'street', 'city', 'email', 'phone'));
 
 		if($suspect->validate()) {
 			$suspect->save();

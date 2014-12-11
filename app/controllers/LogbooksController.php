@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 class LogbooksController extends \BaseController {
 
 	public function __construct() {
@@ -62,16 +62,24 @@ class LogbooksController extends \BaseController {
 	 * @return Response
 	 */
 	public function show($logbook_id) {
-		$logbook = Logbook::findOrFail($logbook_id);
-		$entries = Entry::where('logbook_id', $logbook_id)
-			->orderBy('finished_at', 'desc')
-			->orderBy('started_at', 'desc')
-			->paginate(10);
+		try{
+			$logbook = Logbook::findOrFail($logbook_id);
+			$entries = Entry::where('logbook_id', $logbook_id)
+				->orderBy('finished_at', 'desc')
+				->orderBy('started_at', 'desc')
+				->paginate(10);
 
-		return View::make('logbooks.show', array(
-			'logbook' => $logbook,
-			'entries' => $entries
-		));
+			return View::make('logbooks.show', array(
+				'logbook' => $logbook,
+				'entries' => $entries
+			));
+		} catch(ModelNotFoundException $e) {
+			return Redirect::to(route('logbooks.index'))
+				->with('message', [
+					'content' => 'Logboek niet gevonden!',
+					'class' => 'danger'
+				]);
+		}
 	}
 
 
@@ -82,8 +90,16 @@ class LogbooksController extends \BaseController {
 	 * @return Response
 	 */
 	public function edit($logbook_id) {
-		$logbook = Logbook::findOrFail($logbook_id);
-		return View::make('logbooks.edit', ['logbook' => $logbook]);
+		try{
+			$logbook = Logbook::findOrFail($logbook_id);
+			return View::make('logbooks.edit', ['logbook' => $logbook]);
+		} catch(ModelNotFoundException $e) {
+			return Redirect::to(route('logbooks.index'))
+				->with('message', [
+					'content' => 'Logboek niet gevonden!',
+					'class' => 'danger'
+				]);
+		}
 	}
 
 
@@ -115,7 +131,13 @@ class LogbooksController extends \BaseController {
 	 * @return Response
 	 */
 	public function destroy($logbook_id) {
-		//
+		$logbook = Logbook::findOrFail($logbook_id);
+		$logbook->delete();
+		return Redirect::to(route('logbooks.index'))
+			->with('message', [
+				'content' => 'Logboek met succes verwijderd!',
+				'class' => 'success'
+			]);
 	}
 
 

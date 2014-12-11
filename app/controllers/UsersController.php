@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 class UsersController extends \BaseController {
 
 	/**
@@ -8,12 +8,7 @@ class UsersController extends \BaseController {
 	 * @return Response
 	 */
 	public function index() {
-		$settings = DB::table('settings')->get();
-		$suspects = DB::table('suspects')->get();
-		$users = User::orderBy('username')
-			->paginate(self::$per_page);
-
-		return View::make('settings.index', ['settings' => $settings, 'users' => $users, 'suspects' => $suspects]);
+		return Redirect::to('/settings');
 	}
 
 	/**
@@ -132,8 +127,24 @@ class UsersController extends \BaseController {
 	 * @return Response
 	 */
 	public function edit($user_id) {
-		$user = User::findOrFail($user_id);
-		return View::make('users.edit', ['user' => $user]);
+		if(Auth::user()['rights'] == 0 && Auth::user()['id'] != $user_id) {
+			return Redirect::to(route('settings.index'))
+				->with('message', [
+					'content' => 'Voor deze handelingen zijn administrator rechten nodig.',
+					'class' => 'danger'
+				]);
+		} else {
+			try{
+				$user = User::findOrFail($user_id);
+				return View::make('users.edit', ['user' => $user]);
+			} catch(ModelNotFoundException $e) {
+	    	return Redirect::to(route('settings.index'))
+					->with('message', [
+						'content' => 'Gebruiker niet gevonden!',
+						'class' => 'danger'
+					]);
+			}
+		}
 	}
 
 

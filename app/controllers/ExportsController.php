@@ -59,7 +59,7 @@ class ExportsController extends \BaseController {
 		return Redirect::to(action('ExportsController@index'))
 			->with('message', [
 				'content' => 'Export verwijderd.',
-				'class' => 'danger'
+				'class' => 'success'
 			]);
 	}
 

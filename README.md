@@ -15,6 +15,7 @@ Also included are ways to:
 * Export journals to CSV, Markdown and PDF.
 * Keep a list of suspects.
 * Solve mono-alphabatic ciphers.
+* Dynamic settings, easy to change.
 
 ## Requirements
 
@@ -48,7 +49,10 @@ Consult the [documentation on Laravel Homestead](http://laravel.com/docs/4.2/hom
   * Use `app/config/local.example` and `app/config/local` for development
 * Edit your configuration
 * Generate a secret key with `php artisan key:generate`
-* Ensure your PHP process/server can write to `app/storage` (`chmod -R 755 app/storage`)
+* Ensure your PHP process/server can write:
+  * to `app/storage` (`chmod -R 777 app/storage`)
+  * to `public/uploads` (`chmod -R 755 public/uploads`)
+  * to `public/downloads` (`chmod -R 775 public/downloads`)
 * Run `php artisan migrate` and `php artisan db:seed`
 * Point a virtualhost to `<cloned_directory>/public`
 * Visit the site. The default login is `owner` with password `changeme`
@@ -57,4 +61,4 @@ Consult the [documentation on Laravel Homestead](http://laravel.com/docs/4.2/hom
 
 ## License
 
-This project is released under the [GPL v3 license](https://github.com/mbernson/logboek/blob/master/LICENSE.txt).
+This project is released under the [GPL v3 license](https://github.com/l0ngestever/logboek/blob/master/LICENSE.txt).

@@ -17,7 +17,7 @@
 		<th>Eigenaar</th>
 		<th>Aantal entries</th>
 		<th>Laatst bijgewerkt</th>
-		<th>Bewerken</th>
+		<th>Beheren</th>
 	</tr>
 
 	@foreach($logbooks as $logbook)
@@ -31,7 +31,7 @@
 		@endif
 		<td>{{ $logbook->entries->count() }}</td>
 		<td>{{ ($entry = $logbook->entries->last()) ? $entry->started_at : 'Nog nooit' }}</td>
-		<td>{{ link_to_action('logbooks.edit', 'Bewerken', [$logbook->id], ['class' => 'btn btn-sm btn-success']) }}</td>
+		<td>{{ link_to_action('logbooks.edit', 'Beheren', [$logbook->id], ['class' => 'btn btn-sm btn-success']) }}</td>
 	</tr>
 	@endforeach
 
