@@ -26,7 +26,7 @@ $app = new Illuminate\Foundation\Application;
 
 $env = $app->detectEnvironment([
 	'local' => [
-		'your-machine-name'
+		'logboek'
 	]
 ]);
 
