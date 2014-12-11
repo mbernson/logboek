@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 class EvidenceController extends \BaseController {
 
 	public function __construct() {
@@ -72,8 +72,16 @@ class EvidenceController extends \BaseController {
 	 * @return Response
 	 */
 	public function show($id) {
-		$evidence = Evidence::findOrFail($id);
-		return View::make('evidences.show', ['evidence' => $evidence]);
+		try{
+			$evidence = Evidence::findOrFail($id);
+			return View::make('evidences.show', ['evidence' => $evidence]);
+		} catch(ModelNotFoundException $e) {
+			return Redirect::to(route('evidences.index'))
+				->with('message', [
+					'content' => 'Bewijs niet gevonden!',
+					'class' => 'danger'
+				]);
+		}
 	}
 
 
@@ -84,8 +92,16 @@ class EvidenceController extends \BaseController {
 	 * @return Response
 	 */
 	public function edit($id) {
-		$evidence = Evidence::findOrFail($id);
-		return View::make('evidences.edit', ['evidence' => $evidence]);
+		try{
+			$evidence = Evidence::findOrFail($id);
+			return View::make('evidences.edit', ['evidence' => $evidence]);
+		} catch(ModelNotFoundException $e) {
+			return Redirect::to(route('evidences.index'))
+				->with('message', [
+					'content' => 'Bewijs niet gevonden!',
+					'class' => 'danger'
+				]);
+		}
 	}
 
 

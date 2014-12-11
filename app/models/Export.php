@@ -64,12 +64,24 @@ class Export extends Model {
 	// Export functions
 
 	protected function getView() {
+		$settings = [
+			'title' => Setting::get('ex_pdf_title'),
+			'customer' => Setting::get('ex_pdf_customer'),
+			'date' => Setting::get('ex_pdf_date'),
+			'version' => Setting::get('ex_pdf_version'),
+			'disclaimer' => Setting::get('ex_pdf_disclaimer_html')
+		];
+
 		return View::make('pdfs.report', [
-			'title' => 'IPFIT1 groep 2',
+			'project_name' => Setting::get('project_name'),
 			'generated_at' => date('d-m-Y H:i'),
 			'users' => static::getUsers(),
 			'logbooks' => static::getLogbooks($this->logbooks),
 			'attachments' => static::getAttachments($this->logbooks),
+			'attachmentsAll' => Attachment::all(),
+			'evidences' => Evidence::all(),
+			'suspects' => Suspect::all(),
+			'settings' => $settings
 		]);
 	}
 

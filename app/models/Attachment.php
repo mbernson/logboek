@@ -19,6 +19,10 @@ class Attachment extends Model {
 		'hash', 'hash_algorithm'
 	];
 
+	public static function getUploadUrl($filename) {
+		return url(self::BASE_PATH.$filename);
+	}
+
 	public function calculatedHash() {
 		$hash = '';
 		switch($this->hash_algorithm) {
