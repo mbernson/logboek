@@ -13,6 +13,9 @@ class Setting extends Model {
 	  $result = static::where('key', '=', $key);
 	  $setting = $result->first();
 
+	  if(!$setting)
+		  return null;
+
 	  Cache::put($setting->key, $setting->value, self::$expireTime);
 	  return $setting->value;
   }
