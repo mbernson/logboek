@@ -4,12 +4,6 @@
 
 <h1>Bestanden</h1>
 
-<script>
-$(function () {
-	$('#myTab a:last').tab('show')
-})
-</script>
-
 <ul class="nav nav-tabs" role="tablist" id="myTab">
 	<li class="active"><a href="#attachments" role="tab" data-toggle="tab">Bestanden</a></li>
 	<li><a href="#upload" role="tab" data-toggle="tab">Upload</a></li>

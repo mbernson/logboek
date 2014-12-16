@@ -156,6 +156,7 @@
 <script src="/js/entry.js"></script>
 <script src="/js/tasks.js"></script>
 <script src="/js/dropzone.js"></script>
+<script src="/js/attachments.js"></script>
 
 @if(App::environment('production') && Config::get('app.piwik_enabled') == true)
 
