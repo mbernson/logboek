@@ -3,9 +3,9 @@
 <html>
 <head>
 
-<title>IPFJUR Forensisch</title>
+	<title>{{ $project_name }}</title>
 
-<link rel="stylesheet" type="text/css" href="css/pdf.css" />
+	<link rel="stylesheet" type="text/css" href="css/pdf.css" />
 
 </head>
 
@@ -106,7 +106,7 @@
 
 @foreach($logbooks as $logbook)
 
-@include('pdfs.partials.logbook', ['logbook' => $logbook, 'entries' => $logbook->entries])
+@include('exports.templates.partials.logbook', ['logbook' => $logbook, 'entries' => $logbook->entries])
 
 @endforeach
 

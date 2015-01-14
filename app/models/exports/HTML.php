@@ -5,14 +5,14 @@ namespace Exports;
 use File;
 use View;
 
-class Markdown extends \Export {
+class HTML extends \Export {
 
-	protected $content_type = 'text/plain';
-	protected $extension = 'md';
+	protected $content_type = 'text/html';
+	protected $extension = 'html';
 
 	public function __construct(array $attributes = array()) {
 		parent::__construct($attributes);
-		$this->type = 'markdown';
+		$this->type = 'html';
 	}
 
 }

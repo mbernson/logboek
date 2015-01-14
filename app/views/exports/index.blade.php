@@ -7,6 +7,7 @@
 <p>
 	{{ link_to_action('ExportsController@create', 'Nieuwe CSV export', ['csv'], ['class' => 'btn btn-primary btn-large']) }}
 	{{ link_to('./exports/create/markdown?save=0', 'Nieuwe Markdown export', ['class' => 'btn btn-primary btn-large']) }}
+	{{ link_to('./exports/create/html?save=0', 'Nieuwe HTML export', ['class' => 'btn btn-primary btn-large']) }}
 </p>
 
 <p>

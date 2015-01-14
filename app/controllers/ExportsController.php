@@ -15,6 +15,8 @@ class ExportsController extends \BaseController {
 			return new Exports\CSV();
 		case 'pdf':
 			return new Exports\PDF();
+		case 'html':
+			return new Exports\HTML();
 		case 'markdown':
 			return new Exports\Markdown();
 		default:
