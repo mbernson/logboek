@@ -24,6 +24,25 @@ Also included are ways to:
 
 ## Installation
 
+You can use Vagrant to set up a virtualized development environment. This is often the easiest way.
+Manual installation instructions are also available.
+
+### Vagrant
+
+Ensure you have [Vagrant](http://vagrantup.com) and [Virtualbox](https://www.virtualbox.org) installed first.
+
+* Clone the project
+* Run `vagrant up`
+* Add `192.168.10.10  logboek.app` to your hosts file
+* The application should now be accessible at `http://logboek.app`
+	* The default login is `owner` with password `changeme`
+	* You can also use the VM's IP address instead
+* Celebrate!
+
+Consult the [documentation on Laravel Homestead](http://laravel.com/docs/4.2/homestead) for further usage of the VM.
+
+### Manual installation
+
 * Clone the project
 * Run `composer install`
 * Copy the configuration folder `app/config/production.example` to `app/config/production`
