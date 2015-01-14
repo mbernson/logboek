@@ -7,10 +7,12 @@
 	<div class="panel-body">
 		{{ $entry->html_body or '<p><em>Geen inhoud</em></p>' }}
 
+		@if($collapse == true) 
 		<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#metadata-{{ $entry->id }}">Toon metadata</button>
+		@endif
 	</div>
 
-	<div class="panel-footer collapse" id="metadata-{{ $entry->id }}">
+	<div class="panel-footer {{ $collapse == false ? '' : 'collapse' }}" id="metadata-{{ $entry->id }}">
 		<table class="table">
 		<tr>
 			<th>Eigenaar</th>

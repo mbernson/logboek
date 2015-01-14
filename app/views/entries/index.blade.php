@@ -12,7 +12,7 @@
 
 @foreach($entries as $entry)
 
-	@include('entries.panel', ['entry' => $entry])
+	@include('entries.panel', ['entry' => $entry, 'collapse' => true])
 
 @endforeach
 

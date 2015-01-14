@@ -2,7 +2,7 @@
 
 @section('content')
 
-@include('entries.panel', ['entry' => $entry])
+@include('entries.panel', ['entry' => $entry, 'collapse' => false])
 
 {{ link_to_action('logbooks.entries.edit', 'Bewerken', [$entry->logbook->id, $entry->id], ['class' => 'btn btn-success pull-left']) }}
 

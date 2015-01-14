@@ -13,6 +13,7 @@ class HTML extends \Export {
 	public function __construct(array $attributes = array()) {
 		parent::__construct($attributes);
 		$this->type = 'html';
+		$this->template = 'exports.templates.bootstrap';
 	}
 
 }
