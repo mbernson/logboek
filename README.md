@@ -62,3 +62,10 @@ Consult the [documentation on Laravel Homestead](http://laravel.com/docs/4.2/hom
 ## License
 
 This project is released under the [GPL v3 license](https://github.com/l0ngestever/logboek/blob/master/LICENSE.txt).
+
+
+#TO DO (dutch)
+
+1. Juridische kader inbouwen oid voor export
+2. md5 / sha1 overview bij popup files
+3. entry uitbouwen
