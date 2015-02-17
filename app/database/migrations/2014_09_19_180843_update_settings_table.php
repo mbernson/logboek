@@ -34,7 +34,7 @@ class UpdateSettingsTable extends Migration {
 			'menu' => join(';', [
 				'entries', 'logbooks', 'tasks',
 				'attachments', 'evidences', 'exports',
-				'cipher', 'settings', 'intro',
+				'menu', 'settings', 'intro',
 			])
 		];
 

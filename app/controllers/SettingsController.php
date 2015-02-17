@@ -8,10 +8,13 @@ class SettingsController extends \BaseController {
 		$users = User::orderBy('username')
 			->paginate(self::$per_page);
 
+		$legals = Legal::orderBy('name')
+			->paginate(self::$per_page);
+
 		$this->features = [
 			'entries', 'logbooks', 'tasks',
 			'attachments', 'evidences', 'exports',
-			'cipher'
+			'tools'
 		];
 
 		$this->export_features = [
@@ -24,6 +27,7 @@ class SettingsController extends \BaseController {
 		View::share('settings', Setting::all());
 		View::share('suspects', Suspect::all());
 		View::share('features', $this->features);
+		View::share('legals', $legals);
 	}
 
 	/**

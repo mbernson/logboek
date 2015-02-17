@@ -16,6 +16,7 @@ $(function () {
 	<li><a href="#suspects" role="tab" data-toggle="tab">Verdachten</a></li>
 	<li><a href="#export" role="tab" data-toggle="tab">Export</a></li>
 	<li><a href="#users" role="tab" data-toggle="tab">Gebruikers</a></li>
+	<li><a href="#legals" role="tab" data-toggle="tab">Juridische kader</a></li>
 </ul>
 
 <div class="tab-content">
@@ -38,7 +39,6 @@ $(function () {
 		@endif
 
 	</div>
-
 	<div class="tab-pane" id="menu">
 
 		@if(Auth::user()['rights'] == 0)
@@ -199,6 +199,46 @@ $(function () {
 			@endforeach
 		@endif
 		</table>
+	</div>
+	<div class="tab-pane" id="legals">
+
+		@if(Auth::user()['rights'] == 0)
+			<p><br />Voor deze instellingen zijn <b>administrator</b> rechten nodig.</p>
+		@else
+			<br />
+			<p>
+				<a class="btn btn-primary btn-lg" href="{{ action('legals.create') }}">Nieuwe wet</a>
+			</p>
+
+			@if($legals->count() != 0)
+				<table class="table table-hover">
+					<tr>
+						<th>ID</th>
+						<th>Naam</th>
+						<th>Afkorting</th>
+						<th>Actief</th>
+					</tr>
+
+					@foreach($legals as $legal)
+
+					<tr>
+						<td>{{ $legal->id }}</td>
+						<td>{{ link_to_action('legals.edit', $legal->name, [$legal->id]) }}</td>
+						<td>{{ $legal->abbreviation }}</td>
+						@if($legal->active == 0)
+							<td>Niet actief</td>
+						@else
+							<td>Actief</td>
+						@endif
+					</tr>
+
+					@endforeach
+				</table>
+			@else
+				<p>Er zijn geen wetten gevonden in de tabel <b>juridische kader</b>!</p>
+			@endif
+		@endif
+
 	</div>
 </div>
 

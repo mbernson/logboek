@@ -21,7 +21,6 @@ class TasksController extends \BaseController {
 	public function index() {
 		$tasks = Task::newest()->paginate(static::$per_page);
 		return View::make('tasks.index', ['tasks' => $tasks]);
-
 	}
 
 	public function toggle($id) {
@@ -170,8 +169,8 @@ class TasksController extends \BaseController {
 	 * @return Response
 	 */
 	public function destroy($task_id) {
-		$entry = Task::findOrFail($task_id);
-		$entry->delete();
+		$task = Task::findOrFail($task_id);
+		$task->delete();
 
 		return Redirect::to(route('tasks.index'))
 			->with('message', [

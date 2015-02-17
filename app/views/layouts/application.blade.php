@@ -65,6 +65,19 @@
 							<li {{ Request::is('cipher') ? 'class="active"' : '' }}>{{ link_to('/cipher', 'Ciphertool') }}</li>
 						@endif
 
+						@if(Setting::contains('menu', 'tools'))
+							<ul class="nav navbar-nav">
+								<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Tools <b class="caret"></b></a>
+									<ul class="dropdown-menu" role="menu">
+										<li>{{ link_to('/cipher', 'Ciphertool') }}</li>
+										<li class="divider"></li>
+										<li>{{ link_to_route('legals.index', 'Juridishe kader') }}</li>
+									</ul>
+								</li>
+							</ul>
+						@endif
+
 						<li {{ Request::is('settings') ? 'class="active"' : '' }}>{{ link_to_route('settings.index', 'Instellingen') }}</li>
 						<li {{ Request::is('intro') ? 'class="active"' : '' }}>{{ link_to('/intro', 'Over') }}</li>
 					</ul>
