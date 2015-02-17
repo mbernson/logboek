@@ -66,6 +66,7 @@ This project is released under the [GPL v3 license](https://github.com/l0ngestev
 
 #TO DO (dutch)
 
-1. Juridische kader inbouwen oid voor export
-2. md5 / sha1 overview bij popup files
-3. entry uitbouwen
+1. md5 / sha1 overview bij popup files
+2. entry uitbouwen
+3. Juridische kader toevoegen aan export
+4. Python script executable
