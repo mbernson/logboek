@@ -8,7 +8,7 @@ class SettingsController extends \BaseController {
 		$users = User::orderBy('username')
 			->paginate(self::$per_page);
 
-		$legals = Legal::orderBy('name')
+		$legals = Legal::orderBy('id')
 			->paginate(self::$per_page);
 
 		$this->features = [

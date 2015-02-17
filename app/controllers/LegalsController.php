@@ -11,7 +11,7 @@ class LegalsController extends \BaseController {
     $legals = DB::table('legals')->select('id', 'name', 'body', 'abbreviation')
                 ->where('active', '1')
                 ->orderBy('name')
-                ->paginate(25);
+                ->paginate(10);
     return View::make('legals.index', ['legals' => $legals]);
   }
 
