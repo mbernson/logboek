@@ -8,10 +8,10 @@ class LegalsController extends \BaseController {
    * @return Response
    */
   public function index() {
-    $legals = DB::table('legals')->select('id', 'name', 'html_body', 'abbreviation')
+    $legals = DB::table('legals')->select('id', 'name', 'html_body', 'abbreviation', 'code')
                 ->where('active', '1')
-                ->orderBy('name')
-                ->paginate(10);
+                ->orderBy('id')
+                ->paginate(25);
     return View::make('legals.index', ['legals' => $legals]);
   }
 
