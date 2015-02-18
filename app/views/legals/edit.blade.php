@@ -33,12 +33,16 @@
 
 {{ Form::close() }}
 
-{{ Form::open(['route' => ['legals.destroy', $legal->id], 'method' => 'delete']) }}
+@if($legal->isNew() == false)
 
-  <div class="pull-right">
-    <button type="submit" class="btn btn-danger pull-right">Verwijderen</button>
-  </div>
+  {{ Form::open(['route' => ['legals.destroy', $legal->id], 'method' => 'delete']) }}
 
-{{ Form::close() }}
+    <div class="pull-right">
+      <button type="submit" class="btn btn-danger pull-right">Verwijderen</button>
+    </div>
+
+  {{ Form::close() }}
+
+@endif
 
 @stop

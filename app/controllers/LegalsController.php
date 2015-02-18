@@ -8,7 +8,7 @@ class LegalsController extends \BaseController {
    * @return Response
    */
   public function index() {
-    $legals = DB::table('legals')->select('id', 'name', 'body', 'abbreviation')
+    $legals = DB::table('legals')->select('id', 'name', 'html_body', 'abbreviation')
                 ->where('active', '1')
                 ->orderBy('name')
                 ->paginate(10);
@@ -34,7 +34,10 @@ class LegalsController extends \BaseController {
   public function store() {
     $legal = new Legal();
     $legal->unguard();
-    $legal->fill(Input::only(['name', 'body', 'abbreviation', 'active']));
+
+    $legal->fill(Input::only(['name', 'body', 'html_body', 'abbreviation', 'active']));
+
+    $legal['html_body'] = Markdown::string($legal['body']);
 
     if($legal->validate()) {
       $legal->save();

@@ -216,6 +216,7 @@ $(function () {
 						<th>ID</th>
 						<th>Naam</th>
 						<th>Afkorting</th>
+						<th>Wetboek</th>
 						<th>Actief</th>
 					</tr>
 
@@ -225,6 +226,7 @@ $(function () {
 						<td>{{ $legal->id }}</td>
 						<td>{{ link_to_action('legals.edit', $legal->name, [$legal->id]) }}</td>
 						<td>{{ $legal->abbreviation }}</td>
+						<td>{{ $legal->code }}</td>
 						@if($legal->active == 0)
 							<td>Niet actief</td>
 						@else

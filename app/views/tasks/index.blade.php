@@ -10,6 +10,8 @@
 		<p>Er zijn <b>geen</b> taken gevonden!</p>
 	@else
 
+	@include('partials.modals')
+
 	<table class="table table-hover">
 		<tr>
 			<th>ID</th>
@@ -17,6 +19,7 @@
 			<th>Eigenaar</th>
 			<th>Deadline</th>
 			<th>Status</th>
+			<th>Beschrijving</th>
 			<th>Voltooid</th>
 		</tr>
 
@@ -31,6 +34,17 @@
 			@else
 				<td>Afgesloten</td>
 			@endif
+			<td>
+				<?php
+					$modalBody;
+					if($task->description == '') {
+						$modalBody = '<i>Geen beschrijving gevonden.</i>';
+					} else {
+						$modalBody = $task->description;
+					}
+				?>
+				<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal" data-title="{{ $task->name }}" data-content="{{ $modalBody; }}">Details</button>
+			</td>
 			<td><div class="btn-group btn-group-xs">
 			<button type="button" data-default-class="btn-success" class="btn btn-default {{ $task->status ? 'btn-success' : '' }}">Ja</button>
 			<button type="button" data-default-class="btn-danger" class="btn btn-default {{ $task->status ? '' : 'btn-danger' }}">Nee</button>

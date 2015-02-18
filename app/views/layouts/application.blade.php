@@ -168,6 +168,19 @@
 <script src="/js/tasks.js"></script>
 <script src="/js/dropzone.js"></script>
 
+<!-- Model popup code, loading after jQuery -->
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#myModal").on('show.bs.modal', function(event){
+					var button = $(event.relatedTarget);  // Button that triggered the modal
+					var titleData = button.data('title'); // Extract value from data-* attributes
+					var bodyData = button.data('content'); //Extract value from data-* attributes
+					$(this).find('.modal-title').text(titleData);
+					$(this).find('.modal-body').text(bodyData);
+			});
+	});
+</script>
+
 @if(App::environment('production') && Config::get('app.piwik_enabled') == true)
 
 {{-- This must be on one line, otherwise blade will not parse it --}}

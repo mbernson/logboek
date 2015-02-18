@@ -12,7 +12,7 @@
   @foreach($legals as $legal)
     <h3>{{ $legal->name }}</h3>
     <h5>{{ $legal->abbreviation }}</h5>
-    <p>{{ $legal->body }}</p>
+    <p>{{ $legal->html_body }}</p>
   @endforeach
 
 @endif
