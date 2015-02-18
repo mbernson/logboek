@@ -94,6 +94,6 @@ blockquote {
 
 /* #bestanden */
 
-#voorblad, #inhhoudsopgave, #disclaimer, #suspects, #attachments, #evidences, .logbook {
+#voorblad, #inhhoudsopgave, #disclaimer, #legals, #suspects, #attachments, #evidences, .logbook {
 	page-break-after: always;
 }

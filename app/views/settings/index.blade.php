@@ -143,6 +143,11 @@ $(function () {
 				</p>
 
 				<div class="form-group">
+					{{ Form::label('ex_pdf_sh_legals', 'PDF Juridische kader') }}
+					{{ Form::select('ex_pdf_sh_legals', ['0' => 'Exporteer niet', '1' => 'Exporteer wel'], Setting::get('ex_pdf_sh_legals'), ['class' => 'form-control']) }}
+				</div>
+
+				<div class="form-group">
 					{{ Form::label('ex_pdf_sh_evidences', 'PDF Bewijzen') }}
 					{{ Form::select('ex_pdf_sh_evidences', ['0' => 'Exporteer niet', '1' => 'Exporteer wel'], Setting::get('ex_pdf_sh_evidences'), ['class' => 'form-control']) }}
 				</div>

@@ -86,6 +86,7 @@ class Export extends Model {
 			'attachmentsAll' => Attachment::all(),
 			'evidences' => Evidence::all(),
 			'suspects' => Suspect::all(),
+			'legals' => Legal::where('active', 1)->get(),
 			'settings' => $settings
 		]);
 	}

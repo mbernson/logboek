@@ -30,6 +30,7 @@ class UpdateSettingsTable extends Migration {
 			'ex_pdf_sh_evidences' => '1',
 			'ex_pdf_sh_attachments' => '1',
 			'ex_pdf_sh_suspects' => '1',
+			'ex_pdf_sh_legals' => '1',
 
 			'menu' => join(';', [
 				'entries', 'logbooks', 'tasks',

@@ -20,7 +20,7 @@ class SettingsController extends \BaseController {
 		$this->export_features = [
 			'ex_pdf_title', 'ex_pdf_customer', 'ex_pdf_date',
 			'ex_pdf_version', 'ex_pdf_disclaimer', 'ex_pdf_sh_evidences',
-			'ex_pdf_sh_attachments', 'ex_pdf_sh_suspects'
+			'ex_pdf_sh_attachments', 'ex_pdf_sh_suspects', 'ex_pdf_sh_legals'
 		];
 
 		View::share('users', $users);

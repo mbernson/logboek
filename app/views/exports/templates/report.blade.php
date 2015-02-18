@@ -96,10 +96,20 @@
 <div id="disclaimer">
 
 	<h1>Disclaimer</h1>
-
 	<p>{{ $settings['disclaimer'] }}</p>
 
 </div>
+
+@if(count($legals) > 0 && Setting::get('ex_pdf_sh_legals') == 1)
+	<div id="legals">
+		<h1>Juridische kader</h1>
+		@foreach($legals as $legal)
+			<h3>{{ $legal->name }}</h3>
+			<h4>{{ $legal->abbreviation }}</h4>
+			<p>{{ $legal->html_body }}</p>
+		@endforeach
+	</div>
+@endif
 
 <h1>Logboeken</h1>
 
