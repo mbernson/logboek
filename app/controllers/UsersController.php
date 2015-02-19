@@ -188,7 +188,26 @@ class UsersController extends \BaseController {
 	 */
 	public function destroy($user_id) {
 		$entry = User::findOrFail($user_id);
+		$user = $entry['username'];
 		$entry->delete();
+
+		$count = Logbook::where('user_id', '=', $user_id)->count();
+
+		$logbooks = Logbook::where('user_id', '=', $user_id)->update(array('user_id' => 0));
+
+		if($count == 1){
+			return Redirect::to(route('settings.index'))
+				->with('message', [
+					'content' => 'Gebruiker met succes verwijderd! Let op, '.$count.' logboek van gebruiker '.$user.' is veranderd naar eigenaar Systeem!',
+					'class' => 'warning'
+				]);
+		} else if($count > 1){
+			return Redirect::to(route('settings.index'))
+				->with('message', [
+					'content' => 'Gebruiker met succes verwijderd! Let op, '.$count.' logboeken van gebruiker '.$user.' zijn veranderd naar eigenaar Systeem!',
+					'class' => 'warning'
+				]);
+		}
 
 		return Redirect::to(route('settings.index'))
 			->with('message', [
