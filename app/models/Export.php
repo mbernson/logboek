@@ -69,6 +69,7 @@ class Export extends Model {
 		if(empty($template)) {
 			$template = $this->template;
 		}
+
 		$settings = [
 			'title' => Setting::get('ex_pdf_title'),
 			'customer' => Setting::get('ex_pdf_customer'),
@@ -82,12 +83,14 @@ class Export extends Model {
 			'generated_at' => date('d-m-Y H:i'),
 			'users' => static::getUsers(),
 			'logbooks' => static::getLogbooks($this->logbooks),
+			'logbooksAll' => static::getLogbooks('all'),
+			'entriesAll' => Entry::all(),
 			'attachments' => static::getAttachments($this->logbooks),
 			'attachmentsAll' => Attachment::all(),
 			'evidences' => Evidence::all(),
 			'suspects' => Suspect::all(),
 			'legals' => Legal::where('active', 1)->get(),
-			'settings' => $settings
+			'settings' => $settings,
 		]);
 	}
 
@@ -127,6 +130,8 @@ class Export extends Model {
 	protected static function getLogbooks($range) {
 		$id = intval($range);
 		if($range == 'all')
+			return Logbook::all();
+		elseif($range == 'html')
 			return Logbook::all();
 		elseif($id != 0)
 			return [Logbook::find($id)];

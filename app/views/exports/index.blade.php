@@ -20,9 +20,9 @@
 	<br />
 	<label for="logbooks">Inbegrepen logboek(en)</label>
 	<select name="logbooks">
-		@foreach($logbooks as $logbook)
-		<option value="{{ $logbook->id }}">{{{ $logbook->title }}}</option>
-		@endforeach
+			@foreach($logbooks as $logbook)
+				<option value="{{ $logbook->id }}">{{{ $logbook->title }}}</option>
+			@endforeach
 		<option value="all">Alle logboeken</option>
 	</select>
 	<br />

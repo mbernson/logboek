@@ -89,7 +89,7 @@ class UsersController extends \BaseController {
 		$user = new User();
 
 		$user->unguard();
-		$user->fill(Input::only('username', 'email', 'password', 'rights', 'first_name', 'last_name'));
+		$user->fill(Input::only('username', 'email', 'password', 'rights', 'first_name', 'last_name', 'student_number'));
 
 		if($user->validate()) {
 			$user->password = Hash::make(Input::get('password'));
@@ -158,7 +158,7 @@ class UsersController extends \BaseController {
 		$user = User::findOrFail($user_id);
 
 		$user->unguard();
-		$user->fill(Input::only('username', 'email', 'rights', 'first_name', 'last_name'));
+		$user->fill(Input::only('username', 'email', 'rights', 'first_name', 'last_name', 'student_number'));
 		if(Input::has('password'))
 			$user->password = Input::get('password');
 
