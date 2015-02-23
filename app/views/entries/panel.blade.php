@@ -7,7 +7,7 @@
 	<div class="panel-body">
 		{{ $entry->html_body or '<p><em>Geen inhoud</em></p>' }}
 
-		@if($collapse == true) 
+		@if($collapse == true)
 		<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#metadata-{{ $entry->id }}">Toon metadata</button>
 		@endif
 	</div>
@@ -31,24 +31,26 @@
 			<td>{{ $entry->finished_at }}</td>
 		</tr>
 		</table>
-		
+
 		@if($entry->evidence_id != 0)
-		<h3>Bewijs</h3>
 		<?php $evidence = $entry->getEvidence($entry->evidence_id); ?>
-		<table class="table">
-			<tr>
-				<th>Naam</th>
-				<td>{{ link_to_action('evidences.show', $evidence->title, [$entry->evidence_id]) }}</td>
-			</tr>
-			<tr>
-				<th>Afzender</th>
-				<td>{{ $evidence->sender; }} </td>
-			</tr>
-			<tr>
-				<th>Datum ontvangen</th>
-				<td>{{ $evidence->date_received; }}</td>
-			</tr>
-		</table>
+			@if($evidence != '')
+				<h3>Bewijs</h3>
+					<table class="table">
+						<tr>
+							<th>Naam</th>
+							<td>{{ link_to_action('evidences.show', $evidence->title, [$entry->evidence_id]) }}</td>
+						</tr>
+						<tr>
+							<th>Afzender</th>
+							<td>{{ $evidence->sender; }} </td>
+						</tr>
+						<tr>
+							<th>Datum ontvangen</th>
+							<td>{{ $evidence->date_received; }}</td>
+						</tr>
+					</table>
+			@endif
 		@endif
 
 		@if($entry->hasWs())

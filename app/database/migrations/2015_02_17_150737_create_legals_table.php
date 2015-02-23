@@ -19,8 +19,8 @@ class CreateLegalsTable extends Migration {
       $table->string('abbreviation')->nullable();
       $table->string('code')->nullable();
       $table->integer('active')->default(0); // Default zero
-      $table->softDeletes();
       $table->timestamps();
+      $table->softDeletes();
     });
   }
 

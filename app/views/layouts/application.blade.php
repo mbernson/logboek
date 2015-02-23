@@ -167,6 +167,8 @@
 <script src="/js/entry.js"></script>
 <script src="/js/tasks.js"></script>
 <script src="/js/dropzone.js"></script>
+<script src="/js/signature_pad.js"></script>
+<script src="/js/signature_pad_app.js"></script>
 
 <!-- Model popup code, loading after jQuery -->
 <script type="text/javascript">

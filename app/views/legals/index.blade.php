@@ -4,28 +4,6 @@
 
 <h1>Juridische kader</h1>
 
-<!-- Count codes -->
-  <?php
-    $all = 0;
-    $criminalLaw = 0;
-    $criminalProcedure = 0;
-    $europeanRights = 0;
-
-    foreach($legals as $legal) {
-      if($legal->code == 'Wetboek van Strafrecht') {
-        /* Count Strafrecht */
-        $criminalLaw++;
-      } else if($legal->code == 'Wetboek van Strafvordering') {
-        /* Count Strafvordering */
-        $criminalProcedure++;
-      } else if($legal->code == 'Europees Verdrag') {
-        /* Count Europees verdrag */
-        $europeanRights++;
-      }
-      $all++;
-    }
-  ?>
-<!-- end cound codes -->
 <!-- Code used for tab system -->
   <script>
   $(function () {

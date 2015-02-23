@@ -31,7 +31,7 @@
 		@endif
 		<td>{{ $logbook->entries->count() }}</td>
 		<td>{{ ($entry = $logbook->entries->last()) ? $entry->started_at : 'Nog nooit' }}</td>
-		<td>{{ link_to_action('logbooks.edit', 'Beheren', [$logbook->id], ['class' => 'btn btn-sm btn-success']) }}</td>
+		<td>{{ link_to_action('logbooks.edit', 'Beheren', [$logbook->id], ['class' => 'btn btn-xs btn-success']) }}</td>
 	</tr>
 	@endforeach
 

@@ -5,6 +5,8 @@ use Illuminate\Database\Eloquent\SoftDeletingTrait;
 class Legal extends Model {
   use SoftDeletingTrait;
 
+  protected $table = 'legals';
+
   protected $fillable = ['name', 'body', 'html_body', 'abbreviation', 'active'];
 
   protected $rules = [

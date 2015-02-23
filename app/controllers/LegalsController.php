@@ -12,7 +12,28 @@ class LegalsController extends \BaseController {
                 ->where('active', '1')
                 ->orderBy('id')
                 ->paginate(25);
-    return View::make('legals.index', ['legals' => $legals]);
+
+    $all = 0;
+    $criminalLaw = 0;
+    $criminalProcedure = 0;
+    $europeanRights = 0;
+
+    foreach($legals as $legal) {
+      if($legal->code == 'Wetboek van Strafrecht') {
+        /* Count Strafrecht */
+        $criminalLaw++;
+      } else if($legal->code == 'Wetboek van Strafvordering') {
+        /* Count Strafvordering */
+        $criminalProcedure++;
+      } else if($legal->code == 'Europees Verdrag') {
+        /* Count Europees verdrag */
+        $europeanRights++;
+      }
+      $all++;
+    }
+
+    return View::make('legals.index', ['legals' => $legals, 'all' => $all, 'criminalLaw' => $criminalLaw,
+                      'criminalProcedure' => $criminalProcedure, 'europeanRights' => $europeanRights]);
   }
 
 
@@ -61,7 +82,7 @@ class LegalsController extends \BaseController {
    * @return Response
    */
   public function show($legal_id) {
-    //TO DO LATER
+    return Redirect::to('/legals');
   }
 
 
@@ -95,7 +116,9 @@ class LegalsController extends \BaseController {
     $legal = Legal::findOrFail($legal_id);
 
     $legal->unguard();
-    $legal->fill(Input::only('name', 'body', 'abbreviation', 'active'));
+    $legal->fill(Input::only('name', 'body', 'html_body', 'abbreviation', 'active'));
+
+    $legal['html_body'] = Markdown::string($legal['body']);
 
     if($legal->validate()) {
       $legal->save();

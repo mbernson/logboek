@@ -90,8 +90,14 @@ class Entry extends Model {
 	}
 
 	public function getEvidence($evidence_id) {
-		 $evidence = Evidence::findOrFail($evidence_id);
-		 return $evidence;
+		$evidence = NULL;
+
+		try{
+			$evidence = Evidence::findOrFail($evidence_id);
+			return $evidence;
+		} catch(Exception $e) {
+			return $evidence;
+		}
 	}
 
 	public function get7Ws() {

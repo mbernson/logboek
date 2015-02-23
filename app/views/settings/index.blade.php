@@ -4,12 +4,6 @@
 
 <h1>Instellingen</h1>
 
-<script>
-$(function () {
-	$('#myTab a:last').tab('show')
-})
-</script>
-
 <ul class="nav nav-tabs" role="tablist" id="myTab">
 	<li class="active"><a href="#default" role="tab" data-toggle="tab">Standaard</a></li>
 	<li><a href="#menu" role="tab" data-toggle="tab">Menu</a></li>
@@ -248,5 +242,11 @@ $(function () {
 
 	</div>
 </div>
+
+<script>
+$(function () {
+	$('#myTab a:last').tab('show')
+})
+</script>
 
 @stop

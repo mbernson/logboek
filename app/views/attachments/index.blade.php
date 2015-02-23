@@ -11,15 +11,18 @@ $(function () {
 </script>
 
 <ul class="nav nav-tabs" role="tablist" id="myTab">
-	<li class="active"><a href="#attachments" role="tab" data-toggle="tab">Bestanden</a></li>
+	<li class="active"><a href="#attachments" role="tab" data-toggle="tab">Bestanden <span class="badge">{{ $attachmentsCount }}</span></a></li>
 	<li><a href="#upload" role="tab" data-toggle="tab">Upload</a></li>
-	<li><a href="#uploads" role="tab" data-toggle="tab">Uploads</a></li>
-	<li><a href="#alluploads" role="tab" data-toggle="tab">Alle uploads</a></li>
+	<li><a href="#uploads" role="tab" data-toggle="tab">Uploads <span class="badge">{{ $uploadsCount }}</span></a></li>
+	<li><a href="#alluploads" role="tab" data-toggle="tab">Alle uploads <span class="badge">{{ $alluploadsCount }}</span></a></li>
 </ul>
 
 <div class="tab-content">
 	<div class="tab-pane active" id="attachments">
-		<p style="padding-top:10px;"><a class="btn btn-primary btn-lg" href="{{ action('attachments.create') }}">Nieuw bestand</a></p>
+		<p style="padding-top:10px;">
+			<a class="btn btn-primary btn-lg" href="{{ action('attachments.create') }}">Nieuw bestand</a>
+		</p>
+
 			@if($attachments->count() == 0)
 				<p>Er zijn <b>geen</b> bestanden gevonden!</p>
 			@else
