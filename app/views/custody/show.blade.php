@@ -115,15 +115,19 @@
   </div>
   <div class="panel-footer">
     <p>
-      {{ link_to_action('custody.edit', 'Bewerken', [$custody->id], ['class' => 'btn btn-success']) }}
+      @if($custody->signed == 1 && $custody->signature == 1)
+        Chain of custody met succes ingenomen. Wijzigingen / verwijderingen zijn niet meer mogelijk.
+      @else
+        {{ link_to_action('custody.edit', 'Bewerken', [$custody->id], ['class' => 'btn btn-success']) }}
 
-      @if($custody->signed == '0')
-        {{ link_to('custody/'.$custody->id.'/sign', 'Onderteken', ['class' => 'btn btn-info']) }}
-      @elseif($custody->signed == '1')
-        <?php
-          $link = Request::root().'/custody/'.$custody->id.'/signature/'.$custody->signed_hash;
-        ?>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-title="{{ $custody->name }}" data-content="Opdrachtgever dient Chain of Custody te ondertekenen. Geef volgende link om opdrachtgever te laten tekenen." data-url="{{ $link }}">Onderteken</button>
+        @if($custody->signed == '0')
+          {{ link_to('custody/'.$custody->id.'/sign', 'Onderteken', ['class' => 'btn btn-info']) }}
+        @elseif($custody->signed == '1')
+          <?php
+            $link = Request::root().'/custody/'.$custody->id.'/signature/'.$custody->signed_hash;
+          ?>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-title="{{ $custody->name }}" data-content="Opdrachtgever dient Chain of Custody te ondertekenen. Geef volgende link om opdrachtgever te laten tekenen." data-url="{{ $link }}">Onderteken</button>
+        @endif
       @endif
     </p>
   </div>
