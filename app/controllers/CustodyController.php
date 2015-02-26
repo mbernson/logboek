@@ -14,8 +14,10 @@ class CustodyController extends \BaseController {
     }
 
     $authUser = NULL;
-    if(Auth::user()->first_name != '' && Auth::user()->last_name != '')
-      $authUser = Auth::user()->first_name .' '. Auth::user()->last_name;
+    try{
+      if(Auth::user()->first_name != '' && Auth::user()->last_name != '')
+        $authUser = Auth::user()->first_name .' '. Auth::user()->last_name;
+    } catch(Exception $e) { }
 
     View::share('responsible', $responsible);
     View::share('authUser', $authUser);
@@ -50,8 +52,9 @@ class CustodyController extends \BaseController {
     $custody = new Custody();
     $custody->unguard();
 
-    $custody->fill(Input::only(['name', 'characteristic', 'responsible', 'date', 'time', 'description', 'html_description', 'details', 'html_details']));
+    $custody->fill(Input::only(['name', 'characteristic', 'location', 'responsible', 'seized', 'date', 'time', 'description', 'html_description', 'details', 'html_details']));
 
+    $custody['time'] = date('Y-m-d H:m:s');
     $custody['html_description'] = Markdown::string($custody['description']);
     $custody['html_details'] = Markdown::string($custody['details']);
 
@@ -120,8 +123,17 @@ class CustodyController extends \BaseController {
   public function update($custody_id) {
     $custody = Custody::findOrFail($custody_id);
 
-    $custody->fill(Input::only(['name', 'characteristic', 'responsible', 'date', 'time', 'description', 'html_description', 'details', 'html_details']));
+    if($custody->signature == 1) {
+      return Redirect::to(route('evidences.index'))
+  			->with('message', [
+  				'content' => 'Chain of Custody door opdrachtgever getekend. Kan niet worden bewerkt!',
+  				'class' => 'danger'
+  			]);
+    }
 
+    $custody->fill(Input::only(['name', 'characteristic', 'location', 'responsible', 'seized', 'date', 'time', 'description', 'html_description', 'details', 'html_details']));
+
+    $custody['time'] = date('Y-m-d H:m:s');
     $custody['html_description'] = Markdown::string($custody['description']);
     $custody['html_details'] = Markdown::string($custody['details']);
 
@@ -147,8 +159,16 @@ class CustodyController extends \BaseController {
    */
   public function destroy($custody_id) {
     $custody = Custody::findOrFail($custody_id);
-		$custody->delete();
 
+    if($custody->signature == 1) {
+      return Redirect::to(route('evidences.index'))
+  			->with('message', [
+  				'content' => 'Chain of Custody door opdrachtgever getekend. Kan niet worden verwijderd!',
+  				'class' => 'danger'
+  			]);
+    } else {
+      $custody->delete();
+    }
 		return Redirect::to(route('evidences.index'))
 			->with('message', [
 				'content' => 'Chain of Custody met succes verwijderd!',
@@ -188,8 +208,10 @@ class CustodyController extends \BaseController {
 
           $custody['signed'] = 1;
           $custody['signed_ip'] = Request::getClientIp();
-          $custody['signed_hash'] = 'limonade';
+          $custody['signed_hash'] = md5(uniqid(rand(), true));
           $custody['signed_sign'] = Input::get('signed_sign');
+          $custody['signed_date'] = date('Y-m-d');
+          $custody['signed_time'] = date('Y-m-d H:m:s');
 
           if($custody->save()) {
             return Redirect::to(route('evidences.index'))
@@ -266,22 +288,22 @@ class CustodyController extends \BaseController {
         if($custody['signed'] == 1 && $custody['signature'] == 0) {
 
           $custody->fill(Input::only(['signature_name', 'signature_remark', 'html_signature_remark',
-                              'signature_signed', 'signature_signed_ip', 'signature_signed_date']));
+                              'signature_sign', 'signature_ip', 'signature_date', 'signature_time']));
 
+          $custody['signed_hash'] = md5(uniqid(rand(), true)); //Create new hash
+          $custody['signature'] = 1;
           $custody['signature_name'] = Input::get('signature_name');
           $custody['signature_remark'] = Input::get('signature_remark');
           $custody['html_signature_remark'] = Markdown::string($custody['signature_remark']);
-          $custody['signature_signed'] = Input::get('signed_sign');
-          $custody['signature_signed_ip'] = Request::getClientIp();
-          $custody['signature_signed_date'] = date('Y-m-d');
-          $custody['signature_signed_time'] = date('Y-m-d H:m:s');
+          $custody['signature_sign'] = Input::get('signed_sign');
+          $custody['signature_ip'] = Request::getClientIp();
+          $custody['signature_date'] = date('Y-m-d');
+          $custody['signature_time'] = date('Y-m-d H:m:s');
 
           if($custody->save()) {
-            return Redirect::to(route('evidences.index'))
-      				->with('message', [
-      					'content' => 'Chain of Custody met succes ondertekend!',
-      					'class' => 'success'
-      				]);
+
+            return View::make('custody.view', ['custody' => $custody]);
+
           }
 
         } else if($custody['signed'] == 1 && $custody['signature'] == 1) {

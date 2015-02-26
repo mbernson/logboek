@@ -1,4 +1,4 @@
-@extends('layouts.application')
+@extends('layouts.application_signature')
 
 @section('content')
 
@@ -8,7 +8,7 @@
     <h4 style="text-decoration:underline;">Algemeen</h4>
     <table>
       <tr>
-        <th width="125px;">Naam</th>
+        <th width="175px;">Naam</th>
         <td>{{ $custody->name }}</td>
       </tr>
       <tr>
@@ -16,12 +16,24 @@
         <td>{{ $custody->characteristic }}</td>
       </tr>
       <tr>
-        <th>Verantwoordelijk</th>
+        <th>Locatie</th>
+        <td>{{ $custody->location }}</td>
+      </tr>
+      <tr>
+        <th>In beslag genomen door</th>
         <td>{{ $custody->responsible }}</td>
+      </tr>
+      <tr>
+        <th>In beslag genomen van</th>
+        <td>{{ $custody->seized }}</td>
       </tr>
       <tr>
         <th>Datum</th>
         <td>{{ $custody->date }}</td>
+      </tr>
+      <tr>
+        <th>Timestamp</th>
+        <td>{{ $custody->time }}</td>
       </tr>
       <tr>
         <th valign="top">Beschrijving</th>
@@ -37,8 +49,16 @@
     <h4 style="text-decoration:underline;">Ondertekening</h4>
     <table>
       <tr >
-        <th width="125px;">IP</th>
+        <th width="175px;">IP</th>
         <td>{{ $custody->signed_ip }}</td>
+      </tr>
+      <tr >
+        <th>Datum</th>
+        <td>{{ $custody->signed_date }}</td>
+      </tr>
+      <tr >
+        <th width="125px;">Timestamp</th>
+        <td>{{ $custody->signed_time }}</td>
       </tr>
       <tr>
         <th valign="top">Handtekening</th>
@@ -67,7 +87,7 @@
       {{ Form::open(['route' => ['custodySignatureUpdate', $custody->id, $custody->signed_hash], 'method' => 'post']) }}
         <div class="form-group">
           {{ Form::label('signature_name', 'Naam ondertekenaar') }}
-          {{ Form::text('signature_name', $custody->signature_name, ['class' => 'form-control']) }}
+          {{ Form::text('signature_name', empty($custody->signature_name) ? $custody->seized : $custody->signature_name, ['class' => 'form-control']) }}
         </div>
 
         <div class="form-group">

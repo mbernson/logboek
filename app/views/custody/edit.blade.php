@@ -8,6 +8,14 @@
   {{ Form::open(['route' => ['custody.update', $custody->id], 'method' => 'put']) }}
 @endif
 
+@if($custody->signature == 1)
+  <div class="alert alert-danger" role="alert">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    <span class="sr-only">Error:</span>
+      Chain of Custody is al door opdrachtgever getekend. Wijzigingen of verwijderingen niet mogelijk!
+  </div>
+@endif
+
 <div class="form-group">
   {{ Form::label('name', 'Naam') }}
   {{ Form::text('name', $custody->name, ['class' => 'form-control']) }}
@@ -19,8 +27,18 @@
 </div>
 
 <div class="form-group">
-  {{ Form::label('responsible', 'Toegewezen aan') }}
+  {{ Form::label('location', 'Locatie') }}
+  {{ Form::text('location', $custody->location, ['class' => 'form-control']) }}
+</div>
+
+<div class="form-group">
+  {{ Form::label('responsible', 'In beslag genomen door') }}
 	{{ Form::select('responsible', $responsible, empty($custody->responsible) ? $authUser : $custody->responsible, ['class' => 'form-control']) }}
+</div>
+
+<div class="form-group">
+  {{ Form::label('seized', 'In beslag genomen van') }}
+  {{ Form::text('seized', $custody->seized, ['class' => 'form-control']) }}
 </div>
 
 <div class="form-group">
@@ -45,19 +63,22 @@
   <p><em>Je kunt bij het schrijven gebruik maken van <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet" target="_blank">Markdown</a>.</em></p>
 </div>
 
-<button type="submit" class="btn btn-primary btn-lg">Opslaan</button>
+@if($custody->signature == 0)
+  <button type="submit" class="btn btn-primary btn-lg">Opslaan</button>
 
 {{ Form::close() }}
 
-@if($custody->isNew() == false)
+  @if($custody->isNew() == false)
 
-  {{ Form::open(['route' => ['custody.destroy', $custody->id], 'method' => 'delete']) }}
+    {{ Form::open(['route' => ['custody.destroy', $custody->id], 'method' => 'delete']) }}
 
-    <div class="pull-right">
-      <button type="submit" class="btn btn-danger pull-right">Verwijderen</button>
-    </div>
+      <div class="pull-right">
+        <button type="submit" class="btn btn-danger pull-right">Verwijderen</button>
+      </div>
 
-  {{ Form::close() }}
+    {{ Form::close() }}
+
+  @endif
 
 @endif
 

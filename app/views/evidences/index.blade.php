@@ -62,15 +62,31 @@ $(function () {
 				<tr>
 					<th>ID</th>
 					<th>Naam</th>
+					<th>In beslag genomen door</th>
+					<th>In beslag genomen van</th>
+					<th>Datum</td>
 					<th>Beheer</th>
+					<th>Status</th>
 				</tr>
 
 				 @foreach($custody as $key)
 				<tr>
 					<td>{{ $key->id }}</td>
 					<td>{{ link_to_action('custody.edit', $key->name, [$key->id]) }}</td>
+					<td>{{ $key->responsible }}
+					<td>{{ $key->seized }}
+					<td>{{ $key->date }}
 					<td>
 						{{ link_to_action('custody.show', 'Beheren', [$key->id], ['class' => 'btn btn-xs btn-success']) }}
+					</td>
+					<td>
+						@if($key->signature == 1 && $key->signed == 1)
+							<span class="label label-success">Ingenomen</span>
+						@elseif($key->signature == 0 && $key->signed == 1)
+							<span class="label label-warning">Actie nodig</span>
+						@else
+							<span class="label label-default">Concept</span>
+						@endif
 					</td>
 				</tr>
 				@endforeach

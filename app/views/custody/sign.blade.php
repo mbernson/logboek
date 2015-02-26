@@ -7,7 +7,7 @@
   <div class="panel-body">
     <table>
       <tr>
-        <th width="125px;">Naam</th>
+        <th width="175px;">Naam</th>
         <td>{{ $custody->name }}</td>
       </tr>
       <tr>
@@ -15,12 +15,24 @@
         <td>{{ $custody->characteristic }}</td>
       </tr>
       <tr>
-        <th>Verantwoordelijk</th>
+        <th>Locatie</th>
+        <td>{{ $custody->location }}</td>
+      </tr>
+      <tr>
+        <th>In beslag genomen door</th>
         <td>{{ $custody->responsible }}</td>
+      </tr>
+      <tr>
+        <th>In beslag genomen van</th>
+        <td>{{ $custody->seized }}</td>
       </tr>
       <tr>
         <th>Datum</th>
         <td>{{ $custody->date }}</td>
+      </tr>
+      <tr>
+        <th>Timestamp</th>
+        <td>{{ $custody->time }}</td>
       </tr>
       <tr>
         <th valign="top">Beschrijving</th>

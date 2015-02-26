@@ -176,9 +176,11 @@
 		$("#myModal").on('show.bs.modal', function(event){
 					var button = $(event.relatedTarget);  // Button that triggered the modal
 					var titleData = button.data('title'); // Extract value from data-* attributes
-					var bodyData = button.data('content'); //Extract value from data-* attributes
+					var bodyData = button.data('content');
+					var urlData = button.data('url'); //Extract value from data-* attributes
 					$(this).find('.modal-title').text(titleData);
 					$(this).find('.modal-body').text(bodyData);
+					$(this).find('.modal-url').text(urlData);
 			});
 	});
 </script>

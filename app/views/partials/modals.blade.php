@@ -9,6 +9,13 @@
     <div class="modal-body">
       <h3>Modal body</h3>
     </div>
+
+    <!-- ONLY FOR CUSTODY -->
+    <div class="modal-url" style="position:relative;padding-left:20px;">
+      <p></p>
+    </div>
+    <!-- END ONLY FOR CUSTODY -->
+
     <div class="modal-footer">
       <button type="button" class="btn btn-primary" data-dismiss="modal">Sluit</button>
     </div>

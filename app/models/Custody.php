@@ -7,7 +7,8 @@ class Custody extends Model {
 
   protected $table = 'custody';
 
-  protected $fillable = ['name', 'characteristic', 'responsible', 'date', 'time',
+  protected $fillable = ['name', 'characteristic', 'location', 'responsible',
+                         'seized', 'date', 'time',
                          'description', 'details', 'signature', 'signature_name',
                          'signature_remark', 'signature_signed', 'signature_ip',
                          'signature_date', 'signature_time'];
@@ -15,7 +16,9 @@ class Custody extends Model {
   protected $rules = [
     'name' => 'required',
     'characteristic' => 'required',
+    'location' => 'required',
     'responsible' => 'required',
+    'seized' => 'required',
     'date' => 'required|date'
   ];
 

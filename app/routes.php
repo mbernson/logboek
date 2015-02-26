@@ -11,6 +11,9 @@
 |
 */
 
+Route::get('/custody/{id}/signature/{hash}', 'CustodyController@signature');
+Route::post('/custody/{id}/signature/{hash}/update', [ 'as' => 'custodySignatureUpdate', 'uses' => 'CustodyController@signatureUpdate' ]);
+
 Route::any('/login', 'UsersController@login');
 
 Route::group(['before' => 'auth'], function() {
@@ -33,9 +36,6 @@ Route::group(['before' => 'auth'], function() {
 
     Route::get('/custody/{id}/sign', 'CustodyController@sign');
     Route::post('/custody/{id}/sign/update', [ 'as' => 'custodySignUpdate', 'uses' => 'CustodyController@signUpdate' ]);
-
-    Route::get('/custody/{id}/signature/{hash}', 'CustodyController@signature');
-    Route::post('/custody/{id}/signature/{hash}/update', [ 'as' => 'custodySignatureUpdate', 'uses' => 'CustodyController@signatureUpdate' ]);
 
     Route::get('/attachment/{id}/download', 'AttachmentsController@download');
     Route::post('/attachment/upload', 'AttachmentsController@upload');
