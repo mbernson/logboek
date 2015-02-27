@@ -77,10 +77,6 @@ This project is released under the [GPL v3 license](https://github.com/l0ngestev
 
 1. entry uitbouwen
 2. Python script executable
-3. Projecten kunnen maken en daarin tussen wisselen
-4. Voorbeeld knop
-     1. http://www.codingdrama.com/bootstrap-markdown/
-5. Kalender drop-down bij datums
-6. Exporteren HTML verschillende items
-7. Fix Attachments issue - gebruiker verwijderen + fout
-8. Bewerken + verwijderen beveiligen andere gebruikers
+3. Kalender drop-down bij datums
+4. Exporteren HTML verschillende items
+5. Bewerken + verwijderen beveiligen andere gebruikers
