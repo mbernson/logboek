@@ -35,3 +35,9 @@ textarea.markdown {
 #sidebar > p {
 	text-align: center;
 }
+
+@media screen and (min-width: 1024px){
+  table th {
+		width: 400px;
+	}
+}
