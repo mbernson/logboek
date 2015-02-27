@@ -77,3 +77,7 @@ This project is released under the [GPL v3 license](https://github.com/l0ngestev
 
 1. entry uitbouwen
 2. Python script executable
+ - Projecten kunnen maken en daarin tussen wisselen
+ - Voorbeeld knop
+ - Kalender drop-down bij datums
+ - Exporteren HTML verschillende items
