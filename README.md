@@ -82,5 +82,5 @@ This project is released under the [GPL v3 license](https://github.com/l0ngestev
      1. http://www.codingdrama.com/bootstrap-markdown/
 5. Kalender drop-down bij datums
 6. Exporteren HTML verschillende items
-7. Fix Attachments issue (meerdere gebruikers)
+7. Fix Attachments issue - gebruiker verwijderen + fout
 8. Bewerken + verwijderen beveiligen andere gebruikers
