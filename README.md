@@ -81,3 +81,4 @@ This project is released under the [GPL v3 license](https://github.com/l0ngestev
  - Voorbeeld knop
  - Kalender drop-down bij datums
  - Exporteren HTML verschillende items
+ - Fix Attachments issue (meerdere gebruikers)
