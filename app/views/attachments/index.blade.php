@@ -112,7 +112,7 @@ $(function () {
 					<td>{{ $allupload->name }}</td>
 					<td>{{ $allupload->owner }}</td>
 					<td><?php echo '<a href="'.Attachment::getUploadUrl($allupload->name).'" target="_NEW">'.Attachment::getUploadUrl($allupload->name).'</a>'; ?></td>
-					<td><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal" data-title="{{ $upload->name }}" data-content="MD5: {{ $upload->md5 }}" data-content2="SHA1: {{ $upload->sha1 }}">Details</button></td>
+					<td><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal" data-title="{{ $allupload->name }}" data-content="MD5: {{ $allupload->md5 }}" data-content2="SHA1: {{ $allupload->sha1 }}">Details</button></td>
 				</tr>
 				@endforeach
 			</table>
