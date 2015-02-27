@@ -53,13 +53,13 @@
 
 <div class="form-group">
   {{ Form::label('description', 'Omschrijving') }}
-  {{ Form::textarea('description', $custody->description, ['class' => 'form-control markdown', 'rows' => 20]) }}
+  {{ Form::textarea('description', $custody->description, ['data-provide' => 'markdown', 'id' => 'markdown-lang', 'class' => 'form-control markdown', 'rows' => 20]) }}
   <p><em>Je kunt bij het schrijven gebruik maken van <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet" target="_blank">Markdown</a>.</em></p>
 </div>
 
 <div class="form-group">
   {{ Form::label('details', 'Details') }}
-  {{ Form::textarea('details', $custody->details, ['class' => 'form-control markdown', 'rows' => 20]) }}
+  {{ Form::textarea('details', $custody->details, ['data-provide' => 'markdown', 'id' => 'markdown-lang', 'class' => 'form-control markdown', 'rows' => 20]) }}
   <p><em>Je kunt bij het schrijven gebruik maken van <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet" target="_blank">Markdown</a>.</em></p>
 </div>
 

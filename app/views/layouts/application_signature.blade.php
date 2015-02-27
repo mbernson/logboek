@@ -112,5 +112,16 @@
 <script src="/js/signature_pad.js"></script>
 <script src="/js/signature_pad_app.js"></script>
 
+<!-- Following 4 lines are supported for markdown WYSIWYG editor! -->
+<script src="/js/bootstrap-markdown.js"></script>
+<script src="/js/bootstrap-markdown.nl.js"></script>
+<script src="/js/markdown.js"></script>
+<script src="/js/to-markdown.js"></script>
+
+<!-- Dutch language support WYSIWYG -->
+<script type="text/javascript">
+	$("#markdown-lang").markdown({language:'nl'})
+</script>
+
 </body>
 </html>

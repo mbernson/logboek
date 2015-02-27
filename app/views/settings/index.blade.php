@@ -141,7 +141,7 @@
 
 							  <div class="form-group">
 							    {{ Form::label('ex_disclaimer', 'Export Disclaimer') }}
-							    {{ Form::textarea('ex_disclaimer', Setting::get('ex_disclaimer'), ['class' => 'form-control markdown', 'rows' => 20]) }}
+							    {{ Form::textarea('ex_disclaimer', Setting::get('ex_disclaimer'), ['data-provide' => 'markdown', 'id' => 'markdown-lang', 'class' => 'form-control markdown', 'rows' => 20]) }}
 							    <p><em>Je kunt bij het schrijven gebruik maken van <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet" target="_blank">Markdown</a>.</em></p>
 							  </div>
 							</div>
