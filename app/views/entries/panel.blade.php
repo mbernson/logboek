@@ -1,3 +1,13 @@
+<!-- CSS Fix -->
+<style type="text/css">
+@media screen and (min-width: 1024px){
+	table th {
+		width: 400px;
+	}
+}
+</style>
+<!-- END CSS fix -->
+
 <div class="panel panel-default entry-panel">
 	<div class="panel-heading">
 		<h3 class="panel-title">{{ link_to_action('logbooks.entries.show', empty($entry->title) ? 'Naamloos' : $entry->title, [$entry->logbook->id, $entry->id]) }}</h3>
