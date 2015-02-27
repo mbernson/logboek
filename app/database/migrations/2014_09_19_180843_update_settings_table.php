@@ -21,16 +21,22 @@ class UpdateSettingsTable extends Migration {
 
 		$settings = [
 			'project_name' => 'Logboek',
-			'ex_pdf_title' => 'ex_logboek',
-			'ex_pdf_customer' => 'Opdrachtgever',
-			'ex_pdf_date' => '01-01-1970',
-			'ex_pdf_version' => '1.0',
-			'ex_pdf_disclaimer' => '',
-			'ex_pdf_disclaimer_html' => '',
+			'ex_title' => 'ex_logboek',
+			'ex_customer' => 'Opdrachtgever',
+			'ex_date' => '01-01-1970',
+			'ex_version' => '1.0',
+			'ex_disclaimer' => '',
+			'ex_disclaimer_html' => '',
 			'ex_pdf_sh_evidences' => '1',
+			'ex_pdf_sh_coc' => '1',
 			'ex_pdf_sh_attachments' => '1',
 			'ex_pdf_sh_suspects' => '1',
 			'ex_pdf_sh_legals' => '1',
+			'ex_html_sh_evidences' => '1',
+			'ex_html_sh_coc' => '1',
+			'ex_html_sh_attachments' => '1',
+			'ex_html_sh_suspects' => '1',
+			'ex_html_sh_legals' => '1',
 
 			'menu' => join(';', [
 				'entries', 'logbooks', 'tasks',
