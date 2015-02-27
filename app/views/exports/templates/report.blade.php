@@ -69,30 +69,6 @@
 	</table>
 </div>
 
-<div id="inhhoudsopgave">
-
-	<h1>Inhoudsopgave</h1>
-
-		<ol>
-			@foreach($logbooks as $logbook)
-				<li>{{ $logbook->title }}</li>
-			@endforeach
-
-			@if(count($attachmentsAll) > 0 && Setting::get('ex_pdf_sh_attachments') == 1)
-				<li>Bestanden</li>
-			@endif
-
-			@if(count($suspects) > 0 && Setting::get('ex_pdf_sh_suspects') == 1)
-				<li>Verdachten</li>
-			@endif
-
-			@if(count($evidences) > 0 && Setting::get('ex_pdf_sh_evidences') == 1)
-				<li>Bewijzen</li>
-			@endif
-		</ol>
-
-</div>
-
 <div id="disclaimer">
 
 	<h1>Disclaimer</h1>
@@ -110,6 +86,34 @@
 		@endforeach
 	</div>
 @endif
+
+<div id="inhhoudsopgave">
+
+	<h1>Inhoudsopgave</h1>
+
+		<ol>
+			@foreach($logbooks as $logbook)
+				<li>{{ $logbook->title }}</li>
+			@endforeach
+
+			@if(count($attachmentsAll) > 0 && Setting::get('ex_pdf_sh_attachments') == 1)
+				<li>Bestanden</li>
+			@endif
+
+			@if(count($evidences) > 0 && Setting::get('ex_pdf_sh_evidences') == 1)
+				<li>Bewijzen</li>
+			@endif
+
+			@if(count($custody) > 0 && Setting::get('ex_pdf_sh_coc') == 1)
+				<li>Chain of Custody</li>
+			@endif
+
+			@if(count($suspects) > 0 && Setting::get('ex_pdf_sh_suspects') == 1)
+				<li>Verdachten</li>
+			@endif
+		</ol>
+
+</div>
 
 <h1>Logboeken</h1>
 
@@ -190,6 +194,97 @@
 				</tr>
 			@endforeach
 		</table>
+	</div>
+@endif
+
+@if(count($custody) > 0 && Setting::get('ex_pdf_sh_coc') == 1)
+	<div id="coc">
+		<h1>Chain of Custody</h1>
+			@foreach($custody as $key)
+			<table>
+				<tr>
+					<th colspan="2">Algemeen</th>
+				</tr>
+				<tr>
+					<th width="175px;">Naam</th>
+					<td>{{ $key->name }}</td>
+				</tr>
+				<tr>
+					<th>Kenmerk</th>
+					<td>{{ $key->characteristic }}</td>
+				</tr>
+				<tr>
+					<th>Locatie</th>
+					<td>{{ $key->location }}</td>
+				</tr>
+				<tr>
+					<th>In beslag genomen door</th>
+					<td>{{ $key->responsible }}</td>
+				</tr>
+				<tr>
+					<th>In beslag genomen van</th>
+					<td>{{ $key->seized }}</td>
+				</tr>
+				<tr>
+					<th>Datum</th>
+					<td>{{ $key->date }}</td>
+				</tr>
+				<tr>
+					<th>Timestamp</th>
+					<td>{{ $key->time }}</td>
+				</tr>
+				<tr>
+					<th valign="top">Beschrijving</th>
+					<td>{{ empty($key->description) ? '<i>Geen beschrijving gevonden.</i>' : $key->html_description }}</td>
+				</tr>
+				<tr>
+					<th valign="top">Details</th>
+					<td>{{ empty($key->details) ? '<i>Geen details gevonden.</i>' : $key->html_details }}</td>
+				</tr>
+				<tr>
+					<th colspan="2">Ondertekening</th>
+				</tr>
+				<tr >
+          <th width="175px;">IP</th>
+          <td>{{ $key->signed_ip }}</td>
+        </tr>
+        <tr >
+          <th>Datum</th>
+          <td>{{ $key->signed_date }}</td>
+        </tr>
+        <tr >
+          <th width="125px;">Timestamp</th>
+          <td>{{ $key->signed_time }}</td>
+        </tr>
+        <tr>
+          <th valign="top">Handtekening</th>
+          <td><img style="border:1px solid black;" style="border:1px;" alt="" src="<?php echo $key->signed_sign; ?>" /></td>
+        </tr>
+				<tr>
+					<th colspan="2">Ondertekening opdrachtgever</th>
+				</tr>
+				<tr >
+          <th width="175px;">Naam</th>
+          <td>{{ $key->signature_name }}</td>
+        </tr>
+        <tr >
+          <th>IP</th>
+          <td>{{ $key->signature_ip }}</td>
+        </tr>
+        <tr>
+          <th>Datum</th>
+          <td>{{ $key->signature_date }}</td>
+        </tr>
+        <tr>
+          <th>Timestamp</th>
+          <td>{{ $key->signature_time }}</td>
+        </tr>
+				<tr>
+          <th>Handtekening</th>
+          <td><img style="border:1px solid black;" style="border:1px;" alt="" src="<?php echo $key->signature_sign; ?>" /></td>
+        </tr>
+			</table>
+			@endforeach
 	</div>
 @endif
 

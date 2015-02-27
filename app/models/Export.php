@@ -71,11 +71,11 @@ class Export extends Model {
 		}
 
 		$settings = [
-			'title' => Setting::get('ex_pdf_title'),
-			'customer' => Setting::get('ex_pdf_customer'),
-			'date' => Setting::get('ex_pdf_date'),
-			'version' => Setting::get('ex_pdf_version'),
-			'disclaimer' => Setting::get('ex_pdf_disclaimer_html')
+			'title' => Setting::get('ex_title'),
+			'customer' => Setting::get('ex_customer'),
+			'date' => Setting::get('ex_date'),
+			'version' => Setting::get('ex_version'),
+			'disclaimer' => Setting::get('ex_disclaimer_html')
 		];
 
 		return View::make($template, [
@@ -88,9 +88,10 @@ class Export extends Model {
 			'attachments' => static::getAttachments($this->logbooks),
 			'attachmentsAll' => Attachment::all(),
 			'evidences' => Evidence::all(),
+			'custody' => Custody::all(),
 			'suspects' => Suspect::all(),
 			'legals' => Legal::where('active', 1)->get(),
-			'settings' => $settings,
+			'settings' => $settings
 		]);
 	}
 

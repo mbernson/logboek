@@ -177,9 +177,11 @@
 					var button = $(event.relatedTarget);  // Button that triggered the modal
 					var titleData = button.data('title'); // Extract value from data-* attributes
 					var bodyData = button.data('content');
+					var bodyData2 = button.data('content2');
 					var urlData = button.data('url'); //Extract value from data-* attributes
 					$(this).find('.modal-title').text(titleData);
 					$(this).find('.modal-body').text(bodyData);
+					$(this).find('.modal-body2').text(bodyData2);
 					$(this).find('.modal-url').text(urlData);
 			});
 	});

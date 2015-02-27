@@ -10,6 +10,10 @@ $(function () {
 })
 </script>
 
+@if($alluploads->count() != 0)
+	@include('partials.modals')
+@endif
+
 <ul class="nav nav-tabs" role="tablist" id="myTab">
 	<li class="active"><a href="#attachments" role="tab" data-toggle="tab">Bestanden <span class="badge">{{ $attachmentsCount }}</span></a></li>
 	<li><a href="#upload" role="tab" data-toggle="tab">Upload</a></li>
@@ -71,13 +75,15 @@ $(function () {
 					<th>Naam</th>
 					<th>Eigenaar</th>
 					<th>Link</th>
+					<th>Hash</th>
 				</tr>
 
 					@foreach($uploads as $upload)
-						<tr id="popuploads" data-md5="{{ $upload->md5 }}" data-sha1="{{ $upload->sha1 }}">
+						<tr>
 							<td>{{ $upload->name }}</td>
 							<td>{{ $upload->owner }}</td>
 							<td><?php echo '<a href="'.Attachment::getUploadUrl($upload->name).'" target="_NEW">'.Attachment::getUploadUrl($upload->name).'</a>'; ?></td>
+							<td><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal" data-title="{{ $upload->name }}" data-content="MD5: {{ $upload->md5 }}" data-content2="SHA1: {{ $upload->sha1 }}">Details</button></td>
 						</tr>
 					@endforeach
 			</table>
@@ -98,6 +104,7 @@ $(function () {
 					<th>Naam</th>
 					<th>Eigenaar</th>
 					<th>Link</th>
+					<th>Hash</th>
 				</tr>
 
 				@foreach($alluploads as $allupload)
@@ -105,6 +112,7 @@ $(function () {
 					<td>{{ $allupload->name }}</td>
 					<td>{{ $allupload->owner }}</td>
 					<td><?php echo '<a href="'.Attachment::getUploadUrl($allupload->name).'" target="_NEW">'.Attachment::getUploadUrl($allupload->name).'</a>'; ?></td>
+					<td><button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#myModal" data-title="{{ $upload->name }}" data-content="MD5: {{ $upload->md5 }}" data-content2="SHA1: {{ $upload->sha1 }}">Details</button></td>
 				</tr>
 				@endforeach
 			</table>

@@ -54,18 +54,20 @@
 	</div>
 	<!-- Eind disclaimer -->
 
-	<!-- Disclaimer -->
-	<div class="panel panel-default">
-		<div class="panel-heading"><h1 class="panel-title">Juridische kader</h1></div>
-		<div class="panel-body">
-			@foreach($legals as $legal)
-        <h5>{{ $legal->name }}</h5>
-        <h6>{{ $legal->abbreviation }} (<i>{{ $legal->code }}</i>)</h6>
-        <p>{{ $legal->html_body }}</p>
-      @endforeach
+	<!-- Juridische kader -->
+	@if(count($legals) > 0 && Setting::get('ex_html_sh_legals') == 1)
+		<div class="panel panel-default">
+			<div class="panel-heading"><h1 class="panel-title">Juridische kader</h1></div>
+			<div class="panel-body">
+				@foreach($legals as $legal)
+	        <h5>{{ $legal->name }}</h5>
+	        <h6>{{ $legal->abbreviation }} (<i>{{ $legal->code }}</i>)</h6>
+	        <p>{{ $legal->html_body }}</p>
+	      @endforeach
+			</div>
 		</div>
-	</div>
-	<!-- Eind disclaimer -->
+	@endif
+	<!-- Eind Juridische kader -->
 
 	<!-- Projectleden -->
 	<div class="panel panel-default">
@@ -118,19 +120,23 @@
 					</li>
 				@endif
 
-				@if(count($attachments) > 0)
+				@if(count($attachments) > 0 && Setting::get('ex_html_sh_attachments') == 1)
 					<li>Bestanden</li>
 				@endif
 
-				@if(count($attachmentsAll) > 0)
+				@if(count($attachmentsAll) > 0 && Setting::get('ex_html_sh_attachments') == 1)
 					<li>Bestanden (uploads)</li>
 				@endif
 
-				@if(count($evidences) > 0)
-					<li>Verdachten</li>
+				@if(count($evidences) > 0 && Setting::get('ex_html_sh_evidences') == 1)
+					<li>Bewijzen</li>
 				@endif
 
-				@if(count($suspects) > 0)
+				@if(count($custody) > 0 && Setting::get('ex_html_sh_coc') == 1)
+					<li>Chain of Custody</li>
+				@endif
+
+				@if(count($suspects) > 0 && Setting::get('ex_html_sh_suspects') == 1)
 					<li>Verdachten</li>
 				@endif
 			</ol>
@@ -161,7 +167,7 @@
 	<!-- Eind logboeken -->
 
 	<!-- Bestanden -->
-	@if(count($attachments) > 0)
+	@if(count($attachments) > 0 && Setting::get('ex_html_sh_attachments') == 1)
 		<div class="panel panel-default">
 			<div class="panel-heading"><h1 class="panel-title">Bestanden</h1></div>
 			<div class="panel-body">
@@ -193,7 +199,7 @@
 	<!-- Einde bestanden -->
 
 	<!-- Alle geuploade bestanden -->
-	@if(count($attachmentsAll) > 0)
+	@if(count($attachmentsAll) > 0 && Setting::get('ex_html_sh_attachments') == 1)
 		<div class="panel panel-default">
 			<div class="panel-heading"><h1 class="panel-title">Bestanden (geupload)</h1></div>
 			<div class="panel-body">
@@ -217,7 +223,7 @@
 	<!-- Einde alle geuploade bestanden -->
 
 	<!-- Bewijzen -->
-	@if(count($evidences) > 0)
+	@if(count($evidences) > 0 && Setting::get('ex_html_sh_evidences') == 1)
 		<div class="panel panel-default">
 			<div class="panel-heading"><h1 class="panel-title">Bewijzen</h1></div>
 			<div class="panel-body">
@@ -242,8 +248,104 @@
 	@endif
 	<!-- Einde bewijzen -->
 
+	<!-- Chain of Custody -->
+	@if(count($custody) > 0 && Setting::get('ex_html_sh_coc') == 1)
+		<div class="panel panel-default">
+			<div class="panel-heading"><h1 class="panel-title">Chain of Custody</h1></div>
+			<div class="panel-body">
+				@foreach($custody as $key)
+				<table>
+					<tr>
+						<th colspan="2"><h4><u>Algemeen</u></h4></th>
+					</tr>
+					<tr>
+						<th width="175px;">Naam</th>
+						<td>{{ $key->name }}</td>
+					</tr>
+					<tr>
+						<th>Kenmerk</th>
+						<td>{{ $key->characteristic }}</td>
+					</tr>
+					<tr>
+						<th>Locatie</th>
+						<td>{{ $key->location }}</td>
+					</tr>
+					<tr>
+						<th>In beslag genomen door</th>
+						<td>{{ $key->responsible }}</td>
+					</tr>
+					<tr>
+						<th>In beslag genomen van</th>
+						<td>{{ $key->seized }}</td>
+					</tr>
+					<tr>
+						<th>Datum</th>
+						<td>{{ $key->date }}</td>
+					</tr>
+					<tr>
+						<th>Timestamp</th>
+						<td>{{ $key->time }}</td>
+					</tr>
+					<tr>
+						<th valign="top">Beschrijving</th>
+						<td>{{ empty($key->description) ? '<i>Geen beschrijving gevonden.</i>' : $key->html_description }}</td>
+					</tr>
+					<tr>
+						<th valign="top">Details</th>
+						<td>{{ empty($key->details) ? '<i>Geen details gevonden.</i>' : $key->html_details }}</td>
+					</tr>
+					<tr>
+						<th colspan="2"><h4><u>Ondertekening</u></h4></th>
+					</tr>
+					<tr >
+	          <th width="175px;">IP</th>
+	          <td>{{ $key->signed_ip }}</td>
+	        </tr>
+	        <tr >
+	          <th>Datum</th>
+	          <td>{{ $key->signed_date }}</td>
+	        </tr>
+	        <tr >
+	          <th width="125px;">Timestamp</th>
+	          <td>{{ $key->signed_time }}</td>
+	        </tr>
+	        <tr>
+	          <th valign="top">Handtekening</th>
+	          <td><img style="border:1px solid black;" style="border:1px;" alt="" src="<?php echo $key->signed_sign; ?>" /></td>
+	        </tr>
+					<tr>
+						<th colspan="2"><h4><u>Ondertekening opdrachtgever</u></h4></th>
+					</tr>
+					<tr >
+	          <th width="175px;">Naam</th>
+	          <td>{{ $key->signature_name }}</td>
+	        </tr>
+	        <tr >
+	          <th>IP</th>
+	          <td>{{ $key->signature_ip }}</td>
+	        </tr>
+	        <tr>
+	          <th>Datum</th>
+	          <td>{{ $key->signature_date }}</td>
+	        </tr>
+	        <tr>
+	          <th>Timestamp</th>
+	          <td>{{ $key->signature_time }}</td>
+	        </tr>
+					<tr>
+	          <th valign="top">Handtekening</th>
+	          <td><img style="border:1px solid black;" style="border:1px;" alt="" src="<?php echo $key->signature_sign; ?>" /></td>
+	        </tr>
+				</table>
+				<hr />
+				@endforeach
+			</div>
+		</div>
+	@endif
+	<!-- Einde Chain of Custody -->
+
 	<!-- Verdachten -->
-	@if(count($suspects) > 0)
+	@if(count($suspects) > 0 && Setting::get('ex_html_sh_suspects') == 1)
 		<div class="panel panel-default">
 			<div class="panel-heading"><h1 class="panel-title">Verdachten</h1></div>
 			<div class="panel-body">
@@ -260,10 +362,10 @@
 					<tr>
 							<td>{{ $att->name }}</td>
 							<td>{{ $att->alias }}</td>
-							<td>{{ $att->street }}</td>
-							<td>{{ $att->city }}</td>
-							<td>{{ $att->email }}</td>
-							<td>{{ $att->phone }}</td>
+							<td>{{ empty($att->street) ? '-' : $att->street }}</td>
+							<td>{{ empty($att->city) ? '-' : $att->city }}</td>
+							<td>{{ empty($att->email) ? '-' : $att->email }}</td>
+							<td>{{ count($att->phone) ? '-' : $att->phone }}</td>
 					</tr>
 					@endforeach
 				</table>

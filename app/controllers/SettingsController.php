@@ -18,9 +18,11 @@ class SettingsController extends \BaseController {
 		];
 
 		$this->export_features = [
-			'ex_pdf_title', 'ex_pdf_customer', 'ex_pdf_date',
-			'ex_pdf_version', 'ex_pdf_disclaimer', 'ex_pdf_sh_evidences',
-			'ex_pdf_sh_attachments', 'ex_pdf_sh_suspects', 'ex_pdf_sh_legals'
+			'ex_title', 'ex_customer', 'ex_date',
+			'ex_version', 'ex_disclaimer', 'ex_pdf_sh_evidences', 'ex_pdf_sh_coc',
+			'ex_pdf_sh_attachments', 'ex_pdf_sh_suspects', 'ex_pdf_sh_legals',
+			'ex_html_sh_evidences', 'ex_html_sh_coc', 'ex_html_sh_attachments',
+			'ex_html_sh_suspects', 'ex_html_sh_legals'
 		];
 
 		View::share('users', $users);
@@ -54,7 +56,7 @@ class SettingsController extends \BaseController {
 	private function updateExportSettings() {
 		$input = Input::only($this->export_features);
 
-		$input['ex_pdf_disclaimer_html'] = Markdown::string($input['ex_pdf_disclaimer']);
+		$input['ex_disclaimer_html'] = Markdown::string($input['ex_disclaimer']);
 
 			foreach($input as $key => $value) {
 					Setting::set($key, $value);
