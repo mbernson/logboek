@@ -25,7 +25,7 @@
 		<td>{{ $logbook->id }}</td>
 		<td>{{ link_to_action('logbooks.show', $logbook->title, [$logbook->id]) }}</td>
 		@if($logbook->user_id == 0)
-			<td>Systeem</td>
+			<td>systeem</td>
 		@else
 			<td> {{ link_to_action('users.show', $logbook->user->username, [$logbook->user->id]) }} </td>
 		@endif

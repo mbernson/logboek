@@ -50,7 +50,11 @@
 	<tr>
 		<td>{{ $export->id }}</td>
 		<td>{{ strtoupper($export->type) }}</td>
-		<td>{{ $export->user->username }}</td>
+		@if($export->user_id == 0)
+			<td>systeem</td>
+		@else
+			<td> {{ link_to_action('users.show', $export->user->username, [$export->user->id]) }} </td>
+		@endif
 		<td>{{ $export->created_at }}</td>
 		<td>{{ $export->filename }}</td>
 		<td>{{ $export->filesize }} Kb</td>

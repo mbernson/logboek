@@ -27,7 +27,11 @@
 		<tr data-id="{{ $task->id }}" data-status="{{ $task->isClosed() ? 'completed' : 'pending' }}" class="{{ $task->status ? 'success' : 'danger' }}">
 			<td>{{ $task->id }}</td>
 			<td>{{ link_to_action('tasks.show', $task->name, [$task->id]) }}</td>
-			<td>{{ link_to_action('users.show', $task->user->username, [$task->user->id]) }}</td>
+			@if($task->user_id == 0)
+				<td>systeem</td>
+			@else
+				<td> {{ link_to_action('users.show', $task->user->username, [$task->user->id]) }} </td>
+			@endif
 			<td>{{ $task->deadline }}</td>
 			@if($task->status == 0)
 				<td>Openstaand</td>

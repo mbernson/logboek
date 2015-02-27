@@ -194,6 +194,8 @@ class UsersController extends \BaseController {
 		$count = Logbook::where('user_id', '=', $user_id)->count();
 
 		$logbooks = Logbook::where('user_id', '=', $user_id)->update(array('user_id' => 0));
+		$tasks = Task::where('user_id', '=', $user_id)->update(array('user_id' => 0));
+		$attachments = Attachment::where('user_id', '=', $user_id)->update(array('user_id' => 0));
 
 		if($count == 1){
 			return Redirect::to(route('settings.index'))

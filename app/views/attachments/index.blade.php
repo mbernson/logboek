@@ -44,7 +44,11 @@ $(function () {
 				<tr>
 					<td>{{ $attachment->id }}</td>
 					<td>{{ link_to_action('attachments.show', empty($attachment->title) ? $attachment->filename : $attachment->title, [$attachment->id]) }}</td>
-					<td>{{ link_to_action('users.show', $attachment->user->username, [$attachment->user->id]) }}</td>
+					@if($attachment->user_id == 0)
+						<td>systeem</td>
+					@else
+						<td> {{ link_to_action('users.show', $attachment->user->username, [$attachment->user->id]) }} </td>
+					@endif
 					<td>{{ format_bytes($attachment->filesize) }}</td>
 					<td>{{ $attachment->created_at }}</td>
 				</tr>
