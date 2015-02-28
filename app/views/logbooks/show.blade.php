@@ -5,7 +5,7 @@
 <h1>{{{ $logbook->title }}}</h1>
 
 <p>
-	@if ($logbook->user_id == (Auth::user()->id) || $logbook->user_id == 0)
+	@if($logbook->user_id == (Auth::user()->id) || $logbook->user_id == 0)
 		<a class="btn btn-primary btn-lg" href="{{ action('logbooks.entries.create', [$logbook->id]) }}">Nieuwe entry</a>
 	@else
 		<a class="btn btn-primary btn-lg" disabled="disabled">Nieuwe entry</a>
