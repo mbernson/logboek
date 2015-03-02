@@ -80,3 +80,4 @@ This project is released under the [GPL v3 license](https://github.com/l0ngestev
 3. Kalender drop-down bij datums
 4. Exporteren HTML verschillende items
 5. Bewerken + verwijderen beveiligen andere gebruikers
+6. Chain of custody markdown wysiwyg editor toevoegen
