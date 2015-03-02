@@ -120,7 +120,7 @@
 
 <!-- Dutch language support WYSIWYG -->
 <script type="text/javascript">
-	$("#markdown-lang").markdown({language:'nl'})
+	$("#markdown-lang").markdown({language:'nl',fullscreen:'false'})
 </script>
 
 </body>

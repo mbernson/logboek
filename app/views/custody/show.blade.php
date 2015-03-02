@@ -4,6 +4,16 @@
 
 @include('partials.modals')
 
+<!-- CSS Fix -->
+<style type="text/css">
+@media screen and (min-width: 1024px){
+	table td img {
+		width: 300px;
+	}
+}
+</style>
+<!-- END CSS fix -->
+
 <div class="panel panel-default">
   <div class="panel-heading"><h1 class="panel-title">Overview - Chain of Custody</h1></div>
   <div class="panel-body">
