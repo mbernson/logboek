@@ -311,31 +311,62 @@
 	        </tr>
 	        <tr>
 	          <th valign="top">Handtekening</th>
-	          <td><img style="border:1px solid black;" style="border:1px;" alt="" src="<?php echo $key->signed_sign; ?>" /></td>
+	          <td><img style="border:1px solid black;" style="border:1px;" width="300px;" alt="" src="<?php echo $key->signed_sign; ?>" /></td>
 	        </tr>
-					<tr>
-						<th colspan="2"><h4><u>Ondertekening opdrachtgever</u></h4></th>
-					</tr>
-					<tr >
-	          <th width="175px;">Naam</th>
-	          <td>{{ $key->signature_name }}</td>
-	        </tr>
-	        <tr >
-	          <th>IP</th>
-	          <td>{{ $key->signature_ip }}</td>
-	        </tr>
-	        <tr>
-	          <th>Datum</th>
-	          <td>{{ $key->signature_date }}</td>
-	        </tr>
-	        <tr>
-	          <th>Timestamp</th>
-	          <td>{{ $key->signature_time }}</td>
-	        </tr>
-					<tr>
-	          <th valign="top">Handtekening</th>
-	          <td><img style="border:1px solid black;" style="border:1px;" alt="" src="<?php echo $key->signature_sign; ?>" /></td>
-	        </tr>
+					@if($key->signature == 1)
+						<tr>
+							<th colspan="2"><h4><u>Ondertekening opdrachtgever</u></h4></th>
+						</tr>
+						<tr >
+		          <th width="175px;">Naam</th>
+		          <td>{{ $key->signature_name }}</td>
+		        </tr>
+		        <tr >
+		          <th>IP</th>
+		          <td>{{ $key->signature_ip }}</td>
+		        </tr>
+		        <tr>
+		          <th>Datum</th>
+		          <td>{{ $key->signature_date }}</td>
+		        </tr>
+		        <tr>
+		          <th>Timestamp</th>
+		          <td>{{ $key->signature_time }}</td>
+		        </tr>
+						<tr>
+		          <th valign="top">Handtekening</th>
+		          <td><img style="border:1px solid black;" style="border:1px;" width="300px;" alt="" src="<?php echo $key->signature_sign; ?>" /></td>
+		        </tr>
+						@if(!empty($key->log))
+							<tr>
+								<th colspan="2"><h4><u>Logs</u></h4></th>
+							</tr>
+							<tr >
+								<td colspan="2">{{ $key->html_log }}</td>
+							</tr>
+						@endif
+						@if($key->returned == 1)
+						<tr>
+							<th colspan="2"><h4><u>Ondertekening retour opdrachtgever</u></h4></th>
+						</tr>
+						<tr >
+		          <th>IP</th>
+		          <td>{{ $key->returned_ip }}</td>
+		        </tr>
+		        <tr>
+		          <th>Datum</th>
+		          <td>{{ $key->returned_date }}</td>
+		        </tr>
+		        <tr>
+		          <th>Timestamp</th>
+		          <td>{{ $key->returned_time }}</td>
+		        </tr>
+						<tr>
+		          <th valign="top">Handtekening</th>
+		          <td><img style="border:1px solid black;" style="border:1px;" width="300px;" alt="" src="<?php echo $key->returned_sign; ?>" /></td>
+		        </tr>
+						@endif
+					@endif
 				</table>
 				<hr />
 				@endforeach

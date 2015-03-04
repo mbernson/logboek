@@ -23,7 +23,7 @@ class EvidenceController extends \BaseController {
 		$evidences = Evidence::newest()
 			->orderBy('title')
 			->paginate(self::$per_page);
-		$custody = Custody::orderBy('signature', 'signed')
+		$custody = Custody::orderBy('signature', 'ASC')
 								->paginate(self::$per_page);
 
 		$evidencesCount = count($evidences);

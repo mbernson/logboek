@@ -82,10 +82,30 @@
 	          <li>Kies 'ondertekenen' om af te ronden.</li>
 	        </ol>
 	      </p>
-			@else
+			@elseif($custody->signature == 1 && $custody->return == 0)
 				<h3>Afronding</h3>
 				<h5>Chain of Custody</h5>
 				<h6>Met succes ondertekend.</h6>
+			@else
+				<h3>Afronding</h3>
+				<h5>ontvangst Chain of Custody</h5>
+				<h6>Met succes ondertekend.</h6>
+
+				<h3>Ondertekening</h3>
+	      <h5>Retour Chain of Custody</h5>
+
+	      <p>
+	        <ol>
+	          <li>Controleer alle gegevens;</li>
+	          <li>Plaats handtekening in grijs vlak:</li>
+	          <ul>
+	            <li>kies 'opslaan';</li>
+	          </ul>
+	          <li>Controleer en verbeter naam;</li>
+	          <li>Plaats eventuele opmerking;</li>
+	          <li>Kies 'ondertekenen' om af te ronden.</li>
+	        </ol>
+	      </p>
 			@endif
 
 		@show

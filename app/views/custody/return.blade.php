@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="panel panel-default">
-  <div class="panel-heading"><h1 class="panel-title">Overzicht - Chain of Custody</h1></div>
+  <div class="panel-heading"><h1 class="panel-title">Retour - Chain of Custody</h1></div>
   <div class="panel-body">
     <h4 style="text-decoration:underline;">Algemeen</h4>
     <table>
@@ -48,15 +48,15 @@
     <hr />
     <h4 style="text-decoration:underline;">Ondertekening</h4>
     <table>
-      <tr >
+      <tr>
         <th width="175px;">IP</th>
         <td>{{ $custody->signed_ip }}</td>
       </tr>
-      <tr >
+      <tr>
         <th>Datum</th>
         <td>{{ $custody->signed_date }}</td>
       </tr>
-      <tr >
+      <tr>
         <th width="125px;">Timestamp</th>
         <td>{{ $custody->signed_time }}</td>
       </tr>
@@ -69,11 +69,11 @@
     <hr />
     <h4 style="text-decoration:underline;">Ondertekening opdrachtgever</h4>
     <table>
-      <tr >
+      <tr>
         <th width="175px;">Naam</th>
         <td>{{ $custody->signature_name }}</td>
       </tr>
-      <tr >
+      <tr>
         <th>IP</th>
         <td>{{ $custody->signature_ip }}</td>
       </tr>
@@ -82,60 +82,50 @@
         <td>{{ $custody->signature_date }}</td>
       </tr>
       <tr>
-        <th>Timestamp</th>
+        <th width="125px;">Timestamp</th>
         <td>{{ $custody->signature_time }}</td>
       </tr>
-        @if($custody->signature_remark)
-          <tr>
-            <th>Opmerking</th>
-            <td>{{ $custody->html_signature_remark }}
-          </tr>
-        @endif
       <tr>
         <th valign="top">Handtekening</th>
         <td><img style="border:1px solid black;" style="border:1px;" width="300px;" alt="" src="<?php echo $custody->signature_sign; ?>" /></td>
       </tr>
     </table>
 
-    @if($custody->returned == 1)
-      @if(!empty($custody->log))
-        <hr />
-        <h4 style="text-decoration:underline;">Log</h4>
-        <p>{{ $custody->html_log }}</p>
-      @endif
-
+    @if(!empty($custody->log))
       <hr />
-      <h4 style="text-decoration:underline;">Ondertekening retour opdrachtgever</h4>
-      <table>
-        <tr >
-          <th>IP</th>
-          <td>{{ $custody->returned_ip }}</td>
-        </tr>
-        <tr>
-          <th>Datum</th>
-          <td>{{ $custody->returned_date }}</td>
-        </tr>
-        <tr>
-          <th>Timestamp</th>
-          <td>{{ $custody->returned_time }}</td>
-        </tr>
-          @if($custody->returned_remark)
-            <tr>
-              <th>Opmerking</th>
-              <td>{{ $custody->html_returned_remark }}
-            </tr>
-          @endif
-        <tr>
-          <th valign="top">Handtekening</th>
-          <td><img style="border:1px solid black;" style="border:1px;" width="300px;" alt="" src="<?php echo $custody->signature_sign; ?>" /></td>
-        </tr>
-      </table>
+      <h4 style="text-decoration:underline;">Log</h4>
+      <p>{{ $custody->html_log }}</p>
     @endif
 
   </div>
   <div class="panel-footer">
     <p>
-      Deze pagina zal maar eenmalig worden getoond. Print de pagina om deze op te slaan.
+      <i>Na ondertekening wordt de Chain of Custody overhandigd aan de opdrachtgever.</i>
+    </p>
+    <p>
+      <div id="signature-pad" class="m-signature-pad">
+        <div class="m-signature-pad--body">
+          <canvas style="background-color:gray; max-width:300px; height:150px;"></canvas>
+        </div>
+        <div class="m-signature-pad--footer">
+          <div class="description">Onderteken in bovenstaand venster.</div>
+          <button class="btn btn-info btn-xs" data-action="clear">Opnieuw</button>
+          <button class="btn btn-info btn-xs" data-action="save">Opslaan</button>
+        </div>
+      </div>
+    </p>
+    <p>
+      {{ Form::open(['route' => ['custodyReturnUpdate', $custody->id, $custody->returned_hash], 'method' => 'post']) }}
+        <div class="form-group">
+          {{ Form::label('return_remark', 'Opmerking') }}
+          {{ Form::textarea('return_remark', $custody->return_remark, ['data-provide' => 'markdown', 'id' => 'markdown-lang', 'style' => 'background-color:white;', 'class' => 'form-control markdown', 'rows' => 5]) }}
+          <p><em>Je kunt bij het schrijven gebruik maken van <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet" target="_blank">Markdown</a>.</em></p>
+        </div>
+      </p>
+      <p>
+        <input type="hidden" value="sign" id="sign" name="signed_sign" />
+        <button type="submit" class="btn btn-success" id="submit" style="visibility:hidden;">Ondertekenen</button>
+      {{ Form::close() }}
     </p>
   </div>
 </div>

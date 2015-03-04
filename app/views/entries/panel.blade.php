@@ -1,7 +1,7 @@
 <!-- CSS Fix -->
 <style type="text/css">
 @media screen and (min-width: 1024px){
-	table th {
+	.widthfix {
 		width: 400px;
 	}
 }
@@ -25,7 +25,7 @@
 	<div class="panel-footer {{ $collapse == false ? '' : 'collapse' }}" id="metadata-{{ $entry->id }}">
 		<table class="table">
 		<tr>
-			<th>Eigenaar</th>
+			<th class="widthfix">Eigenaar</th>
 			<td>{{ link_to_action('users.show', $entry->logbook->user->username, [$entry->logbook->user->id]) }}</td>
 		</tr>
 		<tr>
@@ -48,7 +48,7 @@
 				<h3>Bewijs</h3>
 					<table class="table">
 						<tr>
-							<th>Naam</th>
+							<th class="widthfix">Naam</th>
 							<td>{{ link_to_action('evidences.show', $evidence->title, [$entry->evidence_id]) }}</td>
 						</tr>
 						<tr>
@@ -69,7 +69,7 @@
 		@foreach($entry->get7Ws() as $title => $value)
 			@if(!empty($value))
 			<tr>
-				<th>{{ ucfirst(Lang::get("messages.$title")) }}</th>
+				<th class="widthfix">{{ ucfirst(Lang::get("messages.$title")) }}</th>
 				<td>{{{ $value }}}</td>
 			</tr>
 			@endif

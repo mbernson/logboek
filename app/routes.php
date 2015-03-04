@@ -11,8 +11,12 @@
 |
 */
 
+/* Routes for signing custody */
 Route::get('/custody/{id}/signature/{hash}', 'CustodyController@signature');
 Route::post('/custody/{id}/signature/{hash}/update', [ 'as' => 'custodySignatureUpdate', 'uses' => 'CustodyController@signatureUpdate' ]);
+Route::get('/custody/{id}/return/{hash}', 'CustodyController@returned');
+Route::post('/custody/{id}/return/{hash}/update', [ 'as' => 'custodyReturnUpdate', 'uses' => 'CustodyController@returnedUpdate' ]);
+/* End routes signing custody */
 
 Route::any('/login', 'UsersController@login');
 
@@ -36,6 +40,8 @@ Route::group(['before' => 'auth'], function() {
 
     Route::get('/custody/{id}/sign', 'CustodyController@sign');
     Route::post('/custody/{id}/sign/update', [ 'as' => 'custodySignUpdate', 'uses' => 'CustodyController@signUpdate' ]);
+    Route::get('/custody/{id}/log', 'CustodyController@log');
+    Route::post('/custody/{id}/log/update', [ 'as' => 'custodyLogUpdate', 'uses' => 'CustodyController@logUpdate' ]);
 
     Route::get('/attachment/{id}/download', 'AttachmentsController@download');
     Route::post('/attachment/upload', 'AttachmentsController@upload');

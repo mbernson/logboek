@@ -52,7 +52,7 @@ class CustodyController extends \BaseController {
     $custody = new Custody();
     $custody->unguard();
 
-    $custody->fill(Input::only(['name', 'characteristic', 'location', 'responsible', 'seized', 'date', 'time', 'description', 'html_description', 'details', 'html_details']));
+    $custody->fill(Input::only(['name', 'characteristic', 'location', 'responsible', 'seized', 'date', 'time', 'description', 'html_description', 'details', 'html_details', 'return']));
 
     $custody['time'] = date('Y-m-d H:m:s');
     $custody['html_description'] = Markdown::string($custody['description']);
@@ -131,7 +131,7 @@ class CustodyController extends \BaseController {
   			]);
     }
 
-    $custody->fill(Input::only(['name', 'characteristic', 'location', 'responsible', 'seized', 'date', 'time', 'description', 'html_description', 'details', 'html_details']));
+    $custody->fill(Input::only(['name', 'characteristic', 'location', 'responsible', 'seized', 'date', 'time', 'description', 'html_description', 'details', 'html_details', 'return']));
 
     $custody['time'] = date('Y-m-d H:m:s');
     $custody['html_description'] = Markdown::string($custody['description']);
@@ -300,6 +300,10 @@ class CustodyController extends \BaseController {
           $custody['signature_date'] = date('Y-m-d');
           $custody['signature_time'] = date('Y-m-d H:m:s');
 
+          if($custody['return'] == 1) {
+            $custody['returned_hash'] = md5(uniqid(rand(), true));
+          }
+
           if($custody->save()) {
 
             return View::make('custody.view', ['custody' => $custody]);
@@ -310,6 +314,129 @@ class CustodyController extends \BaseController {
           return Redirect::to(route('evidences.index'))
     				->with('message', [
     					'content' => 'Chain of Custody al door opdrachtgever getekend!',
+    					'class' => 'danger'
+    				]);
+        } else {
+          return Redirect::to(route('evidences.index'))
+    				->with('message', [
+    					'content' => 'Chain of Custody kan niet worden ondertekend!',
+    					'class' => 'danger'
+    				]);
+        }
+		} catch(ModelNotFoundException $e) {
+			return Redirect::to(route('evidences.index'))
+				->with('message', [
+					'content' => 'Chain of Custody kan niet worden ondertekend!',
+					'class' => 'danger'
+				]);
+		}
+  }
+
+  public function log($custody_id) {
+    try{
+			$custody = Custody::findOrFail($custody_id);
+			return View::make('custody.log', ['custody' => $custody]);
+		} catch(ModelNotFoundException $e) {
+			return Redirect::to(route('evidences.index'))
+				->with('message', [
+					'content' => 'Chain of Custody niet gevonden!',
+					'class' => 'danger'
+				]);
+		}
+  }
+
+  public function logUpdate($custody_id) {
+    try{
+      $custody = Custody::findOrFail($custody_id);
+
+      $custody['log'] = Input::get('log');
+      $custody['html_log'] = Markdown::string(Input::get('log'));
+
+  		$custody->save();
+
+  		return Redirect::to(route('evidences.index'))
+  			->with('message', [
+  				'content' => 'Log Chain of Custody met succes geupdated!',
+  				'class' => 'success'
+  			]);
+    } catch(ModelNotFoundException $e) {
+      return Redirect::to(route('evidences.index'))
+        ->with('message', [
+          'content' => 'Chain of Custody niet gevonden!',
+          'class' => 'danger'
+        ]);
+    }
+  }
+
+  public function returned($custody_id, $custody_hash) {
+    try{
+        $custody = Custody::findOrFail($custody_id);
+
+        if($custody['return'] == 1 && $custody['returned'] == 0) {
+          if($custody['returned_hash'] == $custody_hash) {
+            return View::make('custody.return', [
+    					'custody' => $custody
+    				]);
+          } else {
+            return Redirect::to(route('evidences.index'))
+      				->with('message', [
+      					'content' => 'Chain of Custody hash komt niet overeen!',
+      					'class' => 'danger'
+      				]);
+          }
+
+        } else if ($custody['return'] == 1 && $custody['returned'] == 1) {
+          return Redirect::to(route('evidences.index'))
+    				->with('message', [
+    					'content' => 'Chain of Custody al geretourneerd!',
+    					'class' => 'danger'
+    				]);
+        } else if ($custody['signed'] == 0 && $custody['signature'] == 0) {
+          return Redirect::to(route('evidences.index'))
+    				->with('message', [
+    					'content' => 'Chain of Custody hoeft niet retour!',
+    					'class' => 'danger'
+    				]);
+        } else {
+          return Redirect::to(route('evidences.index'))
+    				->with('message', [
+    					'content' => 'Er is een fout opgetreden!',
+    					'class' => 'danger'
+    				]);
+        }
+		} catch(ModelNotFoundException $e) {
+			return Redirect::to(route('evidences.index'))
+				->with('message', [
+					'content' => 'Chain of Custody niet gevonden!',
+					'class' => 'danger'
+				]);
+		}
+  }
+
+  public function returnedUpdate($custody_id, $custody_hash) {
+    try{
+        $custody = Custody::findOrFail($custody_id);
+        if($custody['return'] == 1 && $custody['returned'] == 0) {
+
+          $custody->fill(Input::only(['returned_remark']));
+
+          $custody['returned_hash'] = md5(uniqid(rand(), true)); //Create new hash
+          $custody['returned'] = 1;
+          $custody['returned_remark'] = Input::get('signature_remark');
+          $custody['html_returned_remark'] = Markdown::string($custody['returned_remark']);
+          $custody['returned_sign'] = Input::get('signed_sign');
+          $custody['returned_ip'] = Request::getClientIp();
+          $custody['returned_date'] = date('Y-m-d');
+          $custody['returned_time'] = date('Y-m-d H:m:s');
+
+          if($custody->save()) {
+            return View::make('custody.view', ['custody' => $custody]);
+          }
+
+        } else if($custody['signed'] == 1 && $custody['signature'] == 1) {
+          return Redirect::to(route('evidences.index'))
+    				->with('message', [
+    					'content' => 'Chain of Custody al retour naar opdrachtgever!',
     					'class' => 'danger'
     				]);
         } else {

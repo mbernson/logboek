@@ -11,7 +11,9 @@ class Custody extends Model {
                          'seized', 'date', 'time',
                          'description', 'details', 'signature', 'signature_name',
                          'signature_remark', 'signature_signed', 'signature_ip',
-                         'signature_date', 'signature_time'];
+                         'signature_date', 'signature_time', 'return',
+                         'returned', 'returned_remark', 'html_returned_remark',
+                         'returned_hash', 'returned_sign', 'returned_ip'];
 
   protected $rules = [
     'name' => 'required',

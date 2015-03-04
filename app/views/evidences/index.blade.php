@@ -81,7 +81,15 @@ $(function () {
 					</td>
 					<td>
 						@if($key->signature == 1 && $key->signed == 1)
-							<span class="label label-success">Ingenomen</span>
+							@if($key->return == 1)
+								@if($key->returned == 1)
+									<span class="label label-success">Geretourneerd</span>
+								@else
+									<span class="label label-warning">Ingenomen</span>
+								@endif
+							@else
+								<span class="label label-success">Ingenomen</span>
+							@endif
 						@elseif($key->signature == 0 && $key->signed == 1)
 							<span class="label label-warning">Actie nodig</span>
 						@else

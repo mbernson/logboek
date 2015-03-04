@@ -4,16 +4,6 @@
 
 @include('partials.modals')
 
-<!-- CSS Fix -->
-<style type="text/css">
-@media screen and (min-width: 1024px){
-	table td img {
-		width: 300px;
-	}
-}
-</style>
-<!-- END CSS fix -->
-
 <div class="panel panel-default">
   <div class="panel-heading"><h1 class="panel-title">Overview - Chain of Custody</h1></div>
   <div class="panel-body">
@@ -75,7 +65,7 @@
         </tr>
         <tr>
           <th valign="top">Handtekening</th>
-          <td><img style="border:1px solid black;" style="border:1px;" alt="" src="<?php echo $custody->signed_sign; ?>" /></td>
+          <td><img style="border:1px solid black;" style="border:1px;" width="300px;" alt="" src="<?php echo $custody->signed_sign; ?>" /></td>
         </tr>
       </table>
 
@@ -113,7 +103,7 @@
 
         <tr>
           <th valign="top">Handtekening</th>
-          <td><img style="border:1px solid black;" style="border:1px;" alt="" src="<?php echo $custody->signature_sign; ?>" /></td>
+          <td><img style="border:1px solid black;" style="border:1px;" width="300px;" alt="" src="<?php echo $custody->signature_sign; ?>" /></td>
         </tr>
       </table>
 
@@ -122,11 +112,52 @@
       <p>Opdrachtgever heeft nog niet getekend. Klik op onderstaande button 'onderteken' om de link te ontvangen.</p>
 
     @endif
+    @if(!empty($custody->log))
+      <hr />
+      <h4 style="text-decoration:underline;">Logs</h4>
+      <p>{{ $custody->html_log }}</p>
+    @endif
+
+    @if($custody->signed == 1 && $custody->signature == 1)
+      <hr />
+      <h4 style="text-decoration:underline;">Ondertekening retour opdrachtgever</h4>
+      <table>
+        <tr>
+          <th width="175px;">IP</th>
+          <td>{{ $custody->returned_ip }}</td>
+        </tr>
+        <tr>
+          <th>Datum</th>
+          <td>{{ $custody->returned_date }}</td>
+        </tr>
+        <tr>
+          <th>Timestamp</th>
+          <td>{{ $custody->returned_time }}</td>
+        </tr>
+          @if($custody->returned_remark)
+            <tr>
+              <th>Opmerking</th>
+              <td>{{ $custody->html_returned_remark }}
+            </tr>
+          @endif
+        <tr>
+          <th valign="top">Handtekening</th>
+          <td><img style="border:1px solid black;" style="border:1px;" width="300px;" alt="" src="<?php echo $custody->returned_sign; ?>" /></td>
+        </tr>
+      </table>
+    @endif
+
   </div>
   <div class="panel-footer">
     <p>
       @if($custody->signed == 1 && $custody->signature == 1)
-        Chain of custody met succes ingenomen. Wijzigingen / verwijderingen zijn niet meer mogelijk.
+				{{ link_to('custody/'.$custody->id.'/log', 'Loggen', ['class' => 'btn btn-success']) }}
+					@if($custody->return == 1 && $custody->returned == 0)
+            <?php
+              $link = Request::root().'/custody/'.$custody->id.'/return/'.$custody->returned_hash;
+            ?>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" data-title="{{ $custody->name }}" data-content="Opdrachtgever dient Chain of Custody retourformulier te ondertekenen. Geef volgende link om opdrachtgever te laten tekenen." data-url="{{ $link }}">Retourneren</button>
+					@endif
       @else
         {{ link_to_action('custody.edit', 'Bewerken', [$custody->id], ['class' => 'btn btn-success']) }}
 

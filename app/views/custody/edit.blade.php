@@ -42,6 +42,11 @@
 </div>
 
 <div class="form-group">
+  {{ Form::label('return', 'Moet return') }}
+  {{ Form::select('return', ['0' => 'Nee', '1' => 'Ja'], $custody->return, ['class' => 'form-control']) }}
+</div>
+
+<div class="form-group">
   {{ Form::label('date', 'Datum') }}
   {{ Form::text('date', empty($custody->date) ? date('Y-m-d') : $custody->date, ['class' => 'form-control']) }}
 </div>

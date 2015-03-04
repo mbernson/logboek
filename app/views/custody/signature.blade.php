@@ -2,16 +2,6 @@
 
 @section('content')
 
-<!-- CSS Fix -->
-<style type="text/css">
-@media screen and (min-width: 1024px){
-	table td img {
-		width: 300px;
-	}
-}
-</style>
-<!-- END CSS fix -->
-
 <div class="panel panel-default">
   <div class="panel-heading"><h1 class="panel-title">Ondertekening - Chain of Custody</h1></div>
   <div class="panel-body">
@@ -72,7 +62,7 @@
       </tr>
       <tr>
         <th valign="top">Handtekening</th>
-        <td><img style="border:1px solid black;" style="border:1px;" alt="" src="<?php echo $custody->signed_sign; ?>" /></td>
+        <td><img style="border:1px solid black;" style="border:1px;" width="300px;" alt="" src="<?php echo $custody->signed_sign; ?>" /></td>
       </tr>
     </table>
   </div>
@@ -102,7 +92,7 @@
 
         <div class="form-group">
           {{ Form::label('signature_remark', 'Opmerking') }}
-          {{ Form::textarea('signature_remark', $custody->signature_remark, ['data-provide' => 'markdown', 'id' => 'markdown-lang', 'style' => 'background-color:white;', 'class' => 'form-control markdown', 'rows' => 20]) }}
+          {{ Form::textarea('signature_remark', $custody->signature_remark, ['data-provide' => 'markdown', 'id' => 'markdown-lang', 'style' => 'background-color:white;', 'class' => 'form-control markdown', 'rows' => 5]) }}
           <p><em>Je kunt bij het schrijven gebruik maken van <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet" target="_blank">Markdown</a>.</em></p>
         </div>
       </p>
