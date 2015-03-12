@@ -11,6 +11,8 @@ class Export extends Model {
 	protected $content_type;
 	protected $extension;
 
+	protected $template = 'exports.templates..report';
+
 	public $content;
 
 	// Relations
@@ -63,26 +65,54 @@ class Export extends Model {
 
 	// Export functions
 
-	protected function getView() {
+	protected function getView($template = null) {
+		if(empty($template)) {
+			$template = $this->template;
+		}
+
 		$settings = [
-			'title' => Setting::get('ex_pdf_title'),
-			'customer' => Setting::get('ex_pdf_customer'),
-			'date' => Setting::get('ex_pdf_date'),
-			'version' => Setting::get('ex_pdf_version'),
-			'disclaimer' => Setting::get('ex_pdf_disclaimer_html')
+			'title' => Setting::get('ex_title'),
+			'customer' => Setting::get('ex_customer'),
+			'date' => Setting::get('ex_date'),
+			'version' => Setting::get('ex_version'),
+			'disclaimer' => Setting::get('ex_disclaimer_html')
 		];
 
-		return View::make('pdfs.report', [
+		return View::make($template, [
 			'project_name' => Setting::get('project_name'),
 			'generated_at' => date('d-m-Y H:i'),
 			'users' => static::getUsers(),
 			'logbooks' => static::getLogbooks($this->logbooks),
+			'logbooksAll' => static::getLogbooks('all'),
+			'entriesAll' => Entry::all(),
 			'attachments' => static::getAttachments($this->logbooks),
 			'attachmentsAll' => Attachment::all(),
 			'evidences' => Evidence::all(),
+			'custody' => Custody::all(),
 			'suspects' => Suspect::all(),
+			'legals' => Legal::where('active', 1)->get(),
 			'settings' => $settings
 		]);
+	}
+
+	public function run($save = true) {
+		$text = $this->generate();
+		if($save) {
+			if(!File::put($this->fullPath(), $text))
+				return false;
+
+			$this->updateFileSize();
+		} else {
+			$this->content = $text;
+			$this->filesize = 0;
+		}
+
+		return true;
+	}
+
+	public function generate() {
+		$view = $this->getView();
+		return $view->render();
 	}
 
 	// Convenience methods for export data
@@ -101,6 +131,8 @@ class Export extends Model {
 	protected static function getLogbooks($range) {
 		$id = intval($range);
 		if($range == 'all')
+			return Logbook::all();
+		elseif($range == 'html')
 			return Logbook::all();
 		elseif($id != 0)
 			return [Logbook::find($id)];

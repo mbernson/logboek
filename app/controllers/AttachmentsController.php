@@ -8,18 +8,29 @@ class AttachmentsController extends \BaseController {
 	 * @return Response
 	 */
 	public function index() {
+		$attachments = Attachment::orderBy('id', 'desc')
+										->paginate(25);
+
 		$uploads = DB::table('uploads')->select('name', 'owner', 'md5', 'sha1')
 								->where('owner', Auth::user()->username)
 								->orderBy('updated_at', 'desc')
 								->paginate(25);
+
 		$alluploads = DB::table('uploads')->select('name', 'owner', 'md5', 'sha1')
 								->orderBy('updated_at', 'desc')
 								->paginate(25);
+
+		$attachmentsCount = count($attachments);
+		$uploadsCount = count($uploads);
+		$alluploadsCount = count($alluploads);
+
 		return View::make('attachments.index', [
-			'attachments' => Attachment::orderBy('id', 'desc')
-				->paginate(25),
+			'attachments' => $attachments,
 			'uploads' => $uploads,
-			'alluploads' => $alluploads
+			'alluploads' => $alluploads,
+			'attachmentsCount' => $attachmentsCount,
+			'uploadsCount' => $uploadsCount,
+			'alluploadsCount' => $alluploadsCount
 		]);
 	}
 

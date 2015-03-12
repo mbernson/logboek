@@ -54,7 +54,7 @@ class EntriesController extends \BaseController {
 			if($entry->validate()){
 				$entry->save();
 			} else {
-				return View::make('entries.create', ['entry' => $entry, 'logbook' => $logbook])
+				return View::make('entries.create', ['entry' => $entry, 'logbook' => $logbook, 'choices' => $this->getEvidenceChoices()])
 					->withErrors($entry->validator());
 			}
 			return Redirect::to(route('logbooks.show', [$logbook->id]))
@@ -101,6 +101,7 @@ class EntriesController extends \BaseController {
 		$choices = [
 			0 => 'Selecteer bewijs'
 		];
+
 		foreach($evidences as $evidence) {
 			$choices[$evidence->id] = $evidence->title;
 		}

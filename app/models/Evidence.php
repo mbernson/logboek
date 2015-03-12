@@ -1,6 +1,8 @@
 <?php
 
 class Evidence extends Model {
+	protected $table = 'evidences';
+
 	protected $softDelete = true;
 
 	protected $fillable = ['id', 'title', 'hash', 'date_received', 'sender', 'original_message', 'encrypted_message', 'software'];

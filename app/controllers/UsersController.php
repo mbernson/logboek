@@ -89,7 +89,7 @@ class UsersController extends \BaseController {
 		$user = new User();
 
 		$user->unguard();
-		$user->fill(Input::only('username', 'email', 'password', 'rights', 'first_name', 'last_name'));
+		$user->fill(Input::only('username', 'email', 'password', 'rights', 'first_name', 'last_name', 'student_number'));
 
 		if($user->validate()) {
 			$user->password = Hash::make(Input::get('password'));
@@ -158,7 +158,7 @@ class UsersController extends \BaseController {
 		$user = User::findOrFail($user_id);
 
 		$user->unguard();
-		$user->fill(Input::only('username', 'email', 'rights', 'first_name', 'last_name'));
+		$user->fill(Input::only('username', 'email', 'rights', 'first_name', 'last_name', 'student_number'));
 		if(Input::has('password'))
 			$user->password = Input::get('password');
 
@@ -188,7 +188,28 @@ class UsersController extends \BaseController {
 	 */
 	public function destroy($user_id) {
 		$entry = User::findOrFail($user_id);
+		$user = $entry['username'];
 		$entry->delete();
+
+		$count = Logbook::where('user_id', '=', $user_id)->count();
+
+		$logbooks = Logbook::where('user_id', '=', $user_id)->update(array('user_id' => 0));
+		$tasks = Task::where('user_id', '=', $user_id)->update(array('user_id' => 0));
+		$attachments = Attachment::where('user_id', '=', $user_id)->update(array('user_id' => 0));
+
+		if($count == 1){
+			return Redirect::to(route('settings.index'))
+				->with('message', [
+					'content' => 'Gebruiker met succes verwijderd! Let op, '.$count.' logboek van gebruiker '.$user.' is veranderd naar eigenaar Systeem!',
+					'class' => 'warning'
+				]);
+		} else if($count > 1){
+			return Redirect::to(route('settings.index'))
+				->with('message', [
+					'content' => 'Gebruiker met succes verwijderd! Let op, '.$count.' logboeken van gebruiker '.$user.' zijn veranderd naar eigenaar Systeem!',
+					'class' => 'warning'
+				]);
+		}
 
 		return Redirect::to(route('settings.index'))
 			->with('message', [

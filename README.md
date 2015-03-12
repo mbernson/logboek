@@ -9,13 +9,16 @@ Logboek's primary features are:
 * Maintaining forensic journals during your investigation.
 * Assigning tasks to people in your team.
 * Securely storing (and verifying) evidence files.
+* Managing evidences and files;
+	* Chain of Custody intergrated.
 
 Also included are ways to:
 
-* Export journals to CSV, Markdown and PDF.
+* Export journals to CSV, Markdown, PDF and HTML (fast!).
 * Keep a list of suspects.
 * Solve mono-alphabatic ciphers.
 * Dynamic settings, easy to change.
+* Easy to change settings.
 
 ## Requirements
 
@@ -59,6 +62,22 @@ Consult the [documentation on Laravel Homestead](http://laravel.com/docs/4.2/hom
   * You can change this and add more users after logging in
 * Celebrate!
 
+## Update
+
+* Git pull
+* Run `composer migrate`
+* Run `composer db:seed`
+
 ## License
 
 This project is released under the [GPL v3 license](https://github.com/l0ngestever/logboek/blob/master/LICENSE.txt).
+
+
+## TO DO (dutch)
+
+1. entry uitbouwen
+2. Python script executable
+3. Kalender drop-down bij datums
+4. Exporteren HTML verschillende items
+5. Bewerken + verwijderen beveiligen andere gebruikers
+6. Chain of custody markdown wysiwyg editor toevoegen

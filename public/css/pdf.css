@@ -94,6 +94,11 @@ blockquote {
 
 /* #bestanden */
 
-#voorblad, #inhhoudsopgave, #disclaimer, #suspects, #attachments, #evidences, .logbook {
+#voorblad, #inhhoudsopgave, #disclaimer, #legals, #suspects, #attachments, #evidences, #coc, .logbook {
 	page-break-after: always;
+}
+
+#coc table th {
+	text-align: left;
+	valign: left;
 }

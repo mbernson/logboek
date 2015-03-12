@@ -20,6 +20,8 @@
 
 	<link rel="stylesheet" href="/css/dropzone.css" media="all">
 
+	<link href="/css/bootstrap-markdown.min.css" rel="stylesheet">
+
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>
 	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -63,6 +65,17 @@
 						@endif
 						@if(Setting::contains('menu', 'cipher'))
 							<li {{ Request::is('cipher') ? 'class="active"' : '' }}>{{ link_to('/cipher', 'Ciphertool') }}</li>
+						@endif
+
+						@if(Setting::contains('menu', 'tools'))
+							<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Tools <b class="caret"></b></a>
+								<ul class="dropdown-menu" role="menu">
+									<li>{{ link_to('/cipher', 'Ciphertool') }}</li>
+									<li class="divider"></li>
+									<li>{{ link_to_route('legals.index', 'Juridishe kader') }}</li>
+								</ul>
+							</li>
 						@endif
 
 						<li {{ Request::is('settings') ? 'class="active"' : '' }}>{{ link_to_route('settings.index', 'Instellingen') }}</li>
@@ -157,6 +170,36 @@
 <script src="/js/tasks.js"></script>
 <script src="/js/dropzone.js"></script>
 <script src="/js/attachments.js"></script>
+<script src="/js/signature_pad.js"></script>
+<script src="/js/signature_pad_app.js"></script>
+
+<!-- Following 4 lines are supported for markdown WYSIWYG editor! -->
+<script src="/js/bootstrap-markdown.js"></script>
+<script src="/js/bootstrap-markdown.nl.js"></script>
+<script src="/js/markdown.js"></script>
+<script src="/js/to-markdown.js"></script>
+
+<!-- Dutch language support WYSIWYG -->
+<script type="text/javascript">
+	$("#markdown-lang").markdown({language:'nl'})
+</script>
+
+<!-- Model popup code, loading after jQuery -->
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#myModal").on('show.bs.modal', function(event){
+					var button = $(event.relatedTarget);  // Button that triggered the modal
+					var titleData = button.data('title'); // Extract value from data-* attributes
+					var bodyData = button.data('content');
+					var bodyData2 = button.data('content2');
+					var urlData = button.data('url'); // Extract value from data-* attributes
+					$(this).find('.modal-title').text(titleData);
+					$(this).find('.modal-body').text(bodyData);
+					$(this).find('.modal-body2').text(bodyData2);
+					$(this).find('.modal-url').text(urlData);
+			});
+	});
+</script>
 
 @if(App::environment('production') && Config::get('app.piwik_enabled') == true)
 

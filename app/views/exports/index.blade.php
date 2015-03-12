@@ -7,6 +7,7 @@
 <p>
 	{{ link_to_action('ExportsController@create', 'Nieuwe CSV export', ['csv'], ['class' => 'btn btn-primary btn-large']) }}
 	{{ link_to('./exports/create/markdown?save=0', 'Nieuwe Markdown export', ['class' => 'btn btn-primary btn-large']) }}
+	{{ link_to('./exports/create/html?save=0', 'Nieuwe HTML export', ['class' => 'btn btn-primary btn-large']) }}
 </p>
 
 <p>
@@ -19,9 +20,9 @@
 	<br />
 	<label for="logbooks">Inbegrepen logboek(en)</label>
 	<select name="logbooks">
-		@foreach($logbooks as $logbook)
-		<option value="{{ $logbook->id }}">{{{ $logbook->title }}}</option>
-		@endforeach
+			@foreach($logbooks as $logbook)
+				<option value="{{ $logbook->id }}">{{{ $logbook->title }}}</option>
+			@endforeach
 		<option value="all">Alle logboeken</option>
 	</select>
 	<br />
@@ -49,7 +50,11 @@
 	<tr>
 		<td>{{ $export->id }}</td>
 		<td>{{ strtoupper($export->type) }}</td>
-		<td>{{ $export->user->username }}</td>
+		@if($export->user_id == 0)
+			<td>systeem</td>
+		@else
+			<td> {{ link_to_action('users.show', $export->user->username, [$export->user->id]) }} </td>
+		@endif
 		<td>{{ $export->created_at }}</td>
 		<td>{{ $export->filename }}</td>
 		<td>{{ $export->filesize }} Kb</td>

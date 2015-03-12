@@ -36,19 +36,19 @@
 
 <div class="form-group">
 	{{ Form::label('original_message', 'Origineel bericht') }}
-	{{ Form::textarea('original_message', $evidence->original_message, ['class' => 'form-control markdown', 'rows' => 10]) }}
+	{{ Form::textarea('original_message', $evidence->original_message, ['data-provide' => 'markdown', 'id' => 'markdown-lang', 'class' => 'form-control markdown', 'rows' => 10]) }}
 	<p><em>Je kunt bij het schrijven gebruik maken van <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet" target="_blank">Markdown</a>.</em></p>
 </div>
 
 <div class="form-group">
 	{{ Form::label('encrypted_message', 'Decrypted bericht') }}
-	{{ Form::textarea('encrypted_message', $evidence->encrypted_message, ['class' => 'form-control markdown', 'rows' => 10]) }}
+	{{ Form::textarea('encrypted_message', $evidence->encrypted_message, ['data-provide' => 'markdown', 'id' => 'markdown-lang', 'class' => 'form-control markdown', 'rows' => 10]) }}
 	<p><em>Je kunt bij het schrijven gebruik maken van <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet" target="_blank">Markdown</a>.</em></p>
 </div>
 
 <div class="form-group">
 	{{ Form::label('software', 'Gebruikte software / attributen') }}
-	{{ Form::textarea('software', $evidence->software, ['class' => 'form-control markdown', 'rows' => 10]) }}
+	{{ Form::textarea('software', $evidence->software, ['data-provide' => 'markdown', 'id' => 'markdown-lang', 'class' => 'form-control markdown', 'rows' => 10]) }}
 	<p><em>Je kunt bij het schrijven gebruik maken van <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet" target="_blank">Markdown</a>.</em></p>
 </div>
 

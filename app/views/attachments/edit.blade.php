@@ -15,7 +15,7 @@
 
 <div class="form-group">
 	{{ Form::label('description', 'Beschrijving') }}
-	{{ Form::textarea('description', $attachment->description, ['class' => 'form-control markdown', 'rows' => 10]) }}
+	{{ Form::textarea('description', $attachment->description, ['data-provide' => 'markdown', 'id' => 'markdown-lang', 'class' => 'form-control markdown', 'rows' => 10]) }}
 	<p><em>Je kunt bij het schrijven gebruik maken van <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet">Markdown</a>.</em></p>
 </div>
 

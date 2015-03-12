@@ -15,24 +15,4 @@ class Markdown extends \Export {
 		$this->type = 'markdown';
 	}
 
-	private function generateMarkdown() {
-		$view = $this->getView();
-		return $view->render();
-	}
-
-	public function run($save = true) {
-		$text = $this->generateMarkdown();
-		if($save) {
-			if(!File::put($this->fullPath(), $text))
-				return false;
-
-			$this->updateFileSize();
-		} else {
-			$this->content = $text;
-			$this->filesize = 0;
-		}
-
-		return true;
-	}
-
 }

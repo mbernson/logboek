@@ -14,24 +14,24 @@
 </div>
 
 <div class="form-group">
-        {{ Form::label('user_id', 'Toegewezen aan') }}
+  {{ Form::label('user_id', 'Toegewezen aan') }}
 	{{ Form::select('user_id', $users_options, $task->user_id, ['class' => 'form-control']) }}
 </div>
 
 <div class="form-group">
-        {{ Form::label('deadline', 'Deadline') }}
-        {{ Form::text('deadline', $task->deadline, ['class' => 'form-control']) }}
+  {{ Form::label('deadline', 'Deadline') }}
+  {{ Form::text('deadline', $task->deadline, ['class' => 'form-control']) }}
 </div>
 
 <div class="form-group">
-        {{ Form::label('description', 'Beschrijving') }}
-        {{ Form::textarea('description', $task->description, ['class' => 'form-control markdown', 'rows' => 10]) }}
-        <p><em>Je kunt bij het schrijven gebruik maken van <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet">Markdown</a>.</em></p>
+  {{ Form::label('description', 'Beschrijving') }}
+  {{ Form::textarea('description', $task->description, ['data-provide' => 'markdown', 'id' => 'markdown-lang', 'class' => 'form-control markdown', 'rows' => 10]) }}
+  <p><em>Je kunt bij het schrijven gebruik maken van <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet">Markdown</a>.</em></p>
 </div>
 
 <div class="form-group">
-        {{ Form::label('status', 'Taak status') }}
-        {{ Form::select('status', ['0' => 'openstaand', '1' => 'afgesloten'], $task->status, ['class' => 'form-control']) }}
+  {{ Form::label('status', 'Taak status') }}
+  {{ Form::select('status', ['0' => 'openstaand', '1' => 'afgesloten'], $task->status, ['class' => 'form-control']) }}
 </div>
 
 <button type="submit" class="btn btn-primary btn-lg">Opslaan</button>

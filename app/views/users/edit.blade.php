@@ -34,6 +34,11 @@
 </div>
 
 <div class="form-group">
+	{{ Form::label('student_number', 'Studentennummer') }}
+	{{ Form::text('student_number', $user->student_number, ['class' => 'form-control']) }}
+</div>
+
+<div class="form-group">
 	{{ Form::label('rights', 'Gebruikers rechten') }}
 	@if(Auth::user()['rights'] == 0)
 		<p>Voor deze wijziging zijn <b>administrator</b> rechten nodig.</p>
