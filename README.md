@@ -8,17 +8,16 @@ Logboek's primary features are:
 
 * Maintaining forensic journals during your investigation.
 * Assigning tasks to people in your team.
-* Securely storing (and verifying) evidence files.
 * Managing evidences and files;
-	* Chain of Custody intergrated.
+	* Chain of Custody management.
 
 Also included are ways to:
 
-* Export journals to CSV, Markdown, PDF and HTML (fast!).
+* Quickly export your journals to CSV, Markdown, PDF and HTML.
 * Keep a list of suspects.
+* Manage references to the laws used in your case.
 * Solve mono-alphabatic ciphers.
-* Dynamic settings, easy to change.
-* Easy to change settings.
+* Change the menus and preferences.
 
 ## Requirements
 
@@ -27,7 +26,7 @@ Also included are ways to:
 
 ## Installation
 
-You can use Vagrant to set up a virtualized development environment. This is often the easiest way.
+If you'd like to run logboek locally, Vagrant is the recommended way to do so.
 Manual installation instructions are also available.
 
 ### Vagrant
@@ -52,8 +51,8 @@ Consult the [documentation on Laravel Homestead](http://laravel.com/docs/4.2/hom
   * Use `app/config/local.example` and `app/config/local` for development
 * Edit your configuration
 * Generate a secret key with `php artisan key:generate`
-* Ensure your PHP process/server can write:
-  * to `app/storage` (`chmod -R 777 app/storage`)
+* Ensure your PHP process/server can write to the following directories:
+  * to `app/storage` (`chmod -R 755 app/storage`)
   * to `public/uploads` (`chmod -R 755 public/uploads`)
   * to `public/downloads` (`chmod -R 775 public/downloads`)
 * Run `php artisan migrate` and `php artisan db:seed`
@@ -64,14 +63,14 @@ Consult the [documentation on Laravel Homestead](http://laravel.com/docs/4.2/hom
 
 ## Update
 
-* Git pull
-* Run `composer migrate`
-* Run `composer db:seed`
+* Pull the latest source code via Git.
+* Run `composer install`
+* Run `php artisan migrate`
+* Run `php artisan db:seed` if you haven't done so already.
 
 ## License
 
 This project is released under the [GPL v3 license](https://github.com/l0ngestever/logboek/blob/master/LICENSE.txt).
-
 
 ## TO DO (dutch)
 
