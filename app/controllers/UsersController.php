@@ -187,34 +187,55 @@ class UsersController extends \BaseController {
 	 * @return Response
 	 */
 	public function destroy($user_id) {
-		$entry = User::findOrFail($user_id);
-		$user = $entry['username'];
-		$entry->delete();
+		try {
+			DB::beginTransaction();
 
-		$count = Logbook::where('user_id', '=', $user_id)->count();
+			$user = User::findOrFail($user_id);
+			$username = $user['username'];
 
-		$logbooks = Logbook::where('user_id', '=', $user_id)->update(array('user_id' => 0));
-		$tasks = Task::where('user_id', '=', $user_id)->update(array('user_id' => 0));
-		$attachments = Attachment::where('user_id', '=', $user_id)->update(array('user_id' => 0));
+			$count = Logbook::where('user_id', '=', $user_id)->count();
 
-		if($count == 1){
-			return Redirect::to(route('settings.index'))
+			$logbooks = Logbook::where('user_id', '=', $user_id)->update(['user_id' => 0]);
+			$tasks = Task::where('user_id', '=', $user_id)->update(['user_id' => 0]);
+			$attachments = Attachment::where('user_id', '=', $user_id)->update(['user_id' => 0]);
+
+			$deleted = $user->delete();
+
+			DB::commit();
+		} catch(Exception $e) {
+			DB::rollback();
+			return redirect::to(route('settings.index'))
 				->with('message', [
-					'content' => 'Gebruiker met succes verwijderd! Let op, '.$count.' logboek van gebruiker '.$user.' is veranderd naar eigenaar Systeem!',
-					'class' => 'warning'
-				]);
-		} else if($count > 1){
-			return Redirect::to(route('settings.index'))
-				->with('message', [
-					'content' => 'Gebruiker met succes verwijderd! Let op, '.$count.' logboeken van gebruiker '.$user.' zijn veranderd naar eigenaar Systeem!',
-					'class' => 'warning'
+					'content' => 'gebruiker kon niet verwijderd worden. controleer of er geen data meer naar deze gebruiker verwijst.',
+					'class' => 'danger'
 				]);
 		}
 
-		return Redirect::to(route('settings.index'))
+		if($count == 1 && $deleted){
+			return Redirect::to(route('settings.index'))
+				->with('message', [
+					'content' => 'Gebruiker met succes verwijderd! Let op, '.$count.' logboek van gebruiker '.$username.' is veranderd naar eigenaar Systeem!',
+					'class' => 'warning'
+				]);
+		} else if($count > 1 && $deleted){
+			return Redirect::to(route('settings.index'))
+				->with('message', [
+					'content' => 'Gebruiker met succes verwijderd! Let op, '.$count.' logboeken van gebruiker '.$username.' zijn veranderd naar eigenaar Systeem!',
+					'class' => 'warning'
+				]);
+		}
+		else if($deleted) {
+			return Redirect::to(route('settings.index'))
+				->with('message', [
+					'content' => 'Gebruiker met succes verwijderd!',
+					'class' => 'success'
+				]);
+		}
+
+		return redirect::to(route('settings.index'))
 			->with('message', [
-				'content' => 'Gebruiker met succes verwijderd!',
-				'class' => 'success'
+				'content' => 'gebruiker kon niet verwijderd worden. controleer of er geen data meer naar deze gebruiker verwijst.',
+				'class' => 'danger'
 			]);
 	}
 
