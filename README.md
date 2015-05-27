@@ -45,6 +45,9 @@ Consult the [documentation on Laravel Homestead](http://laravel.com/docs/4.2/hom
 
 ### Manual installation
 
+* Create a MySQL database with a user that can access it.
+  * Choose InnoDB as the storage engine.
+  * Choose UTF-8 (`utf8_unicode_ci`) for the database character set.
 * Clone the project
 * Run `composer install`
 * Copy the configuration folder `app/config/production.example` to `app/config/production`
